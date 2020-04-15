@@ -1,0 +1,38 @@
+{
+  "name": "withdocs",
+  "version": "1.0.0",
+  "description": "Backend for withDocs",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon server.js ",
+    "start:prod": "NODE_ENV=production && nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Syed Ali Turab",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6",
+    "morgan": "^1.10.0",
+    "slugify": "^1.4.0",
+    "validator": "^10.11.0",
+    "xss-clean": "^0.1.1",
+    "helmet": "^3.16.0",
+    "hpp": "^0.2.2",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.2"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
