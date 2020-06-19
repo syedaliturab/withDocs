@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const userRoutes = require('./routes/userRoute')
+const userRoute = require('./routes/userRoute')
 const userDocRoutes = require('./routes/userDocRoutes')
 const errorController = require('./controllers/errorComtroller')
 const ErrorUtil = require('./utils/ErrorUtil')
@@ -18,7 +18,7 @@ app.use(express.json());
 
 //routes
 
-app.use('/api/v11/user', userRoutes);
+app.use('/api/v11/user/signup', userRoute);
 app.use('/api/v11/Doc/user', userDocRoutes);
 
 app.all('*', (req, res, next) => {

@@ -4,10 +4,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please tell us your name!']
-  },
   email: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -19,7 +15,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['patient', 'doctor', 'admin'],
-    default: 'user'
+    default: 'doctor'
   },
   password: {
     type: String,
