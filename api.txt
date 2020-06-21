@@ -1,0 +1,59 @@
+https://infinite-sea-97704.herokuapp.com/api/v11/user/signup
+
+post::
+
+{
+     "email":"radhe43@gmail.com",
+     "password":"radhe12345",
+     "passwordConfirm":"radhe12345",
+     "role":"doctor"
+}
+
+https://infinite-sea-97704.herokuapp.com/api/v11/user/profile
+
+post::
+
+ {
+               
+     "_id":"qwuweeeey",
+     "name": "Radhe Raman Tiwari",
+     "email": "radhetinas@gmail.com",
+     "dateOfBirth": "15/11/1998",
+     "address": {
+     "state": "UP",
+     "city": "Gorakhpur",
+     "pincode": 123433,
+          "homeAddress": {
+          "type": "Point",
+          "coordinates": [],
+          "address": "India"
+     }
+     },
+     "contactNo": 1234867871,
+     "alternateContactNo": 1234527328,
+     "gender": "male",
+     "eduction": {
+     "undergraduation": {
+          "degree": "B.Tech",
+          "college": "iitm",
+          "dateOfGraduation": "2021",
+          "doctorRegistrationNo": "173782AA"
+     },
+     "diploma": {
+          "degree": "B.Tech",
+          "college": "iitm",
+          "dateOfGraduation": "2021",
+          "doctorRegistrationNo": "173782AA"
+     },
+     "postgraduation": {
+          "degree": "B.Tech",
+          "college": "iitm",
+          "dateOfGraduation": "2021",
+          "doctorRegistrationNo": "173782AA"
+     }
+     },
+     "specialities": ["one","two"],
+     "field": "dentiest",
+     "experience": 0.2
+}
+

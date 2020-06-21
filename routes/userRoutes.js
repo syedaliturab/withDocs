@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
+const doctor = require('./../controllers/doctorController');
 
 const router = express.Router();
 
@@ -10,19 +11,25 @@ router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
 // Protect all routes after this middleware
-router.use(authController.protect);
+//router.use(authController.protect);
 
 router.patch('/updateMyPassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
-router.use(authController.restrictTo('admin'));
+//router.use(authController.restrictTo('admin'));
 
 router
   .route('/')
   .get(userController.getAllUsers)
   .post(userController.createUser);
+
+
+router
+  .route('/profile')
+  .get(doctor.getAllDocProfile)
+  .post(doctor.createDocProfile);
 
 router
   .route('/:id')

@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const userRoute = require('./routes/userRoute')
-const userDocRoutes = require('./routes/userDocRoutes')
+const userRoute = require('./routes/userRoutes')
 const errorController = require('./controllers/errorComtroller')
 const ErrorUtil = require('./utils/ErrorUtil')
 
@@ -18,8 +17,7 @@ app.use(express.json());
 
 //routes
 
-app.use('/api/v11/user/signup', userRoute);
-app.use('/api/v11/Doc/user', userDocRoutes);
+app.use('/api/v11/user', userRoute);
 
 app.all('*', (req, res, next) => {
     const err = new ErrorUtil(`Unabale to find ${req.originalUrl}`, 404);
