@@ -60,7 +60,7 @@ const doctor = new mongoose.Schema({
             message: 'gender is either male, female or other'
         }
     },
-    eudcation: {
+    education: {
         undergraduation: {
             degree: {
                 type: String
