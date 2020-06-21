@@ -13,11 +13,11 @@ https://infinite-sea-97704.herokuapp.com/api/v11/user/profile
 
 post::
 
- {
-               
-     "_id":"qwuweeeey",
+  {
+
+     "_id":"qwuweeerrggftftd",
      "name": "Radhe Raman Tiwari",
-     "email": "radhetinas@gmail.com",
+     "email": "radhe@gma.com",
      "dateOfBirth": "15/11/1998",
      "address": {
      "state": "UP",
@@ -29,10 +29,10 @@ post::
           "address": "India"
      }
      },
-     "contactNo": 1234867871,
+     "contactNo": 1236267871,
      "alternateContactNo": 1234527328,
      "gender": "male",
-     "eduction": {
+     "education": {
      "undergraduation": {
           "degree": "B.Tech",
           "college": "iitm",
@@ -56,4 +56,5 @@ post::
      "field": "dentiest",
      "experience": 0.2
 }
+
 
