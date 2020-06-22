@@ -45,6 +45,8 @@ exports.createDocProfile = catchAsynsc(
     }
 );
 
+
+
 //to update docter details
 exports.updateDocProfile = catchAsynsc(
     async (req, res, next) => {
@@ -81,6 +83,22 @@ exports.deleteDocProfile = catchAsynsc(
             status: 'success',
             data: {
                 doctor: deleteDocUser
+            }
+        })
+    }
+);
+
+
+//to add clinic details
+exports.addClinicDetail = catchAsynsc(
+    async (req, res, next) => {
+        
+        const updatedClinic = await docUser.findByIdAndUpdate(
+            req.params.id, req.body);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                docter: updatedClinic
             }
         })
     }

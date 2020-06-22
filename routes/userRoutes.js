@@ -32,6 +32,11 @@ router
   .post(doctor.createDocProfile);
 
 router
+  .route('/clinic/:id')
+  .post(doctor.addClinicDetail);
+  
+
+router
   .route('/:id')
   .get(userController.getUser)
   .patch(userController.updateUser)
