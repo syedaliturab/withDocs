@@ -76,8 +76,13 @@ exports.updateDocProfile = catchAsynsc(
 exports.deleteDocProfile = catchAsynsc( 
     async (req, res, next) => {
     
-        console.log(req.params.id)
-        const deleteDocUser = await docUser.findByIdAndRemove(req.params.id);
+        console.log(req.params.id);
+        const deleteDocUser = await docUser.findByIdAndUpdate(
+            req.params.id, req.body, {
+                new: true,
+                runValidators: true
+            }
+        );
         
         res.status(200).json({
             status: 'success',
@@ -92,14 +97,18 @@ exports.deleteDocProfile = catchAsynsc(
 //to add clinic details
 exports.addClinicDetail = catchAsynsc(
     async (req, res, next) => {
-        
-        const updatedClinic = await docUser.findByIdAndUpdate(
-            req.params.id, req.body);
+        console.log(req.params.id);
+        const addClinic = await docUser.findByIdAndUpdate(
+            req.params.id, req.body, {
+                new: true,
+                runValidators: true
+            }
+        );
         res.status(200).json({
             status: 'success',
             data: {
-                docter: updatedClinic
+                docter: addClinic
             }
-        })
+        });
     }
 );

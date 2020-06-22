@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const clinic = require('./../models/clinicModel');
 const doctor = new mongoose.Schema({
     _id:{
         type: String,
@@ -7,7 +8,6 @@ const doctor = new mongoose.Schema({
     },
     name: {
         type: String,
-        requried: [true, 'Please provide your name']
     },
     email: {
         type: String,
@@ -16,106 +16,66 @@ const doctor = new mongoose.Schema({
     },
     dateOfBirth: {
         type: String,
-        required: [true, 'Please provide dateOfBirth']
     },
-    address: {
-        state: {
+    state: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    pincode: {
+        type: Number,
+        length: [6, 'Please provide 6 digit pincode']
+    },
+    homeAddress: {
+        // GeoJSON   
+        type: {
             type: String,
-            required: [true, 'Please provide state']
+            default: 'Point',
+            enum: ['Point']
         },
-        city: {
-            type: String,
-            required: [true, 'Please provide a city']
-        },
-        pincode: {
-            type: Number,
-            required: [true, 'Please provide pincode'],
-            length: [6, 'Please provide 6 digit pincode']
-        },
-        homeAddress: {
-            // GeoJSON   
-            type: {
-                type: String,
-                default: 'Point',
-                enum: ['Point']
-            },
-            coordinates: [Number],
-            address: String
-        },
-
+        coordinates: [Number],
+        address: String
     },
     contactNo: {
         type: Number,
         unique: true,
-        required: [true, 'Please provide contact number']
     },
     alternateContactNo: {
         type: Number
     },
     gender: {
         type: String,
-        required: [true, 'Please provide gender'],
         enum: {
             values: ['male', 'female','other'],
             message: 'gender is either male, female or other'
         }
     },
-    education: {
-        undergraduation: {
-            degree: {
-                type: String
-            },
-            college: {
-                type: String
-            },
-            dateOfGraduation: {
-                type: String
-            },
-            doctorRegistrationNo: {
-                type: String
-            }
-        },
-        diploma: {
-            degree: {
-                type: String
-            },
-            college: {
-                type: String
-            },
-            dateOfGraduation: {
-                type: String
-            },
-            doctorRegistrationNo: {
-                type: String
-            }
-        },
-        postgraduation: {
-            degree: {
-                type: String
-            },
-            college: {
-                type: String
-            },
-            dateOfGraduation: {
-                type: String
-            },
-            doctorRegistrationNo: {
-                type: String
-            }
-        },
-
+    degree: {
+        type: [String]
     },
+    college: {
+        type: [String]
+    },
+    dateOfGraduation: {
+        type: [String]
+    },
+    doctorRegistrationNo: {
+        type: [String]
+    },    
     field: {
         type: String,
-        required: [true, 'Please provide field of work']
     },
-    specialities: [{
-            type: String
-    }],
+    specialities: {
+            type: [String]
+    },
     experience: {
         type: Number,
-        required: [true, 'Please provide your experience']
     },
+    clinics: {
+        type: [clinic.clinicSchema],
+        default: []
+    }
     
 });
 
