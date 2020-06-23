@@ -36,7 +36,7 @@ exports.createDocProfile = catchAsynsc(
 
         const newDocUser = await docUser.create(req.body);
         newDocUser.password = undefined;
-        res.status(201).json({
+        res.status(200).json({
             status: 'success',
             data: {
                 doctor: newDocUser

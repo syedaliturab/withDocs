@@ -4,6 +4,7 @@ const clinic = require('./../models/clinicModel');
 const doctor = new mongoose.Schema({
     _id:{
         type: String,
+	unique: true,
         requried: [true, 'Please provide valid id']
     },
     name: {
@@ -38,11 +39,11 @@ const doctor = new mongoose.Schema({
         address: String
     },
     contactNo: {
-        type: Number,
+        type: String,
         unique: true,
     },
     alternateContactNo: {
-        type: Number
+        type: String
     },
     gender: {
         type: String,
