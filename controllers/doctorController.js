@@ -77,12 +77,7 @@ exports.deleteDocProfile = catchAsynsc(
     async (req, res, next) => {
     
         console.log(req.params.id);
-        const deleteDocUser = await docUser.findByIdAndUpdate(
-            req.params.id, req.body, {
-                new: true,
-                runValidators: true
-            }
-        );
+        const deleteDocUser = await docUser.findByIdAndRemove(req.params.id);
         
         res.status(200).json({
             status: 'success',

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const clinic = require('./../models/clinicModel');
 const doctor = new mongoose.Schema({
-    _id:{
+    id:{
         type: String,
-	unique: true,
+	    unique: true,
         requried: [true, 'Please provide valid id']
     },
     name: {

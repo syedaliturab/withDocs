@@ -1,7 +1,8 @@
 const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
-const doctor = require('./../controllers/doctorController');
+const doctorController = require('./../controllers/doctorController');
+const collegeController = require('./../controllers/collegeController');
 
 const router = express.Router();
 
@@ -26,20 +27,30 @@ router
   .post(userController.createUser);
 
 
+
 router
   .route('/profile')
-  .get(doctor.getAllDocProfile)
-  .post(doctor.createDocProfile);
+  .get(doctorController.getAllDocProfile)
+  .post(doctorController.createDocProfile);
 
 router
   .route('/clinic/:id')
-  .post(doctor.addClinicDetail);
+  .post(doctorController.addClinicDetail);
   
+router
+  .route('/college')
+  .get(collegeController.getAllCollegeNames)
+  .post(collegeController.addCollegeNames);
+
+router
+  .route('/college/:id')
+  .post(collegeController.deleteCollegeNames);
 
 router
   .route('/:id')
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
+
 
 module.exports = router;
