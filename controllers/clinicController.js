@@ -28,7 +28,7 @@ exports.getClinicById = async (req, res) => {
             status: 'success',
             data: {
                 clinic: clinicById
-            }
+            }GET
         })
     } catch (err) {
         res.status(404).json({
