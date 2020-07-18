@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const clinic = require('./../models/clinicModel');
 const doctor = new mongoose.Schema({
-    id:{
+    _id:{
         type: String,
 	    unique: true,
         requried: [true, 'Please provide valid id']
@@ -29,13 +28,10 @@ const doctor = new mongoose.Schema({
         length: [6, 'Please provide 6 digit pincode']
     },
     homeAddress: {
-        // GeoJSON   
-        type: {
-            type: String,
-            default: 'Point',
-            enum: ['Point']
+        coordinates: {
+            type: [Number],
+            default: []
         },
-        coordinates: [Number],
         address: String
     },
     contactNo: {
@@ -52,33 +48,24 @@ const doctor = new mongoose.Schema({
             message: 'gender is either male, female or other'
         }
     },
-    degree: {
-        type: [String]
-    },
-    college: {
-        type: [String]
-    },
-    dateOfGraduation: {
-        type: [String]
-    },
     doctorRegistrationNo: {
-        type: [String]
-    },    
+        type: String
+    },
+    experience: {
+        type: Number,
+    },
+    education: [{
+        degree: String,
+        college: String,
+        dateOfGraduation: String 
+    }],   
     field: {
         type: String,
     },
     specialities: {
             type: [String]
     },
-    experience: {
-        type: Number,
-    },
-    clinics: {
-        type: [clinic.clinicSchema],
-        default: []
-    }
-    
 });
 
-const DocUser = mongoose.model('Docters',doctor);
+const DocUser = mongoose.model('Doctors',doctor);
 module.exports = DocUser;

@@ -14,8 +14,6 @@ exports.getAllCollegeNames = catchAsynsc(
     }
 );
 
-
-
 //to add college names
 exports.addCollegeNames = catchAsynsc(
     async (req, res, next) => {

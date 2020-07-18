@@ -1,51 +1,20 @@
 const mongoose = require('mongoose');
-
+const clinic = require('./../models/clinicSingleModel');
 const clinicSchema = mongoose.Schema({
-    typeOfClinic: {
+    _id:{
         type: String,
+	    unique: true,
+        requried: [true, 'Please provide valid id']
     },
-    clinicName: {
-        type: String,
+    clinicOne: {
+        type: clinic,
+        default: []
     },
-    city: {
-        type: String,
-    },
-    state: {
-        type: String,
-    },
-    pincode: {
-        type: Number,
-    },
-    clinicAddress: {
-        type: {
-            type: String,
-            default: 'Point',
-            enum: ['Point']
-        },
-        coordinates: [Number],
-        address: String
-    },
-    clinicContactNo: {
-        type: Number,
-    },
-    clinicAdditionalContactNo: {
-        type: Number,
-    },
-    clinicSpecialization: {
-        type: [String],
-    },
-    clinicServices: {
-        type: [String],
-    },
-    consultationFees: {
-        type: Number,
-    },
-    holidays: {
-        type: [String]
-    },
-    clinicTiming: {
-        day: [String],
-        timing: [String]
-    },
-    
+    clinicTwo: {
+        type: clinic,
+        default: []
+    }
 });
+
+const clinics = mongoose.model('Clinics',clinicSchema);
+module.exports = clinics;

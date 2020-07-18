@@ -15,45 +15,162 @@ post::
 
  {
                
-     "_id":"qwuweeeey",
+     "_id":"qwuweeeetteey",
      "name": "Radhe Raman Tiwari",
-     "email": "radhetinas@gmail.com",
+     "email": "raeedhe@gmail.com",
      "dateOfBirth": "15/11/1998",
-     "address": {
      "state": "UP",
      "city": "Gorakhpur",
      "pincode": 123433,
-          "homeAddress": {
-          "type": "Point",
-          "coordinates": [],
+      "homeAddress": {
           "address": "India"
-     }
      },
-     "contactNo": 1234867871,
+     "contactNo": 124466777,
      "alternateContactNo": 1234527328,
      "gender": "male",
-     "eduction": {
-     "undergraduation": {
-          "degree": "B.Tech",
-          "college": "iitm",
-          "dateOfGraduation": "2021",
-          "doctorRegistrationNo": "173782AA"
-     },
-     "diploma": {
-          "degree": "B.Tech",
-          "college": "iitm",
-          "dateOfGraduation": "2021",
-          "doctorRegistrationNo": "173782AA"
-     },
-     "postgraduation": {
-          "degree": "B.Tech",
-          "college": "iitm",
-          "dateOfGraduation": "2021",
-          "doctorRegistrationNo": "173782AA"
-     }
-     },
+     "doctorRegistrationNo": "173782AA",
+     "education": [{
+        "degree": "B.Tech",
+        "college": "iitm",
+        "dateOfGraduation": "2021"
+    },
+    {
+        "degree": "M.Tech",
+        "college": "iitb",
+        "dateOfGraduation": "2023"
+    }],
      "specialities": ["one","two"],
      "field": "dentiest",
      "experience": 0.2
 }
 
+https://infinite-sea-97704.herokuapp.com/api/v11/user/clinic
+
+Post::
+
+{
+    "_id": "egdgehhjasjhas",
+    "clinicOne": {
+        "typeOfClinic": "Owned",
+        "clinicName": "4eyed",
+        "city":"Gorakhpur",
+        "state": "U.P",
+        "pincode": 841437,
+        "clinicAddress": {
+            "address": "Gorakhpur"
+        },
+        "clinicContactNo":123456789,
+        "clinicAdditionalContactNo": 123456789,
+        "clinicSpecialization": ["One","Two"],
+        "clinicServices":["One","Two"],
+        "consultationFees": 100,
+        "holidays":["Sunday","Monday"],
+        "clinicTiming": [{
+            "day": "Wednesday",
+            "morningSlots": "6-9",
+            "afternoonSlots": "12-15",
+            "eveningSlots": "15-18",
+            "onlineSlots": "9-12"
+        }],
+        "appointment": []
+    },
+    "clinicTwo": {
+        "typeOfClinic": "Owned",
+        "clinicName": "4eyed",
+        "city":"Gorakhpur",
+        "state": "U.P",
+        "pincode": 841437,
+        "clinicAddress": {
+            "address": "Gorakhpur"
+        },
+        "clinicContactNo":123456789,
+        "clinicAdditionalContactNo": 123456789,
+        "clinicSpecialization": ["One","Two"],
+        "clinicServices":["One","Two"],
+        "consultationFees": 100,
+        "holidays":["Sunday","Monday"],
+        "clinicTiming": [{
+            "day": "Wednesday",
+            "morningSlots": "6-9",
+            "afternoonSlots": "12-15",
+            "eveningSlots": "15-18",
+            "onlineSlots": "9-12"
+        }],
+        "appointment": []
+    }
+
+}
+
+https://infinite-sea-97704.herokuapp.com/api/v11/user/clinic/:id
+
+Patch:: 
+{
+    "clinicOne": {
+        "typeOfClinic": "My Clinic",
+        "clinicName": "Foureyed",
+        "city": "Gorakhpur",
+        "state": "U.P",
+        "pincode": 841437,
+        "clinicAddress": {
+            "address": "Gorakhpur"
+        },
+        "clinicContactNo": 123456789,
+        "clinicAdditionalContactNo": 123456789,
+        "clinicSpecialization": [
+            "One",
+            "Two"
+        ],
+        "clinicServices": [
+            "One",
+            "Two"
+        ],
+        "consultationFees": 100,
+        "holidays": [
+            "Sunday",
+            "Monday"
+        ],
+        "clinicTiming": [
+            {
+                "day": "Wednesday",
+                "morningSlots": "6-9",
+                "afternoonSlots": "12-15",
+                "eveningSlots": "15-18",
+                "onlineSlots": "9-12"
+            }
+        ]
+    },
+    "clinicTwo": {
+        "typeOfClinic": "Public Owned",
+        "clinicName": "4eyed",
+        "city": "Gorakhpur",
+        "state": "U.P",
+        "pincode": 841437,
+        "clinicAddress": {
+            "address": "Gorakhpur"
+        },
+        "clinicContactNo": 123456789,
+        "clinicAdditionalContactNo": 123456789,
+        "clinicSpecialization": [
+            "One",
+            "Two"
+        ],
+        "clinicServices": [
+            "One",
+            "Two"
+        ],
+        "consultationFees": 100,
+        "holidays": [
+            "Sunday",
+            "Monday"
+        ],
+        "clinicTiming": [
+            {
+                "day": "Wednesday",
+                "morningSlots": "6-9",
+                "afternoonSlots": "12-15",
+                "eveningSlots": "15-18",
+                "onlineSlots": "9-12"
+            }
+        ]
+    }
+}

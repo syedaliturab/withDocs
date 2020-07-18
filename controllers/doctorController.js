@@ -5,13 +5,11 @@ const catchAsynsc = require('./../utils/catchAsync');
 exports.getAllDocProfile = catchAsynsc(
     async (req, res, next) => {
 
-        const doctor = await docUser.find();
+        const doctors = await docUser.find();
         res.status(200).json({
             status: 'success',
-            results: doctor.length,
-            data: {
-                doctor,
-            },
+            data: doctors
+            
         });
     }
 );
@@ -23,9 +21,8 @@ exports.getDoctor = catchAsynsc(
         const docter = await docUser.findById(req.params.id);
         res.status(200).json({
             status: 'success',
-            data: {
-                docter
-            }
+            data: docter
+            
         })
     }
 );
@@ -38,9 +35,7 @@ exports.createDocProfile = catchAsynsc(
         newDocUser.password = undefined;
         res.status(200).json({
             status: 'success',
-            data: {
-                doctor: newDocUser
-            }
+            data: newDocUser
         });
     }
 );
@@ -56,7 +51,6 @@ exports.updateDocProfile = catchAsynsc(
                 status: 'fail'
             })
         }
-        console.log(req.params.id)
         const updatedDocUser = await docUser.findByIdAndUpdate(
             req.params.id, req.body, {
                 new: true,
@@ -65,9 +59,8 @@ exports.updateDocProfile = catchAsynsc(
         );
         res.status(200).json({
             status: 'success',
-            data: {
-                docter: updatedDocUser
-            }
+            data: updatedDocUser
+            
         })
     }
 );
@@ -81,29 +74,10 @@ exports.deleteDocProfile = catchAsynsc(
         
         res.status(200).json({
             status: 'success',
-            data: {
-                doctor: deleteDocUser
-            }
+            data:  deleteDocUser
         })
     }
 );
 
 
-//to add clinic details
-exports.addClinicDetail = catchAsynsc(
-    async (req, res, next) => {
-        console.log(req.params.id);
-        const addClinic = await docUser.findByIdAndUpdate(
-            req.params.id, req.body, {
-                new: true,
-                runValidators: true
-            }
-        );
-        res.status(200).json({
-            status: 'success',
-            data: {
-                docter: addClinic
-            }
-        });
-    }
-);
+
