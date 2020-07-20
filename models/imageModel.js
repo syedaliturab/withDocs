@@ -11,8 +11,7 @@ const imageSchema = mongoose.Schema({
         default: 'profile'
     },
     image: {
-        type: [Number],
-        default: []
+        type: Buffer, 
     }
     
 });

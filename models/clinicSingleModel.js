@@ -20,44 +20,12 @@ const singleClinic = {
     holidays: [String],
     clinicTiming: [{
         day: String,
-        morningSlots: String,
-        afternoonSlots: String,
-        eveningSlots: String,
-        onlineSlots: String
+        slots: [Number],
     }],
-    appointment: {
-        type: [{
-            date: String,
-            morningSlots: [{
-                id: String,
-                time: String,
-                name: String,
-                contactNo: String,
-                gender: String
-            }],
-            afternoonSlots: [{
-                id: String,
-                time: String,
-                name: String,
-                contactNo: String,
-                gender: String
-            }],
-            eveningSlots: [{
-                id: String,
-                time: String,
-                name: String,
-                contactNo: String,
-                gender: String
-            }],
-            onlineSlots: [{
-                id: String,
-                time: String,
-                name: String,
-                contactNo: String,
-                gender: String
-            }]
-        }],
-        default: [],
-    }
+    appointment: [{
+        date: String,
+        slots: [Number],
+    }],
+
 };
 module.exports = singleClinic;

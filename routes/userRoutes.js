@@ -4,6 +4,7 @@ const authController = require('./../controllers/authController');
 const doctorController = require('./../controllers/doctorController');
 const clinicController = require('./../controllers/clinicController');
 const collegeController = require('./../controllers/collegeController');
+const patientController = require('./../controllers/patientController');
 const imageController = require('./../controllers/imageController');
 
 const router = express.Router();
@@ -32,17 +33,34 @@ router
 
 
 router
-  .route('/profile')
+  .route('/doctor')
   .get(doctorController.getAllDocProfile)
   .post(doctorController.createDocProfile);
-router.get('/profile/:id',doctorController.getDoctor);
+
+router
+  .route('/doctor/:id')
+  .get(doctorController.getDoctor)
+  .patch(doctorController.updateDocProfile);
+
+  
+router
+  .route('/patient')
+  .get(patientController.getAllPatientProfile)
+  .post(patientController.createPatientProfile);
+
+
+router
+  .route('/patient/:id')
+  .get(patientController.getPatient)
+  .patch(patientController.updatePatientProfile);
+
 
 router.get('/clinic',clinicController.getAllClinicProfile);
 router.get('/clinic/:id',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);
 router.patch('/clinic/:id',clinicController.updateClinicDetail);
 
-router.post('/appointment/:id',clinicController.bookAppointment);
+
   
 
 router
@@ -55,8 +73,10 @@ router
   .route('/college/:id')
   .post(collegeController.deleteCollegeNames);
 
-router.get('/image/:id',imageController.getImage)
-router.post('/image',imageController.uploadImage);
+router
+  .route('/image')
+  .get(imageController.getImage)
+  .post(imageController.uploadImage);
 
 
 router

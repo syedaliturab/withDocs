@@ -1,4 +1,5 @@
 mongoose = require('mongoose');
+const validator = require('validator');
 
 const patientSchema = mongoose.Schema({
     _id:{
