@@ -174,3 +174,130 @@ Patch::
         ]
     }
 }
+
+{
+     "_id": "1234",
+    "clinicOne": {
+        "typeOfClinic": "Owned",
+        "clinicName": "4eyed",
+        "city":"Gorakhpur",
+        "state": "U.P",
+        "pincode": 841437,
+        "clinicAddress": {
+            "address": "Gorakhpur"
+        },
+        "clinicContactNo":123456789,
+        "clinicAdditionalContactNo": 123456789,
+        "clinicSpecialization": ["One","Two"],
+        "clinicServices":["One","Two"],
+        "consultationFees": 100,
+        "holidays":["sunday","monday"],
+        "clinicTiming": [{
+            "day": "tuesday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "wednesday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "thursday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "friday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "saturday",
+            "slots": [5,6,7,8,23,24,25,26]
+        }],
+         "appointment": [{
+            "date": "7/20/2020",
+            "slots": [-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+        }]
+    },
+    "clinicTwo": {
+        "typeOfClinic": "Owned",
+        "clinicName": "4eyed",
+        "city":"Gorakhpur",
+        "state": "U.P",
+        "pincode": 841437,
+        "clinicAddress": {
+            "address": "Gorakhpur"
+        },
+        "clinicContactNo":123456789,
+        "clinicAdditionalContactNo": 123456789,
+        "clinicSpecialization": ["One","Two"],
+        "clinicServices":["One","Two"],
+        "consultationFees": 100,
+        "holidays":["Sunday","Monday"],
+        "clinicTiming": [{
+            "day": "tuesday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "wednesday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "thursday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "friday",
+            "slots": [5,6,7,8,23,24,25,26]
+        },
+        {
+            "day": "saturday",
+            "slots": [5,6,7,8,23,24,25,26]
+        }
+        ],
+        "appointment": [{
+            "date": "7/20/2020",
+            "slots": [-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+        }]
+    }
+}
+
+{
+    "doctorId":"qwerr",
+    "clinicId":"1234",
+    "patientId": "wieeeuru",
+    "date": "7/21/2020",
+    "slot": 8,
+    "doctorName": "Radhe",
+    "patientName": "xyz"
+
+}
+
+{
+    "bookId":"5f1719443c6bca18ede6d385",
+    "doctorId":"qwerr",
+    "clinicId":"1234",
+    "patientId": "wieeeuru",
+    "date": "7/21/2020",
+    "slot": 8,
+    "doctorName": "Radhe",
+    "patientName": "xyz",
+    "status": "pushed"
+
+}
+
+{
+    "bookId":"5f1719443c6bca18ede6d385",
+    "doctorId":"qwerr",
+    "clinicId":"1234",
+    "patientId": "wieeeuru",
+    "date": "7/21/2020",
+    "lastSlot": 8,
+    "newSlot": 7,
+    "doctorName": "Radhe",
+    "patientName": "xyz",
+    "status": "pushed"
+
+}

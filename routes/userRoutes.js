@@ -6,6 +6,8 @@ const clinicController = require('./../controllers/clinicController');
 const collegeController = require('./../controllers/collegeController');
 const patientController = require('./../controllers/patientController');
 const imageController = require('./../controllers/imageController');
+const appointmentController = require('./../controllers/appointmentController');
+const appointments = require('../models/appointmentModel');
 
 const router = express.Router();
 
@@ -58,26 +60,27 @@ router
 router.get('/clinic',clinicController.getAllClinicProfile);
 router.get('/clinic/:id',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);
-router.patch('/clinic/:id',clinicController.updateClinicDetail);
+router.patch('/clinic',clinicController.updateClinicDetail);
 
 
-  
-
-router
-  .route('/college')
-  .get(collegeController.getAllCollegeNames)
-  .post(collegeController.addCollegeNames);
-
+router.post('/college',collegeController.createCollegeName);
+router.post('/degree',collegeController.createDegree);
+router.post('/education',collegeController.getCollegeAndDegree);
 
 router
-  .route('/college/:id')
-  .post(collegeController.deleteCollegeNames);
+  .route('/membership')
+  .get(collegeController.getMemberships)
+  .post(collegeController.createMembership);
 
 router
   .route('/image')
   .get(imageController.getImage)
   .post(imageController.uploadImage);
 
+router
+  .route('/appointment')
+  .post(appointmentController.bookAppointment)
+  .patch(appointmentController.completeAppointment);
 
 router
   .route('/:id')

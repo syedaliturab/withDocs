@@ -16,16 +16,15 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         requried: [true, 'Please provide valid id']
     },
-    Date: {
-        type: Date,
-        default: Date.now
+    date: {
+        type: String,
     },
-    slotNumber: {
+    slot: {
         type: Number
     },
     status: {
         type: String,
-        enum: ['active', 'confirmed', 'cancelled'],
+        enum: ['active', 'confirmed', 'cancelled','pushed'],
         default: 'active'
     },
     doctorName: {

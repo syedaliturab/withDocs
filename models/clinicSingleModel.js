@@ -22,10 +22,18 @@ const singleClinic = {
         day: String,
         slots: [Number],
     }],
-    appointment: [{
-        date: String,
-        slots: [Number],
-    }],
+    appointment: {
+        type: [{
+            date: String,
+            slots: [Number],
+        }],
+        default:[{
+            date: "7/20/2020",
+            slots: [-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+        }]
+    },
 
 };
 module.exports = singleClinic;
