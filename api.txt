@@ -3,6 +3,18 @@ https://infinite-sea-97704.herokuapp.com/api/v11/user/signup
 post::
 
 {
+    "email": "radhe@gamil.com",
+    "password": "12345"
+    
+}
+
+{
+    "contactNo": "8340422624",
+    "password": "12345"
+    
+}
+
+{
      "email":"radhe43@gmail.com",
      "password":"radhe12345",
      "passwordConfirm":"radhe12345",
