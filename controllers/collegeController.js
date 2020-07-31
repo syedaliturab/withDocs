@@ -49,15 +49,17 @@ exports.getCollegeAndDegree = catchAsynsc(
         var degrees;
         if(req.body.filter === "AYUSH Practitioner"){
             colleges = await CollegeNames.find({
-                speciality: {$in:["Ayurveda","Unani","Siddha","Momeopathy"]}
+                speciality: {$in:["Ayurveda","Ayurvedic","Yoga and Naturopathy","Unani","Siddha","Homeopathy"]}
             });
             degrees = await DegreeNames.find({
-                stream: {$in:["Ayurveda","Unani","Siddha","Momeopathy"]}
+                stream: {$in:["Ayurveda","Ayurvedic","Yoga and Naturopathy","Unani","Siddha","Homeopathy"]}
             });
         }else if(req.body.filter === "Student"){
             colleges = await CollegeNames.find();
             degrees = await DegreeNames.find();
         }else {
+            if(req.body.filter==="Dentist")
+                req.body.filter = "Dental"
             colleges = await CollegeNames.find({
                 speciality: req.body.filter
             });
