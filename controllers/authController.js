@@ -74,7 +74,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user) {
     res.status(400).json({
       status: 'fail',
-      message: message +" doesn't exit"
+      message: message +" doesn't exist"
     });
   } else if(!(await user.correctPassword(password, user.password))){
     res.status(400).json({
