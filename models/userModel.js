@@ -6,15 +6,12 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    unique: true,
     lowercase: true,
     minlength: 2,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
-  contactNo: {
-    type: String,
-    unique: true,
-    length: 10,
+  contact: {
+    type: Number,
   },
   role: {
     type: String,
@@ -47,7 +44,7 @@ const userSchema = new mongoose.Schema({
     select: false
   }
 });
-
+userSchema.index({ email: 1, contact: 1 }, { unique: true });
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();

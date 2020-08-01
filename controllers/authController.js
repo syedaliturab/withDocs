@@ -36,6 +36,13 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
   
+  if(!(req.body.email) && !(req.body.contact)){
+    res.status(400).json({
+      status: 'fail',
+      message: "Please provide valid email or contact number!"
+    });
+  }
+
   const newUser = await User.create(req.body);
   
   createSendToken(newUser, 200, res);

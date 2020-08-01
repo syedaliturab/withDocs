@@ -6,13 +6,15 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  console.log(err)
-  //const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+
   var message;
   if(err.keyValue.email){
     message = `Eamil ${err.keyValue.email} already exists. Please use another!`;
+  } else if(err.keyValue.contact) {
+    message = `Contact No ${err.keyValue.contact} already exists. Please use another!`;
   } else {
-    message = `Contact No ${err.keyValue.contactNo} already exists. Please use another!`;
+    const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+    message = `${value} already exists. Please use another!`;
   }
   console.log(message)
   return new ErrorUtil(message, 400);
@@ -62,12 +64,13 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     devError(err, res);
   }
+  let error = { ...err };
+  if (error.code === 11000) error = handleDuplicateFieldsDB(error);
   if (process.env.NODE_ENV === 'production') {
     // console.log(error);
     let error = { ...err };
-    if (error.name === 'CastError') error = handleCastErrorDB(error);
-
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
+    if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
     if (error.name === 'JsonWebTokenError') error = handleJWTError();
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
