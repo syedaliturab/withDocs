@@ -35,7 +35,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-
+  
   const newUser = await User.create(req.body);
   
   createSendToken(newUser, 200, res);
@@ -56,13 +56,24 @@ exports.login = catchAsync(async (req, res, next) => {
   const password = req.body.password;
   // 1) Check if email and password exist
   if (!userId || !password) {
-    return next(new AppError('Please provide '+ message + ' and password!', 400));
+    res.status(400).json({
+      status: 'fail',
+      message: 'Please provide '+ message + ' and password!'
+    });
   }
   // 2) Check if user exists && password is correct
   const user = await User.findOne(userId).select('+password');
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(new AppError('Incorrect '+ message +' or password', 401));
+  if (!user) {
+    res.status(400).json({
+      status: 'fail',
+      message: message +" doesn't exit"
+    });
+  } else if(!(await user.correctPassword(password, user.password))){
+    res.status(400).json({
+      status: 'fail',
+      message: 'Incorrect password'
+    });
   }
 
   // 3) If everything ok, send token to client

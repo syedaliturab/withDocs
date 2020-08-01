@@ -6,9 +6,15 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-
-  const message = `Duplicate field value: ${value}. Please use another value!`;
+  console.log(err)
+  //const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+  var message;
+  if(err.keyValue.email){
+    message = `Eamil ${err.keyValue.email} already exists. Please use another!`;
+  } else {
+    message = `Contact No ${err.keyValue.contactNo} already exists. Please use another!`;
+  }
+  console.log(message)
   return new ErrorUtil(message, 400);
 };
 
@@ -57,13 +63,12 @@ module.exports = (err, req, res, next) => {
     devError(err, res);
   }
   if (process.env.NODE_ENV === 'production') {
-    let error = { ...err };
     // console.log(error);
+    let error = { ...err };
     if (error.name === 'CastError') error = handleCastErrorDB(error);
 
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === 'ValidationError')
-      error = handleValidationErrorDB(error);
+    if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
     if (error.name === 'JsonWebTokenError') error = handleJWTError();
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
     prodError(error, res);
