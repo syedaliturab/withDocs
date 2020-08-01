@@ -1,6 +1,5 @@
 const catchAsynsc = require('./../utils/catchAsync');
 const {CollegeNames, DegreeNames, MembershipNames} = require('./../models/collegeModel.js');
-const { collection } = require('../models/userModel');
 
 
 //to create college name
@@ -22,6 +21,10 @@ exports.getMemberships = catchAsynsc(
 //to create college name
 exports.createMembership = catchAsynsc(
     async (req, res, next) => {
+        // for(var element of req.body.data){
+        //     const member = await MembershipNames.create(element);
+        //     console.log(member);
+        // }
         const member = await MembershipNames.create(req.body);
         res.status(200).json({
             status: 'success',
@@ -58,8 +61,6 @@ exports.getCollegeAndDegree = catchAsynsc(
             colleges = await CollegeNames.find();
             degrees = await DegreeNames.find();
         }else {
-            if(req.body.filter==="Dentist")
-                req.body.filter = "Dental"
             colleges = await CollegeNames.find({
                 speciality: req.body.filter
             });
@@ -90,6 +91,10 @@ exports.getCollegeAndDegree = catchAsynsc(
 exports.createCollegeName = catchAsynsc(
     async (req, res, next) => {
        
+        // for(var element of req.body.data){
+        //     const member = await CollegeNames.create(element);
+        //     console.log(member);
+        // }
         const college = await CollegeNames.create(req.body);
         res.status(200).json({
             status: 'success',
@@ -101,7 +106,11 @@ exports.createCollegeName = catchAsynsc(
 //to create degree name
 exports.createDegree = catchAsynsc(
     async (req, res, next) => {
-       
+        
+        // for(var element of req.body.data){
+        //     const member = await DegreeNames.create(element);
+        //     console.log(member);
+        // }
         const degree = await DegreeNames.create(req.body);
         res.status(200).json({
             status: 'success',
