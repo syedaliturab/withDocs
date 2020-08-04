@@ -28,11 +28,7 @@ const doctor = new mongoose.Schema({
         length: [6, 'Please provide 6 digit pincode']
     },
     homeAddress: {
-        coordinates: {
-            type: [Number],
-            default: []
-        },
-        address: String
+        type: String
     },
     contactNo: {
         type: String,
@@ -44,26 +40,34 @@ const doctor = new mongoose.Schema({
     gender: {
         type: String,
         enum: {
-            values: ['male', 'female','other'],
-            message: 'gender is either male, female or other'
+            values: ['Male', 'Female','Other'],
+            message: 'gender is either Male, Female or Other'
         }
     },
-    doctorRegistrationNo: {
+    stream: {
         type: String
-    },
-    experience: {
-        type: Number,
     },
     education: [{
         degree: String,
         college: String,
-        dateOfGraduation: String 
-    }],   
-    field: {
-        type: String,
+        yearOfPassing: String 
+    }],  
+    registration: {
+        registrationNo: String,
+        registrationCouncil: String,
+        registrationYear: String,
+    },
+    primarySpeciality: {
+        type: String
     },
     specialities: {
-            type: [String]
+        type: [String]
+    },
+    memberships: {
+        type: [String],
+    },
+    experience: {
+        type: Number,
     },
 });
 
