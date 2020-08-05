@@ -313,3 +313,47 @@ Patch::
     "status": "pushed"
 
 }
+
+https://withdoc.herokuapp.com/api/v11/user/doctor
+
+Post::
+
+{
+    "_id": "qwuweeeet",
+    "name": "Radhe Raman Tiwari",
+    "email": "withdoc@gmail.com",
+    "dateOfBirth": "15/11/1998",
+    "state": "UP",
+    "city": "Gorakhpur",
+    "pincode": 123433,
+    "homeAddress": "India",
+    "contactNo": 8340422624,
+    "alternateContactNo": 1234527328,
+    "gender": "Male",
+    "stream": "Dentiest",
+    "education": [{
+        "degree": "B.Tech",
+        "college": "iitm",
+        "YearOfPassing": "2021"
+    },
+    {
+        "degree": "M.Tech",
+        "college": "iitb",
+        "YearOfPassing": "2023"
+    }],
+    "registration": {
+        "registrationNo": "173782AA",
+        "registrationCouncil": "ICMR",
+        "registrationYear": "2015"
+    },
+    "primarySpeciality": "Hair Transplant",
+    "specialities": [
+        "Neutophysiology",
+        "Biomedical Toxicology"
+    ],
+    "memberships": [
+        "All India Medicos Society",
+        "All India Medical Practitioners Association Of India"
+    ],
+    "experience": 0.2
+}

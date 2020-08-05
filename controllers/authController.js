@@ -56,8 +56,8 @@ exports.login = catchAsync(async (req, res, next) => {
   if(req.body.email) {
     userId = {email: req.body.email};
     message = "email";
-  } else {
-    userId = {contactNo: req.body.contactNo};
+  } else if(req.body.contact) {
+    userId = {contact: req.body.contact};
     message = "contact number";
   }
   const password = req.body.password;
