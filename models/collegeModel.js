@@ -33,7 +33,24 @@ const memberships = mongoose.Schema({
     },
 });
 
+const specialitiesSchema = mongoose.Schema({
+    primarySpeciality: {
+        type: String,
+    }, 
+    subSpeciality: {
+        type: String,
+    },
+    clinicServices: {
+        type: String,
+    },  
+    clinicIssues: {
+        type: String,
+    },
+});
+specialitiesSchema.index({ primarySpeciality: 1, subSpeciality: 1, clinicServices: 1, clinicIssues: 1 }, { unique: true });
+
 const CollegeNames = mongoose.model('Colleges',colleges);
 const DegreeNames = mongoose.model('Degrees',degrees);
 const MembershipNames = mongoose.model('Memberships',memberships);
-module.exports = {CollegeNames,DegreeNames,MembershipNames};
+const Specialities = mongoose.model('Specialities',specialitiesSchema);
+module.exports = {CollegeNames,DegreeNames,MembershipNames,Specialities};

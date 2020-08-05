@@ -72,6 +72,11 @@ router
   .get(collegeController.getMemberships)
   .post(collegeController.createMembership);
 
+  router
+  .route('/specialitie')
+  .get(collegeController.getSpecialities)
+  .post(collegeController.createSpecialitie);
+
 router
   .route('/image')
   .get(imageController.getImage)

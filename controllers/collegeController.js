@@ -1,6 +1,47 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const {CollegeNames, DegreeNames, MembershipNames} = require('./../models/collegeModel.js');
+const {CollegeNames, DegreeNames, MembershipNames, Specialities} = require('./../models/collegeModel.js');
 
+
+exports.createSpecialitie = catchAsynsc(
+    async (req, res, next) => {
+        
+        for(var element of req.body.data){
+            const member = await Specialities.create(element);
+            console.log(member);
+        }
+        //const specialitie = await Specialities.create(req.body);
+        res.status(200).json({
+            status: 'success',
+            data: specialitie
+        });
+    }
+);
+
+exports.getSpecialities = catchAsynsc(
+    async (req, res, next) => {
+
+        const members = await Specialities.find();
+        var specialitielist = []
+        members.forEach(element => {
+            if(element.primarySpeciality){
+                specialitielist.push(element.primarySpeciality);
+            }
+            if(element.subSpeciality){
+                specialitielist.push(element.subSpeciality);
+            }
+            if(element.clinicServices){
+                specialitielist.push(element.clinicServices);
+            }
+            if(element.clinicIssues){
+                specialitielist.push(element.clinicIssues);
+            }
+        })
+        res.status(200).json({
+            status: 'success',
+            data: specialitielist
+        });
+    }
+);
 
 //to create college name
 exports.getMemberships = catchAsynsc(
