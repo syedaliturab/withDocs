@@ -62,6 +62,7 @@ router.get('/clinic/:id',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);
 router.patch('/clinic',clinicController.updateClinicDetail);
 
+router.get('/geeksforgeeks',collegeController.getGeeks);
 
 router.post('/college',collegeController.createCollegeName);
 router.post('/degree',collegeController.createDegree);

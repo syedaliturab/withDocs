@@ -1,6 +1,15 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const {CollegeNames, DegreeNames, MembershipNames, Specialities} = require('./../models/collegeModel.js');
+const {CollegeNames, DegreeNames, MembershipNames, Specialities,Geeksforgeeks} = require('./../models/collegeModel.js');
 
+exports.getGeeks = catchAsynsc(
+    async (req, res, next) => {
+        const geeksforgeek = await Geeksforgeeks.find();
+        res.status(200).json({
+            status: 'success',
+            data: {day:geeksforgeek[0].day}
+        });
+    }
+);
 
 exports.createSpecialitie = catchAsynsc(
     async (req, res, next) => {

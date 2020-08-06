@@ -32,6 +32,12 @@ const memberships = mongoose.Schema({
         require: true
     },
 });
+const geeksforgeeksSchema = mongoose.Schema({
+    day : {
+        type: String,
+        require: true
+    },
+});
 
 const specialitiesSchema = mongoose.Schema({
     primarySpeciality: {
@@ -49,8 +55,9 @@ const specialitiesSchema = mongoose.Schema({
 });
 specialitiesSchema.index({ primarySpeciality: 1, subSpeciality: 1, clinicServices: 1, clinicIssues: 1 }, { unique: true });
 
+const Geeksforgeeks = mongoose.model('GeeksforGeeks',geeksforgeeksSchema);
 const CollegeNames = mongoose.model('Colleges',colleges);
 const DegreeNames = mongoose.model('Degrees',degrees);
 const MembershipNames = mongoose.model('Memberships',memberships);
 const Specialities = mongoose.model('Specialities',specialitiesSchema);
-module.exports = {CollegeNames,DegreeNames,MembershipNames,Specialities};
+module.exports = {CollegeNames,DegreeNames,MembershipNames,Specialities,Geeksforgeeks};
