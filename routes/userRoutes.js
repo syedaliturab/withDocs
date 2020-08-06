@@ -74,8 +74,8 @@ router
 
   router
   .route('/specialitie')
-  .get(collegeController.getSpecialities)
-  .post(collegeController.createSpecialitie);
+  .post(collegeController.getSpecialities)
+  .patch(collegeController.createSpecialitie);
 
 router
   .route('/image')

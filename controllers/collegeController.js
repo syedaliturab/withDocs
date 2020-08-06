@@ -5,11 +5,11 @@ const {CollegeNames, DegreeNames, MembershipNames, Specialities} = require('./..
 exports.createSpecialitie = catchAsynsc(
     async (req, res, next) => {
         
-        for(var element of req.body.data){
-            const member = await Specialities.create(element);
-            console.log(member);
-        }
-        //const specialitie = await Specialities.create(req.body);
+        // for(var element of req.body.data){
+        //     const member = await Specialities.create(element);
+        //     console.log(member);
+        // }
+        const specialitie = await Specialities.create(req.body);
         res.status(200).json({
             status: 'success',
             data: specialitie
@@ -19,23 +19,40 @@ exports.createSpecialitie = catchAsynsc(
 
 exports.getSpecialities = catchAsynsc(
     async (req, res, next) => {
-
-        const members = await Specialities.find();
+        console.log(req.body.filter);
         var specialitielist = []
-        members.forEach(element => {
-            if(element.primarySpeciality){
-                specialitielist.push(element.primarySpeciality);
-            }
-            if(element.subSpeciality){
-                specialitielist.push(element.subSpeciality);
-            }
-            if(element.clinicServices){
-                specialitielist.push(element.clinicServices);
-            }
-            if(element.clinicIssues){
-                specialitielist.push(element.clinicIssues);
-            }
-        })
+        if(req.body.filter === "primarySpeciality"){
+            members = await Specialities.find({},{ primarySpeciality: 1, _id: 0 } );
+            members.forEach(element => {
+                if(element.primarySpeciality)
+                    specialitielist.push(element.primarySpeciality);
+            })
+            
+        }
+        if(req.body.filter === "subSpeciality"){
+            members = await Specialities.find({},{ subSpeciality: 1, _id: 0 } );
+            members.forEach(element => {
+                if(element.subSpeciality)
+                    specialitielist.push(element.subSpeciality);
+            })
+            
+        }
+        if(req.body.filter === "clinicServices"){
+            members = await Specialities.find({},{ clinicServices: 1, _id: 0 } );
+            members.forEach(element => {
+                if(element.clinicServices)
+                    specialitielist.push(element.clinicServices);
+            })
+            
+        }
+        if(req.body.filter === "clinicIssues"){
+            members = await Specialities.find({},{ clinicIssues: 1, _id: 0 } );
+            members.forEach(element => {
+                if(element.clinicIssues)
+                    specialitielist.push(element.clinicIssues);
+            })
+            
+        }
         res.status(200).json({
             status: 'success',
             data: specialitielist

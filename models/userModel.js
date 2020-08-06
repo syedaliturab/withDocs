@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
   },
   contact: {
     type: Number,
+    length: [10, 'Please provide 10 digit contact number']
   },
   role: {
     type: String,
