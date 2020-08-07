@@ -50,8 +50,9 @@ exports.updateDocProfile = catchAsynsc(
                 status: 'fail'
             })
         }
+
         const updatedDocUser = await docUser.findByIdAndUpdate(
-            req.params.id, req.body, {
+            req.body.id, req.body, {
                 new: true,
                 runValidators: true
             }

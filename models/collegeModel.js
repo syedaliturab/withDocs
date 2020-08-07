@@ -55,7 +55,7 @@ const specialitiesSchema = mongoose.Schema({
 });
 specialitiesSchema.index({ primarySpeciality: 1, subSpeciality: 1, clinicServices: 1, clinicIssues: 1 }, { unique: true });
 
-const Geeksforgeeks = mongoose.model('GeeksforGeeks',geeksforgeeksSchema);
+const Geeksforgeeks = mongoose.model('Geeksforgeeks',geeksforgeeksSchema);
 const CollegeNames = mongoose.model('Colleges',colleges);
 const DegreeNames = mongoose.model('Degrees',degrees);
 const MembershipNames = mongoose.model('Memberships',memberships);

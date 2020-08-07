@@ -69,6 +69,9 @@ const doctor = new mongoose.Schema({
     experience: {
         type: Number,
     },
+    eligiblity: {
+        type: [Boolean],
+    },
 });
 
 const DocUser = mongoose.model('Doctors',doctor);

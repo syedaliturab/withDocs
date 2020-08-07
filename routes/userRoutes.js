@@ -36,12 +36,11 @@ router
 
 router
   .route('/doctor')
-  .get(doctorController.getAllDocProfile)
   .post(doctorController.createDocProfile);
 
 router
-  .route('/doctor/:id')
-  .get(doctorController.getDoctor)
+  .route('/doctor')
+  .get(doctorController.getAllDocProfile)
   .patch(doctorController.updateDocProfile);
 
   
