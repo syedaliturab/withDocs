@@ -1,6 +1,8 @@
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/ErrorUtil');
 const APIFeatures = require('./../utils/apiFeatures');
+const docUser = require('./../models/doctorModel.js');
+const clinics = require('./../models/clinicModel.js');
 
 exports.deleteOne = Model =>
   catchAsync(async (req, res, next) => {
@@ -49,18 +51,37 @@ exports.createOne = Model =>
 
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
+    console.log(req.query);
+    let query = Model.findById(req.query.id);
     if (popOptions) query = query.populate(popOptions);
-    const doc = await query;
+    const user = await query;
 
-    if (!doc) {
-      return next(new AppError('No document found with that ID', 404));
+    if (!user) {
+      res.status(404).json({
+        status: 'fail',
+        message: "No document found with that ID"
+      });
+      //return next(new AppError('No document found with that ID', 404));
     }
-
+    var move;
+    const doctor = await docUser.findById(user._id);
+    if(!doctor){
+      move = "profile";
+    }else if(doctor.stream==="Student"){
+      move = "home";
+    }else{
+      const clinic = await clinics.findById(user._id);
+      if(!clinic){
+        move = "clinic";
+      }else {
+        move = "home";
+      }
+    }
     res.status(200).json({
       status: 'success',
+      move,
       data: {
-        data: doc
+        data: user
       }
     });
   });

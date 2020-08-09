@@ -28,8 +28,8 @@ router.delete('/deleteMe', userController.deleteMe);
 
 
 router
-  .route('/')
-  .get(userController.getAllUsers)
+  .route('/search/')
+  .get(userController.getUser)
   .post(userController.createUser);
 
 
