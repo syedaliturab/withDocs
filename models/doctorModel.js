@@ -11,8 +11,6 @@ const doctor = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true,
-        validate: [validator.isEmail, 'Please provide valid email']
     },
     dateOfBirth: {
         type: String,

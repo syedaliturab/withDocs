@@ -1,6 +1,5 @@
 const clinics = require('./../models/clinicModel.js');
 const catchAsynsc = require('./../utils/catchAsync');
-const { holidays } = require('../models/clinicSingleModel.js');
 
 const searchIndex = (day,days) => {
     for( var element of days){

@@ -2,6 +2,8 @@ const crypto = require('crypto');
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
+const docUser = require('./../models/doctorModel.js');
+const clinics = require('./../models/clinicModel.js');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/ErrorUtil');
 const sendEmail = require('./../utils/email');
@@ -12,7 +14,7 @@ const signToken = id => {
   });
 };
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(
@@ -24,14 +26,7 @@ const createSendToken = (user, statusCode, res) => {
 
   res.cookie('jwt', token, cookieOptions);
 
-  // Remove password from output
-  user.password = undefined;
-
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: user
-  });
+  return token
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
@@ -45,7 +40,16 @@ exports.signup = catchAsync(async (req, res, next) => {
 
   const newUser = await User.create(req.body);
   
-  createSendToken(newUser, 200, res);
+  // 3) If everything ok, send token to client
+  const token = createSendToken(newUser,res);
+  // Remove password from output
+  user.password = undefined;
+
+  res.status(200).json({
+    status: 'success',
+    token,
+    data: newUser
+  });
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -84,7 +88,29 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  createSendToken(user, 200, res);
+  const token = createSendToken(user,res);
+  // Remove password from output
+  user.password = undefined;
+  var move;
+  const doctor = await docUser.findById(user._id);
+  if(!doctor){
+    move = "profile";
+  }else if(doctor.stream==="Student"){
+    move = "home";
+  }else{
+    const clinic = await clinics.findById(user._id);
+    if(!clinic){
+      move = "clinic";
+    }else {
+      move = "home";
+    }
+  }
+  res.status(200).json({
+    status: 'success',
+    token,
+    move,
+    data: user
+  });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -207,7 +233,16 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3) Update changedPasswordAt property for the user
   // 4) Log the user in, send JWT
-  createSendToken(user, 200, res);
+  // 3) If everything ok, send token to client
+  const token = createSendToken(user,res);
+  // Remove password from output
+  user.password = undefined;
+
+  res.status(200).json({
+    status: 'success',
+    token,
+    data: user
+  });
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -226,5 +261,14 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // User.findByIdAndUpdate will NOT work as intended!
 
   // 4) Log user in, send JWT
-  createSendToken(user, 200, res);
+  // 3) If everything ok, send token to client
+  const token = createSendToken(user,res);
+  // Remove password from output
+  user.password = undefined;
+
+  res.status(200).json({
+    status: 'success',
+    token,
+    data: user
+  });
 });
