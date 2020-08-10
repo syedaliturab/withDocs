@@ -18,7 +18,7 @@ exports.getAllDocProfile = catchAsynsc(
 exports.getDoctor = catchAsynsc(
     async (req, res, next) => {
 
-        const docter = await docUser.findById(req.params.id);
+        const docter = await docUser.findById(req.query.id);
         res.status(200).json({
             status: 'success',
             data: docter

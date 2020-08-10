@@ -26,21 +26,13 @@ router.delete('/deleteMe', userController.deleteMe);
 
 //router.use(authController.restrictTo('admin'));
 
-
-router
-  .route('/search/')
-  .get(userController.getUser)
-  .post(userController.createUser);
-
-
-
 router
   .route('/doctor')
   .post(doctorController.createDocProfile);
 
 router
-  .route('/doctor')
-  .get(doctorController.getAllDocProfile)
+  .route('/doctor/')
+  .get(doctorController.getDoctor)
   .patch(doctorController.updateDocProfile);
 
   
@@ -86,6 +78,10 @@ router
   .route('/appointment')
   .post(appointmentController.bookAppointment)
   .patch(appointmentController.completeAppointment);
+
+router
+  .route('/search/')
+  .get(userController.getUser);
 
 router
   .route('/:id')
