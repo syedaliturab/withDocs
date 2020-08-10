@@ -3,7 +3,7 @@ const validator = require('validator');
 const doctor = new mongoose.Schema({
     _id:{
         type: String,
-	    unique: true,
+	 unique: true,
         requried: [true, 'Please provide valid id']
     },
     name: {

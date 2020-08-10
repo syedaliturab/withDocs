@@ -43,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   // 3) If everything ok, send token to client
   const token = createSendToken(newUser,res);
   // Remove password from output
-  user.password = undefined;
+  newUser.password = undefined;
 
   res.status(200).json({
     status: 'success',
