@@ -56,7 +56,8 @@ exports.login = catchAsync(async (req, res, next) => {
 
   var userId;
   var message;
-
+  console.log("email: "+req.body.email);
+  console.log("Contact No: "+req.body.contact);
   if(req.body.email) {
     userId = {email: req.body.email};
     message = "email";
@@ -69,7 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!userId || !password) {
     res.status(400).json({
       status: 'fail',
-      message: 'Please provide '+ message + ' and password!'
+      message: 'Please provide '+ $message + ' and password!'
     });
   }
   // 2) Check if user exists && password is correct
