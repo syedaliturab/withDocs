@@ -56,8 +56,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   var userId;
   var message;
-  console.log("email: "+req.body.email);
-  console.log("Contact No: "+req.body.contact);
+  console.log(req.body);
   if(req.body.email) {
     userId = {email: req.body.email};
     message = "email";
