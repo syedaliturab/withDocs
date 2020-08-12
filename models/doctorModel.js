@@ -70,6 +70,11 @@ const doctor = new mongoose.Schema({
     eligiblity: {
         type: [Boolean],
     },
+    nonPractising: {
+        type: Boolean,
+        default: false,
+        select: true
+    }
 });
 
 const DocUser = mongoose.model('Doctors',doctor);
