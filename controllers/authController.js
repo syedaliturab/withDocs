@@ -95,12 +95,14 @@ exports.login = catchAsync(async (req, res, next) => {
   const doctor = await docUser.findById(user._id);
   if(!doctor){
     move = "profile";
-  }else if(doctor.stream==="Student" || doctor.nonPractising===true){
+  }else if(doctor.stream==="Student"){
     move = "home";
   }else{
     const clinic = await clinics.findById(user._id);
     if(!clinic){
       move = "clinic";
+    } else if(clinic.nonPractising===true){
+      move = "home";
     }else {
       move = "home";
     }
