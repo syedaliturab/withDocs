@@ -13,6 +13,11 @@ const clinicSchema = mongoose.Schema({
     clinicTwo: {
         type: clinic,
         default: []
+    },
+    nonPractising: {
+        type: Boolean,
+        default: false,
+        select: true
     }
 });
 

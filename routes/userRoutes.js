@@ -48,10 +48,9 @@ router
   .patch(patientController.updatePatientProfile);
 
 
-router.get('/clinic',clinicController.getAllClinicProfile);
-router.get('/clinic/:id',clinicController.getClinic);
+router.get('/clinic',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);
-router.patch('/clinic',clinicController.updateClinicDetail);
+router.patch('/clinic',clinicController.updateClinicProfile);
 
 router.get('/geeksforgeeks',collegeController.getGeeks);
 

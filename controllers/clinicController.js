@@ -80,7 +80,7 @@ exports.getAllClinicProfile = catchAsynsc(
 exports.getClinic = catchAsynsc(
     async (req, res, next) => {
 
-        const clinic = await clinics.findById(req.params.id);
+        const clinic = await clinics.findById(req.query.id);
         res.status(200).json({
             status: 'success',
             data: clinic
@@ -99,6 +99,21 @@ exports.createClinicProfile = catchAsynsc(
     }
 );
 
+exports.updateClinicProfile = catchAsynsc(
+    async (req, res, next) => {
+        const updateClinic = await clinics.findByIdAndUpdate(
+            req.params.id,
+            req.body,{
+                new: true,
+                runValidators: true
+            }
+        );
+        res.status(200).json({
+            status: 'success',
+            data: updateClinic
+        });
+    }
+);
 //to update clinic details
 exports.updateClinicDetail = catchAsynsc(
     async (req, res, next) => {

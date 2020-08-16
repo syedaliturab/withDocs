@@ -69,11 +69,6 @@ const doctor = new mongoose.Schema({
     },
     eligiblity: {
         type: [Boolean],
-    },
-    nonPractising: {
-        type: Boolean,
-        default: false,
-        select: true
     }
 });
 
