@@ -22,23 +22,7 @@ const singleClinic = {
     clinicIssues: [String],
     consultationFees: Number,
     holidays: [String],
-    avgPatientsPerDay: Number,
-    clinicTiming: [{
-        day: String,
-        slots: [Number],
-    }],
-    appointment: {
-        type: [{
-            date: String,
-            slots: [Number],
-        }],
-        default:[{
-            date: "7/20/2020",
-            slots: [-1,-1,-1,-1,-1,-1,-1,-1,-1,
-                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-                -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
-        }]
-    },
+    avgPatientsPerDay: Number
 
 };
 module.exports = singleClinic;

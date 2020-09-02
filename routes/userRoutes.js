@@ -4,10 +4,6 @@ const authController = require('./../controllers/authController');
 const doctorController = require('./../controllers/doctorController');
 const clinicController = require('./../controllers/clinicController');
 const collegeController = require('./../controllers/collegeController');
-const patientController = require('./../controllers/patientController');
-const imageController = require('./../controllers/imageController');
-const appointmentController = require('./../controllers/appointmentController');
-const appointments = require('../models/appointmentModel');
 
 const router = express.Router();
 
@@ -27,32 +23,16 @@ router.delete('/deleteMe', userController.deleteMe);
 //router.use(authController.restrictTo('admin'));
 
 router
-  .route('/doctor')
-  .post(doctorController.createDocProfile);
-
-router
   .route('/doctor/')
   .get(doctorController.getDoctor)
+  .post(doctorController.createDocProfile)
   .patch(doctorController.updateDocProfile);
 
-  
 router
-  .route('/patient')
-  .get(patientController.getAllPatientProfile)
-  .post(patientController.createPatientProfile);
-
-
-router
-  .route('/patient/:id')
-  .get(patientController.getPatient)
-  .patch(patientController.updatePatientProfile);
-
-
-router.get('/clinic',clinicController.getClinic);
-router.post('/clinic',clinicController.createClinicProfile);
-router.patch('/clinic',clinicController.updateClinicProfile);
-
-router.get('/geeksforgeeks',collegeController.getGeeks);
+  .route('/clinic/')
+  .get(clinicController.getClinic)
+  .post(clinicController.createClinicProfile)
+  .patch(clinicController.updateClinicProfile);
 
 router.post('/college',collegeController.createCollegeName);
 router.post('/degree',collegeController.createDegree);
@@ -63,24 +43,13 @@ router
   .get(collegeController.getMemberships)
   .post(collegeController.createMembership);
 
-  router
+router
   .route('/specialitie')
   .post(collegeController.getSpecialities)
   .patch(collegeController.createSpecialitie);
 
-router
-  .route('/image')
-  .get(imageController.getImage)
-  .post(imageController.uploadImage);
 
-router
-  .route('/appointment')
-  .post(appointmentController.bookAppointment)
-  .patch(appointmentController.completeAppointment);
-
-router
-  .route('/search/')
-  .get(userController.getUser);
+router.get('/search/',userController.getUser);
 
 router
   .route('/:id')

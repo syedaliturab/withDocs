@@ -102,8 +102,7 @@ exports.createClinicProfile = catchAsynsc(
 exports.updateClinicProfile = catchAsynsc(
     async (req, res, next) => {
         const updateClinic = await clinics.findByIdAndUpdate(
-            req.params.id,
-            req.body,{
+            req.body.id,req.body,{
                 new: true,
                 runValidators: true
             }

@@ -1,23 +1,9 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const {CollegeNames, DegreeNames, MembershipNames, Specialities,Geeksforgeeks} = require('./../models/collegeModel.js');
-
-exports.getGeeks = catchAsynsc(
-    async (req, res, next) => {
-        const geeksforgeek = await Geeksforgeeks.find();
-        res.status(200).json({
-            status: 'success',
-            data: {day:geeksforgeek[0].day}
-        });
-    }
-);
+const {CollegeNames, DegreeNames, MembershipNames, Specialities} = require('./../models/collegeModel.js');
 
 exports.createSpecialitie = catchAsynsc(
     async (req, res, next) => {
         
-        // for(var element of req.body.data){
-        //     const member = await Specialities.create(element);
-        //     console.log(member);
-        // }
         const specialitie = await Specialities.create(req.body);
         res.status(200).json({
             status: 'success',
@@ -88,10 +74,6 @@ exports.getMemberships = catchAsynsc(
 //to create college name
 exports.createMembership = catchAsynsc(
     async (req, res, next) => {
-        // for(var element of req.body.data){
-        //     const member = await MembershipNames.create(element);
-        //     console.log(member);
-        // }
         const member = await MembershipNames.create(req.body);
         res.status(200).json({
             status: 'success',
@@ -158,10 +140,6 @@ exports.getCollegeAndDegree = catchAsynsc(
 exports.createCollegeName = catchAsynsc(
     async (req, res, next) => {
        
-        // for(var element of req.body.data){
-        //     const member = await CollegeNames.create(element);
-        //     console.log(member);
-        // }
         const college = await CollegeNames.create(req.body);
         res.status(200).json({
             status: 'success',
@@ -174,10 +152,6 @@ exports.createCollegeName = catchAsynsc(
 exports.createDegree = catchAsynsc(
     async (req, res, next) => {
         
-        // for(var element of req.body.data){
-        //     const member = await DegreeNames.create(element);
-        //     console.log(member);
-        // }
         const degree = await DegreeNames.create(req.body);
         res.status(200).json({
             status: 'success',

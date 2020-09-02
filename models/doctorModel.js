@@ -3,7 +3,12 @@ const validator = require('validator');
 const doctor = new mongoose.Schema({
     _id:{
         type: String,
-	 unique: true,
+	    unique: true,
+        requried: [true, 'Please provide valid id']
+    },
+    userId: {
+        type: String,
+	    unique: true,
         requried: [true, 'Please provide valid id']
     },
     name: {
@@ -69,6 +74,10 @@ const doctor = new mongoose.Schema({
     },
     eligiblity: {
         type: [Boolean],
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 
