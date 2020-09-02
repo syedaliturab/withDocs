@@ -13,7 +13,6 @@ const imageSchema = mongoose.Schema({
     image: {
         type: Buffer, 
     }
-    
 });
 
 const images = mongoose.model('Images',imageSchema);

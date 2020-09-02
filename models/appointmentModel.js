@@ -1,6 +1,3 @@
-const { Mongoose } = require("mongoose");
-const { appointment } = require("./clinicSingleModel");
-
 mongoose = require('mongoose');
 
 const appointmentSchema = mongoose.Schema({

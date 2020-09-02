@@ -52,11 +52,12 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 });
 
+
 exports.login = catchAsync(async (req, res, next) => {
 
   var userId;
   var message;
-  console.log(req.body);
+ 
   if(req.body.email) {
     userId = {email: req.body.email};
     message = "email";
