@@ -75,6 +75,36 @@ const doctor = new mongoose.Schema({
     eligiblity: {
         type: [Boolean],
     },
+    workingHours: {
+        sunday: {
+            morning: String,
+            evening: String    
+        },
+        monday: {
+            morning: String,
+            evening: String    
+        },
+        tuesday: {
+            morning: String,
+            evening: String    
+        },
+        wednesday: {
+            morning: String,
+            evening: String    
+        },
+        thursday: {
+            morning: String,
+            evening: String    
+        },
+        friday: {
+            morning: String,
+            evening: String    
+        },
+        saturday: {
+            morning: String,
+            evening: String    
+        },
+    },
     date: {
         type: Date,
         default: Date.now

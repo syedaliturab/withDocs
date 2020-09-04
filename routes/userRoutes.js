@@ -35,6 +35,9 @@ router
   .get(doctorController.getDoctor)
   .patch(doctorController.updateDocProfile);
 
+router
+  .route('/workinghours/')
+  .get(clinicController.checkClinic);
   
 router
   .route('/patient')

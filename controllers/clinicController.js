@@ -1,5 +1,6 @@
 const clinics = require('./../models/clinicModel.js');
 const catchAsynsc = require('./../utils/catchAsync');
+const { clinicName } = require('../models/clinicSingleModel.js');
 
 const searchIndex = (day,days) => {
     for( var element of days){
@@ -113,6 +114,32 @@ exports.updateClinicProfile = catchAsynsc(
         });
     }
 );
+
+exports.checkClinic = catchAsynsc(
+    async (req, res, next) => {
+        const clinic = await clinics.findById(req.query.id);
+        if(clinic.nonPractising===true){
+            res.status(200).json({
+                status: 'nonPractising',
+                message: "You are still nonpractising"
+            });
+        }else {
+            var clinicNames = []
+            if(clinic.clinicOne.clinicName!==""){
+                clinicNames.push(clinic.clinicOne.clinicName);
+            }
+            if(clinic.clinicTwo.clinicName!==""){
+                clinicNames.push(clinic.clinicTwo.clinicName);
+            }
+            res.status(200).json({
+                status: 'success',
+                data: clinicNames
+            });
+        }
+        
+    }
+);
+
 //to update clinic details
 exports.updateClinicDetail = catchAsynsc(
     async (req, res, next) => {
