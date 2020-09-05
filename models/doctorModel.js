@@ -77,32 +77,74 @@ const doctor = new mongoose.Schema({
     },
     workingHours: {
         sunday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },   
         },
         monday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },   
         },
         tuesday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },   
         },
         wednesday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },  
         },
         thursday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },    
         },
         friday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },   
         },
         saturday: {
-            morning: String,
-            evening: String    
+            morning: {
+                slot: String,
+                clinicName: String
+            },
+            evening: {
+                slot: String,
+                clinicName: String
+            },   
         },
     },
     date: {

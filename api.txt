@@ -358,3 +358,46 @@ Post::
     ],
     "experience": 0.2
 }
+
+
+GET::
+
+https://withdoc.herokuapp.com/api/v11/user/workinghours/?id=5f4bc8b05eab570017bf6748
+
+https://withdoc.herokuapp.com/api/v11/user/doctor
+
+PATCH::
+
+{
+    "id": "5f4bc8b05eab570017bf6748",
+    "workingHours": {
+        "sunday": {
+            "morning": "8-10",
+            "evening": "4-6"    
+        },
+        "monday": {
+            "morning": "8-10",
+            "evening": "4-6"   
+        },
+        "tuesday": {
+            "morning": "8-10",
+            "evening": "4-6"    
+        },
+        "wednesday": {
+            "morning": "8-10",
+            "evening": "4-6"    
+        },
+        "thursday": {
+            "morning": "8-10",
+            "evening": "4-6"    
+        },
+        "friday": {
+            "morning": "8-10",
+            "evening": "4-6"    
+        },
+        "saturday": {
+           "morning": "8-10",
+            "evening": "4-6"   
+        }
+    }
+}
