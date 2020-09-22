@@ -1,8 +1,8 @@
 const catchAsynsc = require('./../utils/catchAsync');
 const feedback = require('./../models/feedbackModel');
 const Reply = require('./../models/feedbackModel');
+const Reaction = require('./../models/feedbackModel');
 
-//createfeedback
 exports.createFeedback = catchAsynsc(
     async (req, res, next) => {
         
@@ -17,15 +17,17 @@ exports.createFeedback = catchAsynsc(
 //to get by id 
 exports.getFeedback = catchAsynsc(
     async (req, res, next) => {
-
-        // const oldFeedback = await feedback.findById(req.params.id);
-        // res.status(200).json({
-        //     status: 'success',
-        //     data: oldFeedback
+        console.log(req.query);
+        
+        const oldFeedback = await feedback.findById(req.query.id);
+        console.log(oldFeedback);
+        res.status(200).json({
+            status: 'success',
+            data: oldFeedback
             
-        // })
-
-        console.log(req.parmas.id);
+        })
+        
+        // console.log(req.parmas.id);
     }
 );
 
@@ -58,39 +60,72 @@ exports.deleteFeedback = catchAsynsc(
     }
 );
 
-
+// to create reply
 exports.createReply = catchAsynsc(
     async (req,res, next) => { 
         
-        const oldFeedback = await feedback.findById(req.params.id);
+        const newFeedback = await feedback.findById(req.parmas.id);
         const newReply = await Reply.create(req.body);
 
-        oldFeedback.replies.push(newReply);
-        console.log(newReply);
+        newFeedback.replies.push(newReply);
         res.status(200).json({
             status: 'success',
-            data: newReply
+            data: oldFeedback
         })
-        
-        // feedback.findById(req.params.id, function(err, oldFeedback){
-        //     if(err){
-        //         console.log(err);
-        //         res.status(400).json({
-        //             status : 'fail',
-        //             data : err
-        //         })
-        //     }
-        //     else{
-        //         console.log(oldFeedback);
-        //         res.status(200).json({
-        //                 status: 'success',
-        //                 data: oldFeedback
-        //             })
-
-        //     }
-        // })
-        
     }
 )
 
+// to get reply
+exports.getReply = catchAsynsc(
+    async (req,res,next) => {
+        const foundReply = await Reply.findById(req.params.id);
 
+        res.status(200).json({
+            status : 'success',
+            data : foundReply
+        })
+    }
+)
+
+// to delete reply
+exports.deleteReply = catchAsynsc(
+    async (req, res, next) => {
+        const deletereply = await Reply.findByIdAndRemove(req.parmas.id);
+
+        res.status(200).json({
+            status : 'success',
+            data : deletereply
+        })
+    }
+)
+
+// to update reply
+exports.updateReply = catchAsynsc(
+    async(req, res, next) => {
+        const updatereply = await Reply.findByIdAndUpdate(
+            req.body.id,req.body,{
+                new: true,
+                runValidators: true
+            }
+        );
+
+        res.status(200).json({
+            status : 'success',
+            data : updatereply
+        })
+    }
+)
+
+exports.postReaction = catchAsynsc(
+    async(req, res, next) => {
+        const newFeedback = await feedback.findById(req.parmas.id);
+
+        const newReaction = await Reaction.create(req.body);
+
+        newFeedback.reactions.push(newReaction);
+        res.status(200).json({
+            status: 'success',
+            data: newFeedback
+        })
+    }
+)

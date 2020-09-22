@@ -51,7 +51,7 @@ exports.createOne = Model =>
 
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.query);
+    // console.log(req.query);
     let query = Model.findById(req.query.id);
     if (popOptions) query = query.populate(popOptions);
     const user = await query;

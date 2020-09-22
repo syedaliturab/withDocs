@@ -45,6 +45,10 @@ const specialitiesSchema = mongoose.Schema({
     clinicIssues: {
         type: String,
     },
+    vistits :{
+        type: Number,
+        default : 0
+    }
 });
 specialitiesSchema.index({ primarySpeciality: 1, subSpeciality: 1, clinicServices: 1, clinicIssues: 1 }, { unique: true });
 

@@ -5,6 +5,7 @@ const doctorController = require('./../controllers/doctorController');
 const clinicController = require('./../controllers/clinicController');
 const collegeController = require('./../controllers/collegeController');
 const feedbackController = require('./../controllers/feedbackController');
+const searchController = require('./../controllers/searchController');
 
 const router = express.Router();
 
@@ -66,12 +67,18 @@ router
   .delete(feedbackController.deleteFeedback)  
 
 router
-  .route('/feedback/:id/reply/')
-  // .get(feedbackController.getReply)
+  .route('/feedback/reply/')
+  .get(feedbackController.getReply)
   .post(feedbackController.createReply)
-  // .patch(feedbackController.updateReply)  
-  // .delete(feedbackController.deleteReply)  
+  .patch(feedbackController.updateReply)  
+  .delete(feedbackController.deleteReply)
+  
+router
+  .route('/search/autoComplete')
+  .get(searchController.getSearch)  
 
-
+router
+  .route('/feedback/reaction/:id')
+  .post(feedbackController.postReaction)  
 
 module.exports = router;

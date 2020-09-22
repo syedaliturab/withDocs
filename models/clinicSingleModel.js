@@ -22,7 +22,11 @@ const singleClinic = {
     clinicIssues: [String],
     consultationFees: Number,
     holidays: [String],
-    avgPatientsPerDay: Number
+    avgPatientsPerDay: Number,
+    visits: {
+        type : Number,
+        default : 0
+    }
 
 };
 module.exports = singleClinic;

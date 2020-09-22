@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+const User = require('./userModel');
+
 
 const feedbackSchema = new mongoose.Schema({
     name : {
@@ -28,12 +29,20 @@ const feedbackSchema = new mongoose.Schema({
       }
     },
     replies: [
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'Reply' 
-        }
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Reply'
+      }
+    ],
+    reactions:[
+      {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Reaction'
+      }
     ]
+
 })
+
 const replySchema = new mongoose.Schema({
   name : {
     type : String,
@@ -59,29 +68,23 @@ const replySchema = new mongoose.Schema({
         values: ['Male', 'Female','Other'],
         message: 'gender is either Male, Female or Other'
     }
-  },
-  replies: [
-      {
-          type : mongoose.Schema.Types.ObjectId,
-          ref : 'Reply' 
-      }
-  ]
+  }
 })
 
-// feedbackSchema.virtual('likeCount', {
-//     ref: 'Like',
-//     localField: '_id',
-//     foreignField: 'postId',
-//     count: true
-// });
+const reactionSchema = new mongoose.Schema({
+  user : {
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'User',
+    required : true,
+    index : true
+  },
+  type : {
+    type : String,
+    required : true
+  }
+});
 
-// feedbackSchema.virtual('likes', {
-//     ref: 'Like',
-//     localField: '_id',
-//     foreignField: 'postId',
-// });
-
-
+const Reaction = mongoose.model('Reaction', reactionSchema);
 const feedback = mongoose.model('feedback', feedbackSchema);
 const Reply = mongoose.model('Reply', replySchema);
-module.exports = feedback;
+module.exports = feedback, Reply, Reaction;

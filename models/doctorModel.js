@@ -78,6 +78,10 @@ const doctor = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    visits:{
+        type: Number,
+        default : 0
     }
 });
 
