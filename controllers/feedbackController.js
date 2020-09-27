@@ -2,6 +2,7 @@ const catchAsynsc = require('./../utils/catchAsync');
 const feedback = require('./../models/feedbackModel');
 const Reply = require('./../models/feedbackModel');
 const Reaction = require('./../models/feedbackModel');
+const { compare } = require('bcryptjs');
 
 exports.createFeedback = catchAsynsc(
     async (req, res, next) => {
@@ -18,16 +19,13 @@ exports.createFeedback = catchAsynsc(
 exports.getFeedback = catchAsynsc(
     async (req, res, next) => {
         console.log(req.query);
-        
         const oldFeedback = await feedback.findById(req.query.id);
-        console.log(oldFeedback);
+        // console.log(oldFeedback);
         res.status(200).json({
             status: 'success',
             data: oldFeedback
             
         })
-        
-        // console.log(req.parmas.id);
     }
 );
 
@@ -50,7 +48,7 @@ exports.updateFeedback = catchAsynsc(
 //to delete feedback
 exports.deleteFeedback = catchAsynsc( 
     async (req, res, next) => {
-    
+        console.log(req.params);
         const deletefeedback = await feedback.findByIdAndRemove(req.params.id);
         
         res.status(200).json({
@@ -64,7 +62,7 @@ exports.deleteFeedback = catchAsynsc(
 exports.createReply = catchAsynsc(
     async (req,res, next) => { 
         
-        const newFeedback = await feedback.findById(req.parmas.id);
+        const newFeedback = await feedback.findById(req.query.id);
         const newReply = await Reply.create(req.body);
 
         newFeedback.replies.push(newReply);
@@ -78,7 +76,8 @@ exports.createReply = catchAsynsc(
 // to get reply
 exports.getReply = catchAsynsc(
     async (req,res,next) => {
-        const foundReply = await Reply.findById(req.params.id);
+        console.log(req.query);
+        const foundReply = await Reply.findById(req.query.id);
 
         res.status(200).json({
             status : 'success',
@@ -118,10 +117,11 @@ exports.updateReply = catchAsynsc(
 
 exports.postReaction = catchAsynsc(
     async(req, res, next) => {
-        const newFeedback = await feedback.findById(req.parmas.id);
-
+        console.log(req.query);
+        const newFeedback = await feedback.findById(req.query.id);
+        console.log(newFeedback.name);
         const newReaction = await Reaction.create(req.body);
-
+        console.log(newReaction);
         newFeedback.reactions.push(newReaction);
         res.status(200).json({
             status: 'success',

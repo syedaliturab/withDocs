@@ -17,8 +17,9 @@ exports.getAllDocProfile = catchAsynsc(
 //to get doctor by id
 exports.getDoctor = catchAsynsc(
     async (req, res, next) => {
-
+        console.log(req.query);
         const docter = await docUser.findById(req.query.id);
+        console.log(req.query.id);
         res.status(200).json({
             status: 'success',
             data: docter

@@ -78,7 +78,7 @@ router
   .get(searchController.getSearch)  
 
 router
-  .route('/feedback/reaction/:id')
+  .route('/feedback/reaction/')
   .post(feedbackController.postReaction)  
 
 module.exports = router;

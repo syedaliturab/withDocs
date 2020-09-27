@@ -12,7 +12,7 @@ const doctor = new mongoose.Schema({
         requried: [true, 'Please provide valid id']
     },
     name: {
-        type: String,
+        type: String
     },
     email: {
         type: String,

@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
 const User = require('./userModel');
+const validator = require('validator');
+mongoose.Types.ObjectId.isValid('your id here');
 
 
 const feedbackSchema = new mongoose.Schema({
+    _id:{
+        type: String,
+        unique: true,
+        requried: [true, 'Please provide valid id']
+    },
     name : {
       type : String,
       required : true
@@ -44,6 +51,11 @@ const feedbackSchema = new mongoose.Schema({
 })
 
 const replySchema = new mongoose.Schema({
+  _id:{
+      type: String,
+    unique: true,
+      requried: [true, 'Please provide valid id']
+  },
   name : {
     type : String,
     required : true
@@ -69,16 +81,25 @@ const replySchema = new mongoose.Schema({
         message: 'gender is either Male, Female or Other'
     }
   }
-})
+});
 
 const reactionSchema = new mongoose.Schema({
-  user : {
-    type : mongoose.Schema.Types.ObjectId,
-    ref : 'User',
-    required : true,
-    index : true
+  _id:{
+      type: String,
+    unique: true,
+      requried: [true, 'Please provide valid id']
   },
-  type : {
+  // user : {
+  //   type : mongoose.Schema.Types.ObjectId,
+  //   ref : 'User',
+  //   required : true,
+  //   index : true
+  // },
+  name : {
+    type : String,
+    required : true
+  },
+  reaction : {
     type : String,
     required : true
   }
@@ -87,4 +108,5 @@ const reactionSchema = new mongoose.Schema({
 const Reaction = mongoose.model('Reaction', reactionSchema);
 const feedback = mongoose.model('feedback', feedbackSchema);
 const Reply = mongoose.model('Reply', replySchema);
-module.exports = feedback, Reply, Reaction;
+// module.exports = feedback, Reply, Reaction;
+module.exports = {feedback, Reply, Reaction};
