@@ -8,6 +8,7 @@ const patientController = require('./../controllers/patientController');
 const imageController = require('./../controllers/imageController');
 const appointmentController = require('./../controllers/appointmentController');
 const appointments = require('../models/appointmentModel');
+const feedbackController = require('./../controllers/feedbackController');
 
 const router = express.Router();
 
@@ -84,6 +85,26 @@ router
 router
   .route('/search/')
   .get(userController.getUser);
+
+
+router
+  .route('/feedback/')
+  .get(feedbackController.getFeedback)
+  .post(feedbackController.createFeedback)
+  .patch(feedbackController.updateFeedback)  
+  .delete(feedbackController.deleteFeedback)  
+
+router
+  .route('/feedback/reply/')
+  .get(feedbackController.getReply)
+  .post(feedbackController.createReply)
+  .patch(feedbackController.updateReply)  
+  .delete(feedbackController.deleteReply)
+   
+
+router
+  .route('/feedback/reaction/')
+  .post(feedbackController.postReaction)  
 
 router
   .route('/:id')

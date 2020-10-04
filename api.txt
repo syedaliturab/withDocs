@@ -401,3 +401,16 @@ PATCH::
         }
     }
 }
+
+https://withdoc.herokuapp.com/api/v11/user/feedback
+
+Post::
+
+{
+    "name": "Radhe Raman Tiwari",
+    "doctorId": "ajddhehdndd",
+    "message": "You are such a good doctor!!!",
+    "age": 22,
+    "gender": "Male"
+    
+}
