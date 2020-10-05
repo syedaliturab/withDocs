@@ -1,21 +1,15 @@
 const mongoose = require('mongoose');
-const User = require('./userModel');
-const validator = require('validator');
 mongoose.Types.ObjectId.isValid('your id here');
 
 
 const feedbackSchema = new mongoose.Schema({
-    _id:{
-        type: String,
-        unique: true,
-        requried: [true, 'Please provide valid id']
-    },
     name : {
       type : String,
       required : true
     },
     doctorId:{
-      type: String
+      type: String,
+      requried: true
     },
     message: {
       type : String,
@@ -25,7 +19,7 @@ const feedbackSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
     },
-    age : {
+    age: {
       type : Number
     },
     gender: {
@@ -46,16 +40,18 @@ const feedbackSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Reaction'
       }
+    ],
+    rating : [
+      {
+        type : Number,
+        min : 0,
+        max : 5
+      }
     ]
 
 })
 
 const replySchema = new mongoose.Schema({
-  _id:{
-      type: String,
-    unique: true,
-      requried: [true, 'Please provide valid id']
-  },
   name : {
     type : String,
     required : true
@@ -80,21 +76,17 @@ const replySchema = new mongoose.Schema({
         values: ['Male', 'Female','Other'],
         message: 'gender is either Male, Female or Other'
     }
-  }
+  },
+  rating : [
+    {
+      type : Number,
+      min : 0,
+      max : 5
+    }
+  ]
 });
 
 const reactionSchema = new mongoose.Schema({
-  _id:{
-      type: String,
-    unique: true,
-      requried: [true, 'Please provide valid id']
-  },
-  // user : {
-  //   type : mongoose.Schema.Types.ObjectId,
-  //   ref : 'User',
-  //   required : true,
-  //   index : true
-  // },
   name : {
     type : String,
     required : true
@@ -106,7 +98,7 @@ const reactionSchema = new mongoose.Schema({
 });
 
 const Reaction = mongoose.model('Reaction', reactionSchema);
-const feedback = mongoose.model('feedback', feedbackSchema);
+const Feedback = mongoose.model('feedback', feedbackSchema);
 const Reply = mongoose.model('Reply', replySchema);
-// module.exports = feedback, Reply, Reaction;
-module.exports = {feedback, Reply, Reaction};
+
+module.exports = { Feedback, Reply, Reaction };
