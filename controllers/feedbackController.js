@@ -15,10 +15,10 @@ exports.createFeedback = catchAsynsc(
 exports.getFeedback = catchAsynsc(
     async (req, res, next) => {
       
-        const oldFeedback = await Feedback.findById(req.query.id);
+        const Feedbacks = await Feedback.find({doctorId: req.query.id});
         res.status(200).json({
             status: 'success',
-            data: oldFeedback
+            data: Feedbacks
             
         })
     }
