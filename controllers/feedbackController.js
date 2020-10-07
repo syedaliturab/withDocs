@@ -3,7 +3,6 @@ const {Feedback, Reply, Reaction} = require('../models/feedbackModel');
 
 exports.createFeedback = catchAsynsc(
     async (req, res, next) => {
-        
         const newFeedback = await Feedback.create(req.body);
         res.status(200).json({
             status: 'success',

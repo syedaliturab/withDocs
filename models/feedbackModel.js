@@ -3,13 +3,26 @@ mongoose.Types.ObjectId.isValid('your id here');
 
 
 const feedbackSchema = new mongoose.Schema({
-    name : {
-      type : String,
-      required : true
+    patientId:{
+      type: String,
+      requried: true
     },
     doctorId:{
       type: String,
       requried: true
+    },
+    patientName : {
+      type : String,
+      required : true
+    },
+    sexAndAge: {
+      type : String,
+      required : true
+    },
+    rating: {
+      text: Number,
+      min: 1,
+      max: 5
     },
     message: {
       type : String,
@@ -18,16 +31,6 @@ const feedbackSchema = new mongoose.Schema({
     date: {
       type: Date,
       default: Date.now
-    },
-    age: {
-      type : Number
-    },
-    gender: {
-      type: String,
-      enum: {
-          values: ['Male', 'Female','Other'],
-          message: 'gender is either Male, Female or Other'
-      }
     },
     replies: [
       {
@@ -45,12 +48,12 @@ const feedbackSchema = new mongoose.Schema({
 })
 
 const replySchema = new mongoose.Schema({
-  name : {
-    type : String,
-    required : true
-  },
   doctorId:{
     type: String
+  },
+  doctorName : {
+    type : String,
+    required : true
   },
   message: {
     type : String,
@@ -59,21 +62,11 @@ const replySchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  age : {
-    type : Number
-  },
-  gender: {
-    type: String,
-    enum: {
-        values: ['Male', 'Female','Other'],
-        message: 'gender is either Male, Female or Other'
-    }
   }
 });
 
 const reactionSchema = new mongoose.Schema({
-  name : {
+  doctorName : {
     type : String,
     required : true
   },

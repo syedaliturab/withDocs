@@ -80,7 +80,7 @@ router
 router
   .route('/appointment')
   .post(appointmentController.bookAppointment)
-  .patch(appointmentController.completeAppointment);
+  .put(appointmentController.fatchAppointment);
 
 router
   .route('/search/')

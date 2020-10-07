@@ -6,11 +6,6 @@ const doctor = new mongoose.Schema({
 	    unique: true,
         requried: [true, 'Please provide valid id']
     },
-    userId: {
-        type: String,
-	    unique: true,
-        requried: [true, 'Please provide valid id']
-    },
     name: {
         type: String,
     },

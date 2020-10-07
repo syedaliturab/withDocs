@@ -15,9 +15,11 @@ const appointmentSchema = mongoose.Schema({
     },
     date: {
         type: String,
+        requried: true,
     },
     slot: {
-        type: Number
+        type: String,
+        requried: true,
     },
     status: {
         type: String,
@@ -25,10 +27,12 @@ const appointmentSchema = mongoose.Schema({
         default: 'active'
     },
     doctorName: {
-        type: String
+        type: String,
+        requried: true,
     },
     patientName: {
-        type: String
+        type: String,
+        requried: true,
     },
 });
 
