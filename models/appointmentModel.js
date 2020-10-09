@@ -1,6 +1,10 @@
 mongoose = require('mongoose');
 
 const appointmentSchema = mongoose.Schema({
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
     doctorId: {
         type: String,
         requried: [true, 'Please provide valid id']
@@ -9,9 +13,25 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         requried: [true, 'Please provide valid id']
     },
-    patientId: {
+    patientName: {
         type: String,
-        requried: [true, 'Please provide valid id']
+        requried: true,
+    },
+    doctorName: {
+        type: String,
+        requried: true,
+    },
+    sexAndAge: {
+        type : String,
+        required : true
+    },
+    contactNo: {
+        type : String,
+        required : true
+    },
+    appointmentType: {
+        type : String,
+        required : true
     },
     date: {
         type: String,
@@ -26,14 +46,7 @@ const appointmentSchema = mongoose.Schema({
         enum: ['active', 'confirmed', 'cancelled','pushed'],
         default: 'active'
     },
-    doctorName: {
-        type: String,
-        requried: true,
-    },
-    patientName: {
-        type: String,
-        requried: true,
-    },
+    
 });
 
 const appointments = mongoose.model('Appointments',appointmentSchema);
