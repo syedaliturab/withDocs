@@ -33,7 +33,7 @@ router
 
 router
   .route('/doctor/')
-  .get(doctorController.getDoctor)
+  .get(doctorController.getAllDocProfile)
   .patch(doctorController.updateDocProfile);
 
 router

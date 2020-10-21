@@ -102,9 +102,18 @@ exports.fatchAppointment = catchAsynsc(
     
     }
 );
-
 //to complete appointment into clinic details
 exports.completeAppointment = catchAsynsc(
+    async (req, res, next) => {
+        if(req.body.status === "active"){
+
+        }
+
+    }
+);
+
+//to complete appointment into clinic details
+exports.oldcompleteAppointment = catchAsynsc(
     async (req, res, next) => {
         var appointment;
         if(req.body.status == "confirmed"){
