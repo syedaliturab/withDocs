@@ -29,10 +29,6 @@ const appointmentSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    appointmentType: {
-        type : String,
-        required : true
-    },
     date: {
         type: String,
         requried: true,
