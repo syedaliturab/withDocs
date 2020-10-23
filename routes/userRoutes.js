@@ -28,12 +28,13 @@ router.delete('/deleteMe', userController.deleteMe);
 //router.use(authController.restrictTo('admin'));
 
 router
-  .route('/doctor')
-  .post(doctorController.createDocProfile);
+  .route('/alldoctors')
+  .get(doctorController.getAllDocProfile);
 
 router
   .route('/doctor/')
-  .get(doctorController.getAllDocProfile)
+  .get(doctorController.getDoctor)
+  .post(doctorController.createDocProfile)
   .patch(doctorController.updateDocProfile);
 
 router

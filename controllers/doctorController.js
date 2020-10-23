@@ -5,7 +5,8 @@ const catchAsynsc = require('./../utils/catchAsync');
 exports.getAllDocProfile = catchAsynsc(
     async (req, res, next) => {
 
-        const doctors = await docUser.find().select({name:1,_id:1, primarySpeciality:1});
+        //const doctors = await docUser.find().select({name:1,_id:1, primarySpeciality:1});
+        const doctors = await docUser.find();
         res.status(200).json({
             status: 'success',
             data: doctors
