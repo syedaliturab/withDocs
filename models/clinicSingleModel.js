@@ -26,7 +26,14 @@ const singleClinic = {
     visits: {
         type : Number,
         default : 0
-    }
+    },
+    locality: {
+        type : Number
+    },
+    subLocality: {
+        type : Number
+    },
 
 };
+
 module.exports = singleClinic;

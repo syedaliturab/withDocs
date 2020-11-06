@@ -78,6 +78,14 @@ router
   .get(searchController.getSearch)  
 
 router
+  .route('/search/doctor')
+  .get(searchController.getDoctorSearch)  
+
+router
+  .route('/search/clinics')
+  .get(searchController.getClinicSearch)  
+
+router
   .route('/feedback/reaction/')
   .post(feedbackController.postReaction)  
 

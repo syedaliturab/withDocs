@@ -26,6 +26,12 @@ const doctor = new mongoose.Schema({
     city: {
         type: String,
     },
+    locality: {
+        type : Number
+    },
+    subLocality: {
+        type : Number
+    },
     pincode: {
         type: Number,
         length: [6, 'Please provide 6 digit pincode']
@@ -84,6 +90,8 @@ const doctor = new mongoose.Schema({
         default : 0
     }
 });
+
+doctor.index({ primarySpeciality : 1 }, {unique : true})
 
 const DocUser = mongoose.model('Doctors',doctor);
 module.exports = DocUser;

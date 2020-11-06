@@ -6,7 +6,7 @@ const clinicSchema = mongoose.Schema({
 	    unique: true,
         requried: [true, 'Please provide valid id']
     },
-    clinicOne: {
+    clincOne: {
         type: clinic,
         default: []
     },
@@ -20,6 +20,8 @@ const clinicSchema = mongoose.Schema({
         select: true
     }
 });
+
+clinicSchema.index({clinicIssues : 1}, {unique : true});
 
 const clinics = mongoose.model('Clinics',clinicSchema);
 module.exports = clinics;

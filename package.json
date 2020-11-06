@@ -20,7 +20,10 @@
     "mongoose": "^5.9.6",
     "morgan": "^1.10.0",
     "nodemailer": "^6.1.1",
+    "nodemon": "^2.0.6",
     "slugify": "^1.4.0",
+    "to": "^0.2.9",
+    "update": "^0.7.4",
     "validator": "^10.11.0",
     "xss-clean": "^0.1.1"
   },
