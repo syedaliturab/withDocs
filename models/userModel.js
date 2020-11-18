@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
-  contact: {
+  contactNo: {
     type: Number,
     length: [10, 'Please provide 10 digit contact number']
   },
@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
     select: false
   }
 });
-userSchema.index({ email: 1, contact: 1 }, { unique: true });
+userSchema.index({ email: 1, contactNo: 1 }, { unique: true });
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
