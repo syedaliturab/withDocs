@@ -45,6 +45,7 @@ const userSchema = new mongoose.Schema({
     select: false
   }
 });
+
 userSchema.index({ email: 1, contact: 1 }, { unique: true });
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
