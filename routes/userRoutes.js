@@ -7,8 +7,9 @@ const collegeController = require('./../controllers/collegeController');
 const patientController = require('./../controllers/patientController');
 const imageController = require('./../controllers/imageController');
 const appointmentController = require('./../controllers/appointmentController');
-const appointments = require('../models/appointmentModel');
 const feedbackController = require('./../controllers/feedbackController');
+const personalizationController = require('./../controllers/personalizationController');
+const specialitiesController = require('./../controllers/specialitiesController');
 
 const router = express.Router();
 
@@ -57,7 +58,7 @@ router.get('/clinic',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);
 router.patch('/clinic',clinicController.updateClinicProfile);
 
-router.get('/geeksforgeeks',collegeController.getGeeks);
+
 
 router.post('/college',collegeController.createCollegeName);
 router.post('/degree',collegeController.createDegree);
@@ -68,10 +69,12 @@ router
   .get(collegeController.getMemberships)
   .post(collegeController.createMembership);
 
-  router
+router
   .route('/specialitie')
-  .post(collegeController.getSpecialities)
-  .patch(collegeController.createSpecialitie);
+  .post(specialitiesController.getSpecialities);
+
+router.post('/primaryspecialitie',specialitiesController.createPrimarySpeciality);
+router.post('/createClinicIssues',specialitiesController.createClinicIssues);
 
 router
   .route('/image')
@@ -113,5 +116,6 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
+router.get('/trending',personalizationController.personalSearch);
 
 module.exports = router;

@@ -414,3 +414,5 @@ Post::
     "gender": "Male"
     
 }
+
+DATABASE=mongodb+srv://root:<password>@withdoc.6gjl9.mongodb.net/withdocs?retryWrites=true&w=majority
