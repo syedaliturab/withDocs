@@ -73,6 +73,8 @@ router
   .route('/specialitie')
   .post(specialitiesController.getSpecialities);
 
+  router.get('/trending',personalizationController.personalSearch);
+
 router.post('/primaryspecialitie',specialitiesController.createPrimarySpeciality);
 router.post('/createClinicIssues',specialitiesController.createClinicIssues);
 
@@ -116,6 +118,6 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
-router.get('/trending',personalizationController.personalSearch);
+
 
 module.exports = router;
