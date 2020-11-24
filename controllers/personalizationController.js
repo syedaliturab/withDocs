@@ -18,6 +18,27 @@ exports.personalSearch = catchAsynsc(
         
 });
 
+exports.trendingIssues = catchAsynsc(
+    async (req, res, next) => {
+    
+        const trendingIssues = await clinicIssues.find({},{ clinicIssues: 1, _id: 0 }).sort({trend: -1});
+        res.status(200).json({
+            status: 'success',
+            data: trendingIssues
+        });
+        
+});
+
+exports.trendingSpecialities = catchAsynsc(
+    async (req, res, next) => {
+    
+        const  trendingSpecialities = await primarySpeciality.find({},{ primarySpeciality: 1, _id: 0 }).sort({trend: -1});
+        res.status(200).json({
+            status: 'success',
+            data: trendingSpecialities
+        });
+        
+});
 
 
 

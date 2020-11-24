@@ -73,7 +73,9 @@ router
   .route('/specialitie')
   .post(specialitiesController.getSpecialities);
 
-  router.get('/trending',personalizationController.personalSearch);
+router.get('/trending',personalizationController.personalSearch);
+router.get('/trendingissues/',personalizationController.trendingIssues);
+router.get('/trendingspecialities/',personalizationController.trendingSpecialities);
 
 router.post('/primaryspecialitie',specialitiesController.createPrimarySpeciality);
 router.post('/createClinicIssues',specialitiesController.createClinicIssues);
