@@ -415,4 +415,5 @@ Post::
     
 }
 
-DATABASE=mongodb+srv://root:<password>@withdoc.6gjl9.mongodb.net/withdocs?retryWrites=true&w=majority
+1. DATABASE=mongodb+srv://root:<password>@withdoc.6gjl9.mongodb.net/withdocs?retryWrites=true&w=majority
+2. DATABASE=mongodb+srv://root:<password>@withdoc.dru27.mongodb.net/Withdoc?retryWrites=true&w=majority

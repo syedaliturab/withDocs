@@ -78,7 +78,9 @@ router.get('/trendingissues/',personalizationController.trendingIssues);
 router.get('/trendingspecialities/',personalizationController.trendingSpecialities);
 
 router.post('/primaryspecialitie',specialitiesController.createPrimarySpeciality);
-router.post('/createClinicIssues',specialitiesController.createClinicIssues);
+router.post('/createsubspecialitie',specialitiesController.createSubSpeciality);
+router.post('/createclinicservices',specialitiesController.createClinicServices);
+router.post('/createclinicissues',specialitiesController.createClinicIssues);
 
 router
   .route('/image')

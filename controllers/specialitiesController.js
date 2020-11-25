@@ -18,6 +18,35 @@ exports.createPrimarySpeciality = catchAsynsc(
 );
 
 
+exports.createSubSpeciality = catchAsynsc(
+    async (req, res, next) => {
+        
+        for(var element of req.body.data){
+            const member = await subSpeciality.create(element);
+            console.log(member);
+        }
+        //const speciality = await subSpeciality.create(req.body);
+        res.status(200).json({
+            status: 'success',
+            data: req.body
+        });
+    }
+);
+
+exports.createClinicServices = catchAsynsc(
+    async (req, res, next) => {
+        
+        for(var element of req.body.data){
+            const member = await clinicServices.create(element);
+            console.log(member);
+        }
+        //const speciality = await primarySpeciality.create(req.body);
+        res.status(200).json({
+            status: 'success',
+            data: req.body
+        });
+    }
+);
 exports.createClinicIssues = catchAsynsc(
     async (req, res, next) => {
         
