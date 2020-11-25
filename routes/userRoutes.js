@@ -77,10 +77,16 @@ router.get('/trending',personalizationController.personalSearch);
 router.get('/trendingissues/',personalizationController.trendingIssues);
 router.get('/trendingspecialities/',personalizationController.trendingSpecialities);
 
+router.post('/cities/',personalizationController.citiesSearch);
+router.post('/topcities/',personalizationController.createTopCities);
+router.post('/othercities/',personalizationController.createOtherCities);
+
 router.post('/primaryspecialitie',specialitiesController.createPrimarySpeciality);
 router.post('/createsubspecialitie',specialitiesController.createSubSpeciality);
 router.post('/createclinicservices',specialitiesController.createClinicServices);
 router.post('/createclinicissues',specialitiesController.createClinicIssues);
+
+
 
 router
   .route('/image')
