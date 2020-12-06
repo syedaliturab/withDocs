@@ -73,7 +73,7 @@ exports.getSpecialities = catchAsynsc(
             data = await subSpeciality.find({},{ subSpeciality: 1, _id: 0 } );
         }
         else if(req.body.filter === "clinicServices"){
-            data = await clinicIssues.find({},{ clinicServices: 1, _id: 0 } );
+            data = await clinicServices.find({},{ clinicServices: 1, _id: 0 } );
         }
         else if(req.body.filter === "clinicIssues"){
             data = await clinicIssues.find({},{ clinicIssues: 1, _id: 0 } );
