@@ -128,6 +128,6 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
-
+router.post('/newpassword', authController.emailToUser);
 
 module.exports = router;

@@ -70,6 +70,9 @@ const doctor = new mongoose.Schema({
     eligiblity: {
         type: [Boolean],
     },
+    about: {
+    	type: String
+    },
     workingHours: {
         sunday: {
             morning: {
