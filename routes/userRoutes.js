@@ -10,6 +10,7 @@ const appointmentController = require('./../controllers/appointmentController');
 const feedbackController = require('./../controllers/feedbackController');
 const personalizationController = require('./../controllers/personalizationController');
 const specialitiesController = require('./../controllers/specialitiesController');
+const doctorcardsearchController = require('./../controllers/doctorcardsearchController');
 
 const router = express.Router();
 
@@ -86,7 +87,11 @@ router.post('/createsubspecialitie',specialitiesController.createSubSpeciality);
 router.post('/createclinicservices',specialitiesController.createClinicServices);
 router.post('/createclinicissues',specialitiesController.createClinicIssues);
 
-
+router
+  .route('/doctorcardSearch')
+  .get(doctorcardsearchController.getdoctorcardSearch)
+  
+router.get('/doctorprofile', doctorcardsearchController.doctorprofile);  
 
 router
   .route('/image')

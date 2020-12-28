@@ -1,9 +1,17 @@
 const catchAsynsc = require('../utils/catchAsync');
+const docUser = require("../models/doctorModel");
 const {Feedback, Reply, Reaction} = require('../models/feedbackModel');
+const { compare } = require('bcryptjs');
 
 exports.createFeedback = catchAsynsc(
     async (req, res, next) => {
+        var result = []
         const newFeedback = await Feedback.create(req.body);
+        const doctorInfo = await docUser.find({ _id : newFeedback.doctorId});
+        doctorInfo[0].feedbackCount += 1
+        doctorInfo[0].avgRating = ((doctorInfo[0].avgRating*(doctorInfo[0].feedbackCount-1)) + newFeedback.rating)/doctorInfo[0].feedbackCount 
+        doctorInfo[0].avgRating = doctorInfo[0].avgRating.toFixed(1)
+        doctorInfo[0].save();  
         res.status(200).json({
             status: 'success',
             data: newFeedback
@@ -27,12 +35,18 @@ exports.getFeedback = catchAsynsc(
 // to update feedback
 exports.updateFeedback = catchAsynsc(
     async (req, res, next) => {
+        var result = []
         const updatefeedback = await Feedback.findByIdAndUpdate(
-            req.body.id,req.body,{
+            req.query.id,req.body,{
                 new: true,
                 runValidators: true
             }
         );
+        const doctorInfo = await docUser.find({ _id : updatefeedback.doctorId});
+        
+        doctorInfo[0].feedbackCount += 1
+        doctorInfo[0].avgRating = ((doctorInfo[0].avgRating*(doctorInfo[0].feedbackCount-1)) + updatefeedback.rating)/doctorInfo[0].feedbackCount
+        doctorInfo[0].save();
         res.status(200).json({
             status: 'success',
             data: updatefeedback

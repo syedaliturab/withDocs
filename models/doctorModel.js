@@ -73,6 +73,14 @@ const doctor = new mongoose.Schema({
     about: {
     	type: String
     },
+    avgRating:{
+        type : Number,
+        default : 0
+    },
+    feedbackCount:{
+        type: Number,
+        default : 0
+    },
     workingHours: {
         sunday: {
             morning: {
