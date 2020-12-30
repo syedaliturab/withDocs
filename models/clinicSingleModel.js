@@ -18,8 +18,20 @@ const singleClinic = {
     address: String,
     clinicContactNo: Number,
     clinicAdditionalContactNo: Number,
-    clinicServices: [String],
-    clinicIssues: [String],
+    clinicServices:[{
+        name : String,
+        totalCount : {
+          type : Number,
+          default : 0
+        }
+    }], 
+    clinicIssues:[{
+        name : String,
+        totalCount : {
+          type : Number,
+          default : 0
+        }
+    }],
     consultationFees: Number,
     holidays: [String],
     avgPatientsPerDay: Number,

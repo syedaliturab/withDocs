@@ -21,6 +21,8 @@ const feedbackSchema = new mongoose.Schema({
     },
     rating: {
       type: Number,
+      min : 1,
+      max : 5
     },
     message: {
       type : String,
@@ -29,6 +31,23 @@ const feedbackSchema = new mongoose.Schema({
     date: {
       type: Date,
       default: Date.now
+    },
+    waitingTime : {
+      type : String
+    },
+    recommend :{
+      type : Boolean
+    },
+    purpose: {
+      type : [String]
+    },
+    satisfaction : {
+      positive : {
+        type :[String]
+      },
+      negative : {
+        type : [String]
+      }
     },
     replies: [
       {

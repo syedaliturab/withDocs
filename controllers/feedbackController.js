@@ -1,5 +1,6 @@
 const catchAsynsc = require('../utils/catchAsync');
 const docUser = require("../models/doctorModel");
+const clinic = require("../models/clinicModel")
 const {Feedback, Reply, Reaction} = require('../models/feedbackModel');
 const { compare } = require('bcryptjs');
 
@@ -8,10 +9,52 @@ exports.createFeedback = catchAsynsc(
         var result = []
         const newFeedback = await Feedback.create(req.body);
         const doctorInfo = await docUser.find({ _id : newFeedback.doctorId});
+        const clinicInfo = await clinic.find({_id : newFeedback.doctorId});
+        clinicInfo[0].clinicOne.clinicIssues.forEach(foundInfo => {
+            req.body.purpose.forEach(foundPurpose => {
+                if(foundInfo.name == foundPurpose){
+                    if(foundPurpose.totalCount == NaN){
+                        foundInfo.totalCount = 0
+                    }
+                    foundInfo.totalCount += 1;
+                }
+            })
+        });
+        clinicInfo[0].clinicOne.clinicServices.forEach(foundInfo => {
+            req.body.purpose.forEach(foundPurpose => {
+                if(foundInfo.name == foundPurpose){
+                    foundInfo.totalCount += 1;
+                    
+                }
+            })
+        });
+        clinicInfo[0].clinicTwo.clinicIssues.forEach(foundInfo => {
+            req.body.purpose.forEach(foundPurpose => {
+                if(foundInfo.name == foundPurpose){
+                    if(foundPurpose.totalCount == NaN){
+                        foundInfo.totalCount = 0
+                        foundInfo.totalCount.markModified();
+                    }
+                    foundInfo.totalCount += 1;
+                }
+            })
+        });
+        clinicInfo[0].clinicTwo.clinicServices.forEach(foundInfo => {
+            req.body.purpose.forEach(foundPurpose => {
+                if(foundInfo.name == foundPurpose){
+                    foundInfo.totalCount += 1;
+                    
+                }
+            })
+        });
+        console.log(clinicInfo[0].clinicOne)
+        console.log(clinicInfo[0].clinicTwo)
+        
         doctorInfo[0].feedbackCount += 1
         doctorInfo[0].avgRating = ((doctorInfo[0].avgRating*(doctorInfo[0].feedbackCount-1)) + newFeedback.rating)/doctorInfo[0].feedbackCount 
         doctorInfo[0].avgRating = doctorInfo[0].avgRating.toFixed(1)
-        doctorInfo[0].save();  
+        await doctorInfo[0].save();
+        await clinicInfo[0].save();  
         res.status(200).json({
             status: 'success',
             data: newFeedback
@@ -44,7 +87,6 @@ exports.updateFeedback = catchAsynsc(
         );
         const doctorInfo = await docUser.find({ _id : updatefeedback.doctorId});
         
-        doctorInfo[0].feedbackCount += 1
         doctorInfo[0].avgRating = ((doctorInfo[0].avgRating*(doctorInfo[0].feedbackCount-1)) + updatefeedback.rating)/doctorInfo[0].feedbackCount
         doctorInfo[0].save();
         res.status(200).json({
