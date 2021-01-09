@@ -6,7 +6,7 @@ const clinicSchema = mongoose.Schema({
 	    unique: true,
         requried: [true, 'Please provide valid id']
     },
-    clincOne: {
+    clinicOne: {
         type: clinic,
         default: []
     },
