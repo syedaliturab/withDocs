@@ -81,6 +81,9 @@ router.get('/trendingspecialities/',personalizationController.trendingSpecialiti
 router.post('/cities/',personalizationController.citiesSearch);
 router.post('/topcities/',personalizationController.createTopCities);
 router.post('/othercities/',personalizationController.createOtherCities);
+router.post('/toplocalities/',personalizationController.createTopLocalities);
+router.post('/otherlocalities', personalizationController.createOtherLocalities);
+router.post('/localities', personalizationController.localitySearch);
 
 router.post('/primaryspecialitie',specialitiesController.createPrimarySpeciality);
 router.post('/createsubspecialitie',specialitiesController.createSubSpeciality);

@@ -5,81 +5,51 @@ const clinics = require("../models/clinicModel");
 
 exports.getSearch = catchAsynsc(
     async (req, res, next) => {
-    const regex = await new RegExp('^(?:' + req.query.term + ')', 'i');
+    const regex = await {$regex: req.query.keyword, $options: 'i' };
     
     const doctorInfo = await docUser.find(
             {'name': regex},
-    ).sort({"updated_at":-1}).sort({"created_at" : -1}).sort({visits: -1}).limit(5);
+            {'city' : req.body.city},
+            {
+                $or: [
+                    {'topLocality' : req.body.locality},
+                    {'otherLocality' : req.body.locality}
+                ]
+            }
+    ).sort({visits: -1}).limit(5);
 
-    if(req.query.term != null)
+    if(req.query.keyword != null)
     {    
-        // to find speciality from doctors collections
-        var specialityInfo = await docUser.aggregate([
-            {
-                $match: {'primarySpeciality': regex}
-            },
-            {
-                $sort: {
-                    updated_at: -1,
-                    created_at: -1
-                    // visits: -1
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    primaries: {$addToSet: "$primarySpeciality"}
-                }
-            },
-            {
-                $project: {
-                    primaries: {
-                        $slice: ["$primaries", 5]
-                    }
-                }
-            }
-        ])
+        // to find clinicname from clinic collections 
+        var specialityInfo = await docUser.find(
+        { 'primarySpeciality': regex }
+        ).limit(5);
     }else{
-        // to find speciality from doctors collections
-        var specialityInfo = await docUser.aggregate([
-            {
-                $sort: {
-                    updated_at: -1,
-                    created_at: -1
-                    // visits: -1
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    primaries: {$addToSet: "$primarySpeciality"}
-                }
-            },
-            {
-                $project: {
-                    primaries: {
-                        $slice: ["$primaries", 5]
-                    }
-                }
-            }
-        ])
+        // to find clinicname from clinic collections 
+        var specialityInfo = await docUser.find().limit(5);
     }
-
 
     // to find clinicname from clinic collections 
     const clinicName = await clinics.find(
-        {'clincOne.clinicName': regex},
-    ).sort({"updated_at":-1}).sort({"created_at" : -1}).sort({visits: -1}).limit(5);
+        {'clinicOne.clinicName': regex},
+        {'city' : req.body.city},
+            {
+                $or: [
+                    {'topLocality' : req.body.locality},
+                    {'otherLocality' : req.body.locality}
+                ]
+            }
+    ).sort({visits: -1}).limit(5);
 
-    if(req.query.term != null)
+    if(req.query.keyword != null)
     {    
         // to find clinicname from clinic collections 
         var clinicIssue = await clinics.find(
-        { 'clincOne.clinicIssues': regex }
-        ).sort({"updated_at":-1}).sort({"created_at" : -1}).sort({visits: -1}).limit(5);
+        { 'clinicOne.clinicIssues': regex }
+        ).sort({visits: -1}).limit(5);
     }else{
         // to find clinicname from clinic collections 
-        var clinicIssue = await clinics.find().sort({"updated_at":-1}).sort({"created_at" : -1}).sort({visits: -1}).limit(5);
+        var clinicIssue = await clinics.find().sort({visits: -1}).limit(5);
     }
 
     var result = [];
@@ -95,7 +65,6 @@ exports.getSearch = catchAsynsc(
             id: foundInfo._id,
             label: foundInfo.name
         };
-        console.log(foundInfo.name);
         foundInfo.visits +=1;
         foundInfo.save();
         result2.push(foundInfo.name);
@@ -104,16 +73,15 @@ exports.getSearch = catchAsynsc(
     await specialityInfo.forEach(foundInfo=>{
         let obj ={
             id: foundInfo._id,
-            label: foundInfo.primaries
+            label: foundInfo.primarySpeciality
         };
         result1.push(obj.label);
     });
 
-
     await clinicName.forEach(foundInfo=>{
         let obj ={
             id: foundInfo._id,
-            label: foundInfo.clincOne.clinicName
+            label: foundInfo.clinicOne.clinicName
         };
         foundInfo.visits +=1;
         foundInfo.save();
@@ -123,7 +91,7 @@ exports.getSearch = catchAsynsc(
     await clinicIssue.forEach(foundInfo=>{
         let obj ={
             id: foundInfo._id,
-            label: foundInfo.clincOne.clinicIssues
+            label: foundInfo.clinicOne.clinicIssues
         };
         result4.push(obj.label);
     });
@@ -138,13 +106,13 @@ exports.getSearch = catchAsynsc(
 
 exports.getDoctorSearch = catchAsynsc(
     async(req, res, next) =>{
-        const regexDoctor = await new RegExp('^(?:' + req.query.term + ')', 'i');
+        const regexDoctor = await {$regex: req.query.keyword, $options: 'i' };
         
         var resultDoctor = [];
 
         const doctorResult = await docUser.find(
             {'name' : regexDoctor}
-        ).sort({"updated_at" : -1}).sort({"created_at" : -1}).sort({visits : -1});
+        ).sort({visits : -1});
 
         await doctorResult.forEach(foundInfo=>{
             let obj = {
@@ -161,19 +129,26 @@ exports.getDoctorSearch = catchAsynsc(
 
 exports.getClinicSearch = catchAsynsc(
     async(req, res, next) =>{
-        const regexClinic = await new RegExp('^(?:' + req.query.term + ')', 'i');
+        const regexClinic = await {$regex: req.query.keyword, $options: 'i' };
         
         var resultClinic = [];
 
         // to find clinicname from clinic collections 
         const clinicName = await clinics.find(
-            {'clincOne.clinicName': regexClinic},
-        ).sort({"updated_at":-1}).sort({"created_at" : -1}).sort({visits: -1});
+            {'clinicOne.clinicName': regexClinic},
+            {'city' : req.body.city},
+            {
+                $or: [
+                    {'topLocality' : req.body.locality},
+                    {'otherLocality' : req.body.locality}
+                ]
+            }
+        ).sort({visits: -1});
 
         await clinicName.forEach(foundInfo=>{
             let obj ={
                 id: foundInfo._id,
-                label: foundInfo.clincOne.clinicName
+                label: foundInfo.clinicOne.clinicName
             };
             resultClinic.push(obj.label);
         });
@@ -182,4 +157,5 @@ exports.getClinicSearch = catchAsynsc(
             data : resultClinic
         });
 });
+       
         
