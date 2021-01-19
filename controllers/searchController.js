@@ -5,50 +5,50 @@ const clinics = require("../models/clinicModel");
 
 exports.getSearch = catchAsynsc(
     async (req, res, next) => {
-    const regex = await {$regex: req.query.keyword, $options: 'i' };
+    const regex = await {$regex: req.body.keyword, $options: 'i' };
     
     const doctorInfo = await docUser.find(
-            {'name': regex},
-            {'city' : req.body.city},
-            {
-                $or: [
-                    {'topLocality' : req.body.locality},
-                    {'otherLocality' : req.body.locality}
-                ]
-            }
+            {'name': regex}
+            // {'city' : req.body.city}
+            // {
+            //     $or: [
+            //         {'topLocality' : req.body.locality},
+            //         {'otherLocality' : req.body.locality}
+            //     ]
+            // }
     ).sort({visits: -1}).limit(5);
 
-    if(req.query.keyword != null)
+    if(req.body.keyword != null)
     {    
-        // to find clinicname from clinic collections 
+
         var specialityInfo = await docUser.find(
         { 'primarySpeciality': regex }
         ).limit(5);
     }else{
-        // to find clinicname from clinic collections 
+
         var specialityInfo = await docUser.find().limit(5);
     }
 
-    // to find clinicname from clinic collections 
+
     const clinicName = await clinics.find(
-        {'clinicOne.clinicName': regex},
-        {'city' : req.body.city},
-            {
-                $or: [
-                    {'topLocality' : req.body.locality},
-                    {'otherLocality' : req.body.locality}
-                ]
-            }
+        {'clinicOne.clinicName': regex}
+        // {'city' : req.body.city},
+        //     {
+        //         $or: [
+        //             {'topLocality' : req.body.locality},
+        //             {'otherLocality' : req.body.locality}
+        //         ]
+        //     }
     ).sort({visits: -1}).limit(5);
 
-    if(req.query.keyword != null)
+    if(req.body.keyword != null)
     {    
-        // to find clinicname from clinic collections 
+
         var clinicIssue = await clinics.find(
         { 'clinicOne.clinicIssues': regex }
         ).sort({visits: -1}).limit(5);
     }else{
-        // to find clinicname from clinic collections 
+
         var clinicIssue = await clinics.find().sort({visits: -1}).limit(5);
     }
 
@@ -66,6 +66,7 @@ exports.getSearch = catchAsynsc(
             label: foundInfo.name
         };
         foundInfo.visits +=1;
+        console.log(foundInfo.visits)
         foundInfo.save();
         result2.push(foundInfo.name);
     });
@@ -84,6 +85,7 @@ exports.getSearch = catchAsynsc(
             label: foundInfo.clinicOne.clinicName
         };
         foundInfo.visits +=1;
+        console.log(foundInfo.visits)
         foundInfo.save();
         result3.push(obj.label);
     });
@@ -106,7 +108,7 @@ exports.getSearch = catchAsynsc(
 
 exports.getDoctorSearch = catchAsynsc(
     async(req, res, next) =>{
-        const regexDoctor = await {$regex: req.query.keyword, $options: 'i' };
+        const regexDoctor = await {$regex: req.body.keyword, $options: 'i' };
         
         var resultDoctor = [];
 
@@ -129,20 +131,20 @@ exports.getDoctorSearch = catchAsynsc(
 
 exports.getClinicSearch = catchAsynsc(
     async(req, res, next) =>{
-        const regexClinic = await {$regex: req.query.keyword, $options: 'i' };
+        const regexClinic = await {$regex: req.body.keyword, $options: 'i' };
         
         var resultClinic = [];
-
-        // to find clinicname from clinic collections 
         const clinicName = await clinics.find(
-            {'clinicOne.clinicName': regexClinic},
-            {'city' : req.body.city},
             {
-                $or: [
-                    {'topLocality' : req.body.locality},
-                    {'otherLocality' : req.body.locality}
-                ]
+                'clinicOne.clinicName': regexClinic
             }
+            // {'clinicOne.city' : req.body.city},
+            // {
+            //     $or: [
+            //         {'topLocality' : req.body.locality},
+            //         {'otherLocality' : req.body.locality}
+            //     ]
+            // }
         ).sort({visits: -1});
 
         await clinicName.forEach(foundInfo=>{

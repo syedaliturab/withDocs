@@ -81,6 +81,10 @@ const doctor = new mongoose.Schema({
         type: Number,
         default : 0
     },
+    visits:{
+        type: Number,
+        default : 0
+    },
     workingHours: {
         sunday: {
             morning: {

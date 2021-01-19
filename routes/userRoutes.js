@@ -11,6 +11,7 @@ const feedbackController = require('./../controllers/feedbackController');
 const personalizationController = require('./../controllers/personalizationController');
 const specialitiesController = require('./../controllers/specialitiesController');
 const doctorcardsearchController = require('./../controllers/doctorcardsearchController');
+const searchController = require('./../controllers/searchController');
 
 const router = express.Router();
 
@@ -135,6 +136,18 @@ router
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
+
+  router
+  .route('/search/autoComplete')
+  .get(searchController.getSearch)  
+
+router
+  .route('/search/doctor')
+  .get(searchController.getDoctorSearch)  
+
+router
+  .route('/search/clinics')
+  .get(searchController.getClinicSearch)  
 
 router.post('/newpassword', authController.emailToUser);
 
