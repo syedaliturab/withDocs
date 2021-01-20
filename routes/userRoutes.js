@@ -49,12 +49,20 @@ router
   .get(patientController.getAllPatientProfile)
   .post(patientController.createPatientProfile);
 
-
 router
   .route('/patient/:id')
   .get(patientController.getPatient)
   .patch(patientController.updatePatientProfile);
 
+router
+  .route('/patient/:id/relative')
+  .post(patientController.createPatientRelativeProfile )
+
+router
+  .route('/patient/relative/:id')
+  .get(patientController.getPatientRelativeProfile)
+  .patch(patientController.updatePatientRelativeProfile)
+  .delete(patientController.deletePatientRelativeProfile)
 
 router.get('/clinic',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);

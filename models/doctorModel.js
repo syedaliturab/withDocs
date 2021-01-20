@@ -21,6 +21,9 @@ const doctor = new mongoose.Schema({
     city: {
         type: String,
     },
+    locality : {
+        type : String
+    },
     pincode: {
         type: Number,
         length: [6, 'Please provide 6 digit pincode']

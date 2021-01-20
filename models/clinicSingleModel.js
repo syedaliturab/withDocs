@@ -10,6 +10,7 @@ const singleClinic = {
         required: [true, 'Please provide a clinic name'],
     },
     city: String,
+    locality : String,
     state: String,
     pincode: {
         type: Number,

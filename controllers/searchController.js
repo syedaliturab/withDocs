@@ -7,16 +7,30 @@ exports.getSearch = catchAsynsc(
     async (req, res, next) => {
     const regex = await {$regex: req.body.keyword, $options: 'i' };
     
-    const doctorInfo = await docUser.find(
-            {'name': regex}
-            // {'city' : req.body.city}
-            // {
-            //     $or: [
-            //         {'topLocality' : req.body.locality},
-            //         {'otherLocality' : req.body.locality}
-            //     ]
-            // }
-    ).sort({visits: -1}).limit(5);
+    if(req.body.city != null && req.body.locality != null)
+    {
+        var doctorInfo = await docUser.find(
+            {'name': regex,
+            'city' : req.body.city,
+            'locality' : req.body.locality}
+        ).sort({visits: -1}).limit(5);
+    }
+    else if (req.body.city != null && req.body.locality == null)
+    {
+        var doctorInfo = await docUser.find(
+            {
+            'name': regex,
+            'city' : req.body.city
+        }
+        ).sort({visits: -1}).limit(5);
+    }
+    else {
+        var doctorInfo = await docUser.find(
+            {
+            'name': regex
+        }
+        ).sort({visits: -1}).limit(5);
+    }
 
     if(req.body.keyword != null)
     {    
@@ -26,20 +40,36 @@ exports.getSearch = catchAsynsc(
         ).limit(5);
     }else{
 
-        var specialityInfo = await docUser.find().limit(5);
+        var specialityInfo = await docUser.find({}).limit(5);
     }
 
 
-    const clinicName = await clinics.find(
-        {'clinicOne.clinicName': regex}
-        // {'city' : req.body.city},
-        //     {
-        //         $or: [
-        //             {'topLocality' : req.body.locality},
-        //             {'otherLocality' : req.body.locality}
-        //         ]
-        //     }
-    ).sort({visits: -1}).limit(5);
+    if(req.body.city != null && req.body.locality != null)
+    {
+        var clinicName = await clinics.find(
+                    {
+                        'clinicOne.clinicName': regexClinic,
+                        'clinicOne.city' : req.body.city,
+                        'clinicOne.locality' : req.body.locality
+                    }            
+        ).sort({visits: -1})
+    }
+    else if (req.body.city != null && req.body.locality == null)
+    {
+        var clinicName = await clinics.find(
+            {
+                'clinicOne.clinicName': regex,
+                'clinicOne.city' : req.body.city
+            }            
+            ).sort({visits: -1})
+    }
+    else {
+        var clinicName = await clinics.find(
+            {
+                'clinicOne.clinicName': regex
+            }            
+            ).sort({visits: -1})
+    }
 
     if(req.body.keyword != null)
     {    
@@ -49,14 +79,14 @@ exports.getSearch = catchAsynsc(
         ).sort({visits: -1}).limit(5);
     }else{
 
-        var clinicIssue = await clinics.find().sort({visits: -1}).limit(5);
+        var clinicIssue = await clinics.find({}).sort({visits: -1}).limit(5);
     }
 
     var result = [];
     var result1 = [];
     var result2 = [];
     var result3 = [];
-    var result4 = [];
+    var result4 = []
 
     result.push(result1, result2, result3, result4);
 
@@ -112,9 +142,30 @@ exports.getDoctorSearch = catchAsynsc(
         
         var resultDoctor = [];
 
-        const doctorResult = await docUser.find(
-            {'name' : regexDoctor}
-        ).sort({visits : -1});
+    if(req.body.city != null && req.body.locality != null)
+    {
+        var doctorResult = await docUser.find(
+            {'name': regexDoctor,
+            'city' : req.body.city,
+            'locality' : req.body.locality}
+        ).sort({visits: -1}).limit(5);
+    }
+    else if (req.body.city != null && req.body.locality == null)
+    {
+        var doctorResult = await docUser.find(
+            {
+            'name': regexDoctor,
+            'city' : req.body.city
+        }
+        ).sort({visits: -1}).limit(5);
+    }
+    else {
+        var doctorResult = await docUser.find(
+            {
+            'name': regexDoctor
+        }
+        ).sort({visits: -1}).limit(5);
+    }
 
         await doctorResult.forEach(foundInfo=>{
             let obj = {
@@ -134,18 +185,33 @@ exports.getClinicSearch = catchAsynsc(
         const regexClinic = await {$regex: req.body.keyword, $options: 'i' };
         
         var resultClinic = [];
-        const clinicName = await clinics.find(
-            {
-                'clinicOne.clinicName': regexClinic
-            }
-            // {'clinicOne.city' : req.body.city},
-            // {
-            //     $or: [
-            //         {'topLocality' : req.body.locality},
-            //         {'otherLocality' : req.body.locality}
-            //     ]
-            // }
-        ).sort({visits: -1});
+
+        if(req.body.city != null && req.body.locality != null)
+        {
+            var clinicName = await clinics.find(
+                        {
+                            'clinicOne.clinicName': regexClinic,
+                            'clinicOne.city' : req.body.city,
+                            'clinicOne.locality' : req.body.locality
+                        }            
+            ).sort({visits: -1})
+        }
+        else if (req.body.city != null && req.body.locality == null)
+        {
+            var clinicName = await clinics.find(
+                {
+                    'clinicOne.clinicName': regexClinic,
+                    'clinicOne.city' : req.body.city
+                }            
+                ).sort({visits: -1})
+        }
+        else {
+            var clinicName = await clinics.find(
+                {
+                    'clinicOne.clinicName': regexClinic
+                }            
+                ).sort({visits: -1})
+        }
 
         await clinicName.forEach(foundInfo=>{
             let obj ={

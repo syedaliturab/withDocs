@@ -414,6 +414,23 @@ Post::
     "gender": "Male"
     
 }
+http://localhost:3000/api/v11/user/patient
+
+post::
+{
+    {
+    "name" : "Vedpal Vaidya",
+    "age" : 20,
+    "email" : "abc@gmail.com",
+    "status" : "single",
+    "emergencyContacts" : [9312314145, 99999999999],
+    "dateOfBirth" : "31/01/2000",
+    "state" : "MH",
+    "city" : "Parbhani",
+    "pincode" : 
+}
+}
+
 
 1. DATABASE=mongodb+srv://root:<password>@withdoc.6gjl9.mongodb.net/withdocs?retryWrites=true&w=majority
 2. DATABASE=mongodb+srv://root:<password>@withdoc.dru27.mongodb.net/Withdoc?retryWrites=true&w=majority

@@ -1,4 +1,4 @@
-const  patient = require('./../models/patientModel.js');
+const  {patient, patientRelative, patients} = require('./../models/patientModel.js');
 const catchAsynsc = require('./../utils/catchAsync');
 
 //to get Patient
@@ -78,5 +78,59 @@ exports.deletePatientProfile = catchAsynsc(
     }
 );
 
+exports.createPatientRelativeProfile = catchAsynsc(
+    async (req, res, next) => {
+        const getPatient = await patient(req.params.id);
+        const createPatientRelative = await patientRelative.create(req.body);
 
+        await getPatient.relatives.push(createPatientRelative);
+        
+        const updatePatientProfile = await patients.findByIdAndUpdate(
+            req.params.id, getPatient, {
+                new : true,
+                runValidators : true
+            }
+        );
+        res.status(200).json({
+            status : 'success',
+            data : updatePatientProfile
+        })
+        
+    }
+);
 
+exports.getPatientRelativeProfile = catchAsynsc(
+    async(req, res, next) =>{
+        const getPatientRelative = await patientRelative.findById({_id : req.params.id});
+        res.status(200).json({
+            status : 'success',
+            data : getPatientRelative
+        })
+    }
+)
+
+exports.updatePatientRelativeProfile = catchAsynsc(
+    async (req, res, next) => {
+        const updatePatientRelative = await patientRelative.findByIdAndUpdate(
+            req.params.id, req.body, {
+                new : true,
+                runValidators : true
+            }
+        )
+        res.status(200).json({
+            status : 'success',
+            data : updatePatientRelative
+        })
+    }
+);
+
+exports.deletePatientRelativeProfile = catchAsynsc(
+    async (req, res, next) =>{
+        const deletePatientRelative = await patientRelative.findByIdAndRemove(req.params.id);
+
+        res.status(200).json({
+            status : 'success',
+            data : deletePatientRelative
+        })
+    }
+);
