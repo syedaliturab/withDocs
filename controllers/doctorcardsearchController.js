@@ -11,8 +11,8 @@ exports.getdoctorcardSearch = catchAsynsc(
 
         const doctorInfo = await docUser.find({
             $or: [
-                { name: { $regex: req.query.keyword, $options: 'i' }},
-                {primarySpeciality: { $regex: req.query.keyword, $options: 'i' }}
+                { name: { $regex: req.body.keyword, $options: 'i' }},
+                {primarySpeciality: { $regex: req.body.keyword, $options: 'i' }}
             ]
         } 
         );
