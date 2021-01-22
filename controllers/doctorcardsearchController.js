@@ -3,7 +3,7 @@ const docUser = require("../models/doctorModel");
 const { compareSync } = require("bcryptjs");
 const { find } = require("../models/doctorModel");
 const { Feedback } = require("../models/feedbackModel");
-const clinic = require("../models/clinicModel")
+const clinic = require("../models/clinicModel");
 
 exports.getdoctorcardSearch = catchAsynsc(
     async (req, res, next) => {
@@ -16,12 +16,24 @@ exports.getdoctorcardSearch = catchAsynsc(
             ]
         } 
         );
-
-        await doctorInfo.forEach(async (foundInfo) => {
-            result.push(foundInfo)
-        });
-
-        res.status(200).jsonp({
+        for (const foundInfo of doctorInfo){
+            const clinicInfo = await clinic.findById({_id : foundInfo.id})
+            console.log(clinicInfo)
+            if(clinicInfo == null)
+            {
+                var obj = {}
+            }
+            else{
+                var obj = {
+                    clinicFirstName : clinicInfo.clinicOne.clinicName,
+                    clinicFirstFees : clinicInfo.clinicOne.consultationFees,
+                    clinicTwoName : clinicInfo.clinicTwo.clinicName,
+                    clinicTwoFees : clinicInfo.clinicTwo.consultationFees
+                }
+            }
+            result.push([foundInfo, obj]);
+        }
+        await res.status(200).jsonp({
             status: 'success',
             data : result
         });
