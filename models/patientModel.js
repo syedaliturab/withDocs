@@ -26,8 +26,7 @@ const patientSchema = mongoose.Schema({
         type : String
     },
     emergencyContacts : [{
-        type : Number,
-        unique : true
+        type : Number
     }],
     dateOfBirth: {
         type: String
@@ -67,24 +66,27 @@ const patientSchema = mongoose.Schema({
         type : String
     },
     allergies : [{
-        type : String,
-        unique : true
+        type : String
     }],
     injuries : [{
-        type : String,
-        unique : true
+        type : String
     }],
     surgeries : [{
-        type : String,
-        unique : true
+        type : String
+    }],
+    currentMedications : [{
+        type : String
+    }],
+    pastMedications : [{
+        type : String
+
     }],
     chronicDiseases : [{
-        type : String,
-        unique : true
+        type : String
+
     }],
     heridatoryDiseases : [{
-        type : String,
-        unique : true
+        type : String
     }],
     drinking : String,
     smoking : String,
@@ -94,7 +96,7 @@ const patientSchema = mongoose.Schema({
 });
 
 const patientRelativeSchema = new mongoose.Schema({
-    _id : {
+    relativeId : {
         type: String,
 	    unique: true,
         requried: [true, 'Please provide valid id']

@@ -418,7 +418,6 @@ http://localhost:3000/api/v11/user/patient
 
 post::
 {
-    {
     "name" : "Vedpal Vaidya",
     "age" : 20,
     "email" : "abc@gmail.com",
@@ -427,8 +426,24 @@ post::
     "dateOfBirth" : "31/01/2000",
     "state" : "MH",
     "city" : "Parbhani",
-    "pincode" : 
-}
+    "pincode" : 431401,
+    "homeAddress" : "India",
+    "contactNo" : "9333001199",
+    "alternateContactNo" : "9111111111",
+    "gender" : "male",
+    "pain" : "Anaphy",
+    "allergies" : ["Anaphylaxis", "Hemolytic Anemia", "anti-thymocyte globulin"],
+    "injuries" : ["Left shoulder dislocation", "Achillies tendon rupture"],
+    "surgeries" : ["Arthroscopy", "dental restoration"],
+    "currentMedications" : ["currentMedications"],
+    "pastMedicaitions" : ["Penicillin", "Serum B"],
+    "chronicDiseases" : ["Asthma", "Cystic fibrosis"],
+    "heridatoryDiseases" : ["Penicillin", "Serum B"],
+    "drinking" : "I don’t drink",
+    "smoking" : "I don’t Smoke",
+    "chewingTobako" : "No",
+    "lifestyle" : "sedentary",
+    foodPreference : "Veg"
 }
 
 

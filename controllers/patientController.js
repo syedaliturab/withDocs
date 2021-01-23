@@ -70,7 +70,7 @@ exports.deletePatientProfile = catchAsynsc(
     async (req, res, next) => {
     
         const deletepatient = await patient.findByIdAndRemove(req.params.id);
-        
+
         res.status(200).json({
             status: 'success',
             data:  deletepatient
@@ -80,20 +80,15 @@ exports.deletePatientProfile = catchAsynsc(
 
 exports.createPatientRelativeProfile = catchAsynsc(
     async (req, res, next) => {
-        const getPatient = await patient(req.params.id);
+        const getPatient = await patient.findById(req.params.id);
         const createPatientRelative = await patientRelative.create(req.body);
 
         await getPatient.relatives.push(createPatientRelative);
-        
-        const updatePatientProfile = await patients.findByIdAndUpdate(
-            req.params.id, getPatient, {
-                new : true,
-                runValidators : true
-            }
-        );
+
+        await getPatient.save();
         res.status(200).json({
             status : 'success',
-            data : updatePatientProfile
+            data : getPatient
         })
         
     }
@@ -101,7 +96,7 @@ exports.createPatientRelativeProfile = catchAsynsc(
 
 exports.getPatientRelativeProfile = catchAsynsc(
     async(req, res, next) =>{
-        const getPatientRelative = await patientRelative.findById({_id : req.params.id});
+        const getPatientRelative = await patientRelative.findById(req.params.id);
         res.status(200).json({
             status : 'success',
             data : getPatientRelative

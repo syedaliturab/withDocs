@@ -70,7 +70,6 @@ exports.createTopLocalities = catchAsynsc(
         
         for(var element of req.body.data){
             const member = await toplocalities.create(element);
-            console.log(member);
         }
         res.status(200).json({
             status: 'success',
@@ -83,7 +82,6 @@ exports.createOtherLocalities = catchAsynsc(
     async (req, res, next) => {
         for(var element of req.body.data){
             const member = await otherlocalities.create(element);
-            console.log(member);
         }
         res.status(200).json({
             status: 'success',

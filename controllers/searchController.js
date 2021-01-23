@@ -46,28 +46,48 @@ exports.getSearch = catchAsynsc(
 
     if(req.body.city != null && req.body.locality != null)
     {
-        var clinicName = await clinics.find(
-                    {
-                        'clinicOne.clinicName': regexClinic,
-                        'clinicOne.city' : req.body.city,
-                        'clinicOne.locality' : req.body.locality
-                    }            
+        var clinicName = await clinics.find({
+            $or : [{
+                'clinicOne.clinicName': regex,
+                'clinicOne.city' : req.body.city,
+                'clinicOne.locality' : req.body.locality
+            },
+            {
+                'clinicTwo.clinicName': regex,
+                'clinicTwo.city' : req.body.city,
+                'clinicTwo.locality' : req.body.locality
+            }
+        ]
+    }         
         ).sort({visits: -1})
     }
     else if (req.body.city != null && req.body.locality == null)
     {
         var clinicName = await clinics.find(
             {
-                'clinicOne.clinicName': regex,
-                'clinicOne.city' : req.body.city
-            }            
+                $or : [{
+                    'clinicOne.clinicName': regex,
+                    'clinicOne.city' : req.body.city
+                },
+                {
+                    'clinicTwo.clinicName': regex,
+                    'clinicTwo.city' : req.body.city
+                }
+            ]
+        }           
             ).sort({visits: -1})
     }
     else {
         var clinicName = await clinics.find(
             {
-                'clinicOne.clinicName': regex
-            }            
+                $or : [{
+                    'clinicOne.clinicName': regex
+                },
+                {
+                    'clinicTwo.clinicName': regex
+                }
+            ]
+        }          
             ).sort({visits: -1})
     }
 
@@ -75,7 +95,12 @@ exports.getSearch = catchAsynsc(
     {    
 
         var clinicIssue = await clinics.find(
-        { 'clinicOne.clinicIssues': regex }
+            {
+                $or : [
+                    { 'clinicOne.clinicIssues': regex },
+                    { 'clinicTwo.clinicIssues': regex }
+                ]
+            }
         ).sort({visits: -1}).limit(5);
     }else{
 
@@ -91,10 +116,6 @@ exports.getSearch = catchAsynsc(
     result.push(result1, result2, result3, result4);
 
     await doctorInfo.forEach(foundInfo=>{
-        let obj ={
-            id: foundInfo._id,
-            label: foundInfo.name
-        };
         foundInfo.visits +=1;
         console.log(foundInfo.visits)
         foundInfo.save();
@@ -102,30 +123,26 @@ exports.getSearch = catchAsynsc(
     });
 
     await specialityInfo.forEach(foundInfo=>{
-        let obj ={
-            id: foundInfo._id,
-            label: foundInfo.primarySpeciality
-        };
-        result1.push(obj.label);
+        result1.push(foundInfo.primarySpeciality);
     });
 
     await clinicName.forEach(foundInfo=>{
         let obj ={
-            id: foundInfo._id,
-            label: foundInfo.clinicOne.clinicName
+            clinicOneName: foundInfo.clinicOne.clinicName,
+            clinicTwoName: foundInfo.clinicTwo.clinicName
         };
         foundInfo.visits +=1;
         console.log(foundInfo.visits)
         foundInfo.save();
-        result3.push(obj.label);
+        result3.push(obj);
     });
 
     await clinicIssue.forEach(foundInfo=>{
         let obj ={
-            id: foundInfo._id,
-            label: foundInfo.clinicOne.clinicIssues
+            clinicOne: foundInfo.clinicOne.clinicIssues,
+            clinicTwo: foundInfo.clinicTwo.clinicIssues
         };
-        result4.push(obj.label);
+        result4.push(obj);
     });
 
     res.status(200).jsonp({
@@ -189,36 +206,57 @@ exports.getClinicSearch = catchAsynsc(
         if(req.body.city != null && req.body.locality != null)
         {
             var clinicName = await clinics.find(
-                        {
-                            'clinicOne.clinicName': regexClinic,
-                            'clinicOne.city' : req.body.city,
-                            'clinicOne.locality' : req.body.locality
-                        }            
+                {
+                    $or : [{
+                        'clinicOne.clinicName': regexClinic,
+                        'clinicOne.city' : req.body.city,
+                        'clinicOne.locality' : req.body.locality
+                    },
+                    {
+                        'clinicTwo.clinicName': regexClinic,
+                        'clinicTwo.city' : req.body.city,
+                        'clinicTwo.locality' : req.body.locality
+                    }
+                ]
+            }         
             ).sort({visits: -1})
         }
         else if (req.body.city != null && req.body.locality == null)
         {
             var clinicName = await clinics.find(
                 {
-                    'clinicOne.clinicName': regexClinic,
-                    'clinicOne.city' : req.body.city
-                }            
+                    $or : [{
+                        'clinicOne.clinicName': regexClinic,
+                        'clinicOne.city' : req.body.city
+                    },
+                    {
+                        'clinicTwo.clinicName': regexClinic,
+                        'clinicTwo.city' : req.body.city
+                    }
+                ]
+            }           
                 ).sort({visits: -1})
         }
         else {
-            var clinicName = await clinics.find(
-                {
-                    'clinicOne.clinicName': regexClinic
-                }            
+            var clinicName = await clinics.find({
+                $or : [
+                    {
+                        'clinicOne.clinicName': regexClinic
+                    },
+                    {
+                        'clinicTwo.clinicName': regexClinic
+                    }      
+                ]
+            }         
                 ).sort({visits: -1})
         }
 
         await clinicName.forEach(foundInfo=>{
             let obj ={
-                id: foundInfo._id,
-                label: foundInfo.clinicOne.clinicName
+                clinicOneName: foundInfo.clinicOne.clinicName,
+                clinicTwoName: foundInfo.clinicTwo.clinicName
             };
-            resultClinic.push(obj.label);
+            resultClinic.push(obj);
         });
         res.status(200).jsonp({
             status : 'success',
