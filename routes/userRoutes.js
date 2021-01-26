@@ -101,7 +101,7 @@ router.post('/createclinicissues',specialitiesController.createClinicIssues);
 
 router
   .route('/doctorcardSearch')
-  .get(doctorcardsearchController.getdoctorcardSearch)
+  .post(doctorcardsearchController.getdoctorcardSearch)
   
 router.get('/doctorprofile', doctorcardsearchController.doctorprofile);  
 
@@ -147,15 +147,15 @@ router
 
   router
   .route('/search/autoComplete')
-  .get(searchController.getSearch)  
+  .post(searchController.getSearch)  
 
 router
   .route('/search/doctor')
-  .get(searchController.getDoctorSearch)  
+  .post(searchController.getDoctorSearch)  
 
 router
   .route('/search/clinics')
-  .get(searchController.getClinicSearch)  
+  .post(searchController.getClinicSearch)  
 
 router.post('/newpassword', authController.emailToUser);
 

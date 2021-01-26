@@ -92,7 +92,11 @@ const patientSchema = mongoose.Schema({
     smoking : String,
     chewingTobako : String,
     lifestyle : String,
-    foodPreference : String
+    foodPreference : String,
+    moodsAndSymptoms : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : moodsAndSymptoms
+    }
 });
 
 const patientRelativeSchema = new mongoose.Schema({
@@ -124,6 +128,37 @@ const patientRelativeSchema = new mongoose.Schema({
     }
 })
 
+const moodsAndSymptomsSchema = new mongoose.Schema({
+    gender : {
+        type : String,
+        enum : {
+            values : 'female',
+            message: 'gender is only female'
+        }
+    },
+    symptoms : [{
+        name: String,
+        description : String,
+        level: {
+            type : Number,
+            default : 0
+        }
+    }],
+    moods : [{
+        name: String,
+        description : String,
+        level: {
+            type : Number,
+            default : 0
+        }
+    }],
+    date : {
+        type : Date,
+        default : Date.now
+    }
+})
+
 const patientRelative = mongoose.model('patientRelative', patientRelativeSchema);
 const patient = mongoose.model('Patient',patientSchema);
-module.exports = {patient, patientRelative};
+const moodsAndSymptoms = mongoose.model('moodsAndSymptoms', moodsAndSymptomsSchema);
+module.exports = {patient, patientRelative, moodsAndSymptoms};
