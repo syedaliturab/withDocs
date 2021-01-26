@@ -95,7 +95,7 @@ const patientSchema = mongoose.Schema({
     foodPreference : String,
     moodsAndSymptoms : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : moodsAndSymptoms
+        ref : 'moodsAndSymptoms'
     }
 });
 

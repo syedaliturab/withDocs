@@ -18,7 +18,6 @@ exports.getdoctorcardSearch = catchAsynsc(
         );
         for (const foundInfo of doctorInfo){
             const clinicInfo = await clinic.findById({_id : foundInfo.id})
-            console.log(clinicInfo)
             if(clinicInfo == null)
             {
                 var obj = {}
