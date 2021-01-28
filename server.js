@@ -16,6 +16,7 @@ const DB = process.env.DATABASE.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
 );
+// const DB = "mongodb://localhost/withDocs"
 mongoose
   .connect(DB, {
     useNewUrlParser: true,

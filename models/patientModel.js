@@ -1,5 +1,6 @@
 mongoose = require('mongoose');
 const validator = require('validator');
+const {moods, symptoms} = require('../models/moodsAndSymptomsModel');
 
 const patientSchema = mongoose.Schema({
     _id:{
@@ -93,9 +94,13 @@ const patientSchema = mongoose.Schema({
     chewingTobako : String,
     lifestyle : String,
     foodPreference : String,
-    moodsAndSymptoms : {
+    moods : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'moodsAndSymptoms'
+        ref : 'moods'
+    },
+    symptoms : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'symptoms'
     }
 });
 
@@ -126,39 +131,8 @@ const patientRelativeSchema = new mongoose.Schema({
     occupation : {
         type : String
     }
-})
-
-const moodsAndSymptomsSchema = new mongoose.Schema({
-    gender : {
-        type : String,
-        enum : {
-            values : 'female',
-            message: 'gender is only female'
-        }
-    },
-    symptoms : [{
-        name: String,
-        description : String,
-        level: {
-            type : Number,
-            default : 0
-        }
-    }],
-    moods : [{
-        name: String,
-        description : String,
-        level: {
-            type : Number,
-            default : 0
-        }
-    }],
-    date : {
-        type : Date,
-        default : Date.now
-    }
-})
+});
 
 const patientRelative = mongoose.model('patientRelative', patientRelativeSchema);
 const patient = mongoose.model('Patient',patientSchema);
-const moodsAndSymptoms = mongoose.model('moodsAndSymptoms', moodsAndSymptomsSchema);
-module.exports = {patient, patientRelative, moodsAndSymptoms};
+module.exports = {patient, patientRelative};

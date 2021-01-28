@@ -159,4 +159,21 @@ router
 
 router.post('/newpassword', authController.emailToUser);
 
+router
+  .route('/patient/:id/moods/')
+  .get(patientController.getmoods)
+  .post(patientController.createmoods)
+  .patch(patientController.updatemoods);
+
+router.get('/patient/:id/moodHistory', patientController.getAllMoodHistory);
+
+router
+  .route('/patient/:id/symptoms')
+  .get(patientController.getSymptoms)
+  .post(patientController.createSymptoms)
+  .patch(patientController.updateSymptoms)
+
+
+router.get('/patient/moodHistory/:id', patientController.getmoodsHistory);
+
 module.exports = router;

@@ -82,11 +82,20 @@ exports.getClinic = catchAsynsc(
     async (req, res, next) => {
 
         const clinic = await clinics.findById(req.query.id);
-        res.status(200).json({
-            status: 'success',
-            data: clinic
-            
-        })
+        if((clinic.clinicOne.length == 0) && (clinic.clinicTwo.length == 0))
+        {
+            res.status(200).json({
+                status: 'success',
+                data: null
+                
+            })
+        }
+        else{
+            res.status(200).json({
+                status: 'success',
+                data: clinic  
+            })
+        }
     }
 );
 //to create clinic profile

@@ -1,5 +1,8 @@
-const  {patient, patientRelative, patients} = require('./../models/patientModel.js');
+const { get} = require('../routes/userRoutes.js');
+const  {patient, patientRelative} = require('./../models/patientModel.js');
+const {moods, moodsHistory, symptoms, symptomsHistory} = require('../models/moodsAndSymptomsModel');
 const catchAsynsc = require('./../utils/catchAsync');
+const { compare } = require('bcryptjs');
 
 //to get Patient
 exports.getAllPatientProfile = catchAsynsc(
@@ -39,8 +42,6 @@ exports.createPatientProfile = catchAsynsc(
         });
     }
 );
-
-
 
 //to update Patient details
 exports.updatePatientProfile = catchAsynsc(
@@ -129,3 +130,116 @@ exports.deletePatientRelativeProfile = catchAsynsc(
         })
     }
 );
+
+exports.createmoods = catchAsynsc(
+    async(req, res, next) =>{
+        const getPatient = await patient.findById(req.params.id);
+        console.log(getPatient.gender)
+        if(getPatient.gender === 'female')
+        {
+            console.log("aaaaaaaaaa")
+            const createInfo = await moods.create(req.body);
+            getPatient.moods = createInfo;
+        }
+        getPatient.save();
+        res.status(200).json({
+            status : 'success',
+            data : getPatient
+        });
+    }
+);
+
+exports.getmoods = catchAsynsc(
+    async(req, res, next) => {
+        const getData = await moods.findById(req.params.id);
+        res.status(200).json({
+            status : 'success',
+            data : getData
+        })
+    }
+);
+
+exports.updatemoods= catchAsynsc(
+    async(req, res, next) => {
+        const getData = await moods.findById(req.params.id);
+        getData.history.push(getData);
+        getData.save();
+        const updateData = await moods.findByIdAndUpdate(
+            req.params.id, req.data, {
+                new : true,
+                runValidators : true
+            }
+        )
+        res.status(200).json({
+            status : 'success',
+            data : updateData
+        })
+    }
+);
+
+exports.getAllMoodHistory = catchAsynsc(
+    async(req, res, next) => {
+        const getAllmoods = await moods.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data : getAllmoods.history
+        });
+    }
+)
+
+exports.createSymptoms = catchAsynsc(
+    async(req, res, next) =>{
+        const getPatient = await patient.findById(req.params.id);
+        if(getPatient.gender === 'female')
+        {
+            const createInfo = await symptoms.create(req.body);
+            getPatient.symptoms = createInfo;
+        }
+        getPatient.save();
+        res.status(200).json({
+            status : 'success',
+            data : getPatient
+        });
+    }
+);
+
+exports.getSymptoms = catchAsynsc(
+    async(req, res, next) => {
+        const getData = await symptoms.findById(req.params.id);
+        res.status(200).json({
+            status : 'success',
+            data : getData
+        })
+    }
+);
+
+exports.updateSymptoms= catchAsynsc(
+    async(req, res, next) => {
+        const getData = await symptoms.findById(req.params.id);
+        getData.history.push(getData);
+        getData.save();
+        const updateData = await symptoms.findByIdAndUpdate(
+            req.params.id, req.data, {
+                new : true,
+                runValidators : true
+            }
+        )
+        console.log(getData);
+        res.status(200).json({
+            status : 'success',
+            data : getData
+        })
+    }
+);
+
+exports.getmoodsHistory = catchAsynsc(
+    async(req, res, next) => {
+        const getData = await moods.findById(req.params.id);
+        console.log(getData);
+        res.status(200).json({
+            status : 'success',
+            data : getData
+        })
+    }
+)
