@@ -41,14 +41,16 @@ exports.getdoctorcardSearch = catchAsynsc(
 
 exports.doctorprofile = catchAsynsc(
     async (req, res, next) => {
-        var result = []
-
+        var result = [];
+        var clinicArray = [];
         const doctorInfo = await docUser.find({_id : req.query.id});
         const feedbackInfo = await Feedback.find({doctorId : req.query.id});
         const clinicInfo = await clinic.find({ _id : req.query.id});
-        
-        result.push(doctorInfo, clinicInfo, feedbackInfo)
-        
+        clinicArray.push(clinicInfo[0].clinicOne, clinicInfo[0].clinicTwo);
+        let obj = {
+            clinicDetails : clinicArray
+        }
+        result.push(doctorInfo[0], obj, feedbackInfo[0])
         res.status(200).jsonp({
             status : 'success',
             data : result

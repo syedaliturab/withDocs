@@ -15,8 +15,8 @@ const sendEmail = async options => {
     from: process.env.EMAIL_USERNAME,
     to: options.email,
     subject: options.subject,
-    text: options.message
-    // html:
+    text: options.message,
+    html: options.html
   };
 
   // 3) Actually send the email

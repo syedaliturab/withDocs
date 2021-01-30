@@ -173,7 +173,8 @@ router
   .post(patientController.createSymptoms)
   .patch(patientController.updateSymptoms)
 
-
+router.get('/patient/verify/:id', patientController.verifyEmail);
+router.get('/patient/activate/:id', patientController.emailActivate);
 router.get('/patient/moodHistory/:id', patientController.getmoodsHistory);
 
 module.exports = router;

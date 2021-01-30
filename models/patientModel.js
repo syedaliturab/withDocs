@@ -23,6 +23,10 @@ const patientSchema = mongoose.Schema({
         unique: true,
         validate: [validator.isEmail, 'Please provide valid email']
     },
+    emailVerificationStatus : {
+        type : Boolean,
+        defualt : false
+    },
     status : {
         type : String
     },
