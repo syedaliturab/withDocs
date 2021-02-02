@@ -233,6 +233,7 @@ exports.createmoods = catchAsynsc(
 exports.getmoods = catchAsynsc(
     async(req, res, next) => {
         const getData = await moods.findById(req.params.id);
+        getData.history = [];
         res.status(200).json({
             status : 'success',
             data : getData
@@ -289,6 +290,7 @@ exports.getSymptoms = catchAsynsc(
     async(req, res, next) => {
         const getData = await symptoms.findById(req.params.id);
         // console.log()
+        getData.history = [];
         res.status(200).json({
             status : 'success',
             data : getData
