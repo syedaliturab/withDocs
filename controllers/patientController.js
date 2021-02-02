@@ -288,6 +288,7 @@ exports.createSymptoms = catchAsynsc(
 exports.getSymptoms = catchAsynsc(
     async(req, res, next) => {
         const getData = await symptoms.findById(req.params.id);
+        // console.log()
         res.status(200).json({
             status : 'success',
             data : getData
