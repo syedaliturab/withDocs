@@ -50,7 +50,7 @@ exports.doctorprofile = catchAsynsc(
         let obj = {
             clinicDetails : clinicArray
         }
-        result.push(doctorInfo[0], obj, feedbackInfo[0])
+        result.push(doctorInfo[0], obj, feedbackInfo)
         res.status(200).jsonp({
             status : 'success',
             data : result
