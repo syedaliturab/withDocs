@@ -88,6 +88,8 @@ router.get('/trendingissues/',personalizationController.trendingIssues);
 router.get('/trendingspecialities/',personalizationController.trendingSpecialities);
 
 router.post('/cities/',personalizationController.citiesSearch);
+router.post('/issuesclinicsdoctors/',personalizationController.issuesClinicsDoctorsSearch);
+
 router.post('/topcities/',personalizationController.createTopCities);
 router.post('/othercities/',personalizationController.createOtherCities);
 router.post('/toplocalities/',personalizationController.createTopLocalities);
