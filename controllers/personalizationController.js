@@ -1,6 +1,8 @@
 const catchAsynsc = require('./../utils/catchAsync');
 const {primarySpeciality,subSpeciality,clinicServices,clinicIssues} = require('./../models/specialitiesModel.js');
 const {topCities,otherCities, toplocalities, otherlocalities} = require('./../models/citiesModel.js');
+const docUser = require('./../models/doctorModel.js');
+const clinics = require('./../models/clinicModel.js');
 
 exports.citiesSearch = catchAsynsc(
     async (req, res, next) => {
@@ -13,6 +15,23 @@ exports.citiesSearch = catchAsynsc(
             data: {
                 topcities,
                 othercities
+            }
+        });
+        
+});
+
+exports.issuesClinicsDoctorsSearch = catchAsynsc(
+    async (req, res, next) => {
+    
+        const doctors = await docUser.find({ name: { $regex: req.body.keyword, $options: 'i' }},{ primarySpeciality: 1, _id: 0 });
+        const multiClinics = await clinics.find({ clinicOne: {clinicName: { $regex: req.body.keyword, $options: 'i' }}});
+        const issues = await clinicIssues.find({ clinicIssues: { $regex: req.body.keyword, $options: 'i' }},{ clinicIssues: 1, _id: 0 });
+        res.status(200).json({
+            status: 'success',
+            data: {
+                doctors,
+                multiClinics,
+                issues
             }
         });
         
