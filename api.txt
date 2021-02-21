@@ -449,3 +449,84 @@ post::
 
 1. DATABASE=mongodb+srv://root:<password>@withdoc.6gjl9.mongodb.net/withdocs?retryWrites=true&w=majority
 2. DATABASE=mongodb+srv://root:<password>@withdoc.dru27.mongodb.net/Withdoc?retryWrites=true&w=majority
+
+
+http://localhost:3000/api/v11/user/doctor
+
+Patch::
+
+{
+    "id": "5fb75bc37e9cbb002464cc16",
+    "workingHours": {
+        "sunday": {
+            "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }  
+        },
+        "monday": {
+            "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }  
+        },
+        "tuesday": {
+            "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }    
+        },
+        "wednesday": {
+             "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }  
+        },
+        "thursday": {
+             "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }    
+        },
+        "friday": {
+            "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }   
+        },
+        "saturday": {
+            "morning": {
+                "slot": "09:00-11:30",
+                "clinicName": "xyz"
+            },
+            "evening": {
+                "slot": "14:00-17:30",
+                "clinicName": "abc"
+            }  
+        }
+    }
+}

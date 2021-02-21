@@ -117,6 +117,8 @@ router
   .post(appointmentController.bookAppointment)
   .put(appointmentController.fatchAppointment);
 
+router.post('/appointmentworkinghours',appointmentController.getWorkingHoursByDoctorId);
+
 router
   .route('/search/')
   .get(userController.getUser);

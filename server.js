@@ -25,11 +25,11 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => {
-    console.log('db connected');
+    console.log('Database is connected');
   });
 
 const server = app.listen(process.env.PORT || 3000, () => {
-  console.log('listening' + process.env.PORT);
+  console.log('Server is listening at ' + process.env.PORT);
 });
 
 process.on('unhandledRejection', err => {
