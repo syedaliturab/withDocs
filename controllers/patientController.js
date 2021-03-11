@@ -6,51 +6,7 @@ const { compare } = require('bcryptjs');
 const sendEmail = require('./../utils/email');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel.js');
-// const path = require('path');
-// const { getegid } = require('process');
-// const { compileFunction } = require('vm');
-// const aws = require( 'aws-sdk' );
-// const multerS3 = require( 'multer-s3' );
-// const s3Storage = require('multer-sharp-s3');
 
-// const s3 = new aws.S3({
-//     accessKeyId: 'AKIAXB444AWMQKVH5ZG3',
-//     secretAccessKey: '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',
-//     Bucket: 'nimaserver'
-// });
-
-// const uploadImage = multer({
-//      storage: s3Storage({
-//         s3,
-//         Bucket: 'nimaserver',
-//         ACL: 'public-read',
-//         Key: function (req, file, cb) {
-//          cb( null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
-//         },
-//         resize: {
-//             width: 65,
-//             height: 65
-//           },
-//           max: true
-//        }),
-//      limits:{ fileSize: 5000000 }, // In bytes: 2000000 bytes = 2 MB
-//      fileFilter: function( req, file, cb ){
-//       checkFileType( file, cb );
-//      } 
-//     }).single('image');
-
-// function checkFileType( file, cb ){
-
-//     const filetypes = /jpeg|jpg|png/;
-    
-//     const extname = filetypes.test( path.extname( file.originalname ).toLowerCase());
-    
-//     const mimetype = filetypes.test( file.mimetype );if( mimetype && extname ){
-//     return cb( null, true );
-//     } else {
-//     cb( 'Error: file type error!' );
-//     }
-// }
 
 //to get Patient
 exports.getAllPatientProfile = catchAsynsc(
