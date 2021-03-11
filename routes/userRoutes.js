@@ -12,6 +12,8 @@ const personalizationController = require('./../controllers/personalizationContr
 const specialitiesController = require('./../controllers/specialitiesController');
 const doctorcardsearchController = require('./../controllers/doctorcardsearchController');
 const searchController = require('./../controllers/searchController');
+const haveController = require('../controllers/patientHaveController');
+const patientSettings = require('../controllers/settingController');
 
 const router = express.Router();
 
@@ -180,5 +182,17 @@ router
 router.get('/patient/verify/:id', patientController.verifyEmail);
 router.get('/patient/activate/:id', patientController.emailActivate);
 router.get('/patient/moodHistory/:id', patientController.getmoodsHistory);
+
+router.post('/createpain', haveController.createPain);
+router.post('/createallergies', haveController.createAllergies);
+router.post('/createinjuries', patientController.createInjuries);
+router.post('createsurgeries', haveController.createSurgeries);
+router.post('createcurrentmedications', haveController.createCurrentMedications);
+router.post('createpastmedications', haveController.createPastMedications);
+router.post('/createchronicdiseases', haveController.createChronicDiseases);
+router.post('/createheridatorydiseases', haveController.createHeridatoryDiseases);
+
+router.post('/createpatientsettings', patientSettings.createPatientSetting);
+router.get('/getpatientsettings', patientSettings.getPatientSetting);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 mongoose = require('mongoose');
 const validator = require('validator');
 const {moods, symptoms} = require('../models/moodsAndSymptomsModel');
+const patientSetting = require('../models/patientSettingModel');
 
 const patientSchema = mongoose.Schema({
     _id:{
@@ -14,6 +15,7 @@ const patientSchema = mongoose.Schema({
     age : {
         type : Number
     },
+    image: String,
     relatives :[{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'patientRelative'
@@ -73,6 +75,9 @@ const patientSchema = mongoose.Schema({
             message: 'gender is either male, female or other'
         }
     },
+    weight : String,
+    height : String,
+    bmi : String,
     pain: {
         type : String
     },
@@ -99,6 +104,9 @@ const patientSchema = mongoose.Schema({
     heridatoryDiseases : [{
         type : String
     }],
+    brush : String,
+    skinType : String,
+    hairType : String,
     drinking : String,
     smoking : String,
     chewingTobako : String,
@@ -111,6 +119,10 @@ const patientSchema = mongoose.Schema({
     symptoms : {
         type : mongoose.Schema.Types.ObjectId,
         ref: 'symptoms'
+    },
+    settings : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'patientSetting'
     }
 });
 
@@ -132,6 +144,7 @@ const patientRelativeSchema = new mongoose.Schema({
     age: {
         type : Number
     },
+    image : String,
     contactNo : {
         type :Number
     },

@@ -6,6 +6,51 @@ const { compare } = require('bcryptjs');
 const sendEmail = require('./../utils/email');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel.js');
+// const path = require('path');
+// const { getegid } = require('process');
+// const { compileFunction } = require('vm');
+// const aws = require( 'aws-sdk' );
+// const multerS3 = require( 'multer-s3' );
+// const s3Storage = require('multer-sharp-s3');
+
+// const s3 = new aws.S3({
+//     accessKeyId: 'AKIAXB444AWMQKVH5ZG3',
+//     secretAccessKey: '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',
+//     Bucket: 'nimaserver'
+// });
+
+// const uploadImage = multer({
+//      storage: s3Storage({
+//         s3,
+//         Bucket: 'nimaserver',
+//         ACL: 'public-read',
+//         Key: function (req, file, cb) {
+//          cb( null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+//         },
+//         resize: {
+//             width: 65,
+//             height: 65
+//           },
+//           max: true
+//        }),
+//      limits:{ fileSize: 5000000 }, // In bytes: 2000000 bytes = 2 MB
+//      fileFilter: function( req, file, cb ){
+//       checkFileType( file, cb );
+//      } 
+//     }).single('image');
+
+// function checkFileType( file, cb ){
+
+//     const filetypes = /jpeg|jpg|png/;
+    
+//     const extname = filetypes.test( path.extname( file.originalname ).toLowerCase());
+    
+//     const mimetype = filetypes.test( file.mimetype );if( mimetype && extname ){
+//     return cb( null, true );
+//     } else {
+//     cb( 'Error: file type error!' );
+//     }
+// }
 
 //to get Patient
 exports.getAllPatientProfile = catchAsynsc(
@@ -46,6 +91,34 @@ exports.createPatientProfile = catchAsynsc(
         });
     }
 );
+
+// //to create Patient profile
+// exports.createPatientProfile = catchAsynsc(
+//     async (req, res, next) => {
+//         uploadImage( req, res, async ( error ) => {
+//             console.log(req.file)
+//             if( error ){
+//                 console.log( 'errors', error );
+//                 res.json( { error: error } );
+//             } else {
+//                 // If File not found
+//                 if( req.file === undefined ){
+//                 console.log( 'Error: No File Selected!' );
+//                 res.json( 'Error: No File Selected' );
+//             } else {
+//                 req.body.image = req.file.location;
+//                 const newpatient = await patient.create(req.body);
+//                 newpatient.password = undefined;
+//                 newpatient.emailVerificationStatus = false;
+//                 res.status(200).json({
+//                     status: 'success',
+//                     data: newpatient
+//                 });
+//             }
+//             }
+//         });
+//     }
+// );
 
 //to update Patient details
 exports.updatePatientProfile = catchAsynsc(
@@ -175,6 +248,36 @@ exports.createPatientRelativeProfile = catchAsynsc(
         
     }
 );
+
+// exports.createPatientRelativeProfile = catchAsynsc(
+//     async (req, res, next) => {uploadImage( req, res, async ( error ) => {
+//         console.log(req.file)
+//         if( error ){
+//             console.log( 'errors', error );
+//             res.json( { error: error } );
+//         } else {
+//             // If File not found
+//             if( req.file === undefined ){
+//             console.log( 'Error: No File Selected!' );
+//             res.json( 'Error: No File Selected' );
+//         } else {
+//             req.body.image = req.file.location;
+//             const getPatient = await patient.findById(req.params.id);
+//             const createPatientRelative = await patientRelative.create(req.body);
+
+//             await getPatient.relatives.push(createPatientRelative);
+
+//             await getPatient.save();
+//             res.status(200).json({
+//                 status : 'success',
+//                 data : getPatient
+//             })
+//         }
+//     }
+// });
+        
+//     }
+// );
 
 exports.getPatientRelativeProfile = catchAsynsc(
     async(req, res, next) =>{
