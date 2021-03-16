@@ -33,6 +33,8 @@ const singleClinic = {
           default : 0
         }
     }],
+    latitude : Number,
+    longitude : Number,
     consultationFees: Number,
     holidays: [String],
     avgPatientsPerDay: Number,

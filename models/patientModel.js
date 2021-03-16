@@ -102,10 +102,13 @@ const patientSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'moods'
     },
+    latitude : Number,
+    longitude : Number,
     symptoms : {
         type : mongoose.Schema.Types.ObjectId,
         ref: 'symptoms'
     }
+    
 });
 
 const patientRelativeSchema = new mongoose.Schema({
@@ -132,6 +135,8 @@ const patientRelativeSchema = new mongoose.Schema({
     status : {
         type : String
     },
+    latitude : Number,
+    longitude : Number,
     occupation : {
         type : String
     }
