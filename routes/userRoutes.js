@@ -14,6 +14,7 @@ const doctorcardsearchController = require('./../controllers/doctorcardsearchCon
 const searchController = require('./../controllers/searchController');
 const haveController = require('../controllers/patientHaveController');
 const patientSettings = require('../controllers/settingController');
+const patientMoodsAndSymptoms = require('../controllers/moodsAndSymptomsController');
 
 const router = express.Router();
 
@@ -165,34 +166,43 @@ router
 
 router.post('/newpassword', authController.emailToUser);
 
-router
-  .route('/patient/:id/moods/')
-  .get(patientController.getmoods)
-  .post(patientController.createmoods)
-  .patch(patientController.updatemoods);
+router.get('/patient/:id/moods/', patientMoodsAndSymptoms.getmoods);
+router.post('/patient/moods/:id', patientMoodsAndSymptoms.createmoods);
+router.patch('/patient/moods/:id', patientMoodsAndSymptoms.updatemoods);
+router.get('/patient/moodAllHistory/:id', patientMoodsAndSymptoms.getAllMoodHistory);
+router.get('/patient/moodHistory/:id', patientMoodsAndSymptoms.getMoodsHistory);
 
-router.get('/patient/:id/moodHistory', patientController.getAllMoodHistory);
-
-router
-  .route('/patient/:id/symptoms')
-  .get(patientController.getSymptoms)
-  .post(patientController.createSymptoms)
-  .patch(patientController.updateSymptoms)
+router.get('/patient/:id/symptoms', patientMoodsAndSymptoms.getSymptoms);
+router.post('/patient/symptoms/:id', patientMoodsAndSymptoms.createSymptoms);
+router.patch('/patient/symptoms/:id', patientMoodsAndSymptoms.updateSymptoms);
+router.get('/patient/symptomsAllHistory/:id', patientMoodsAndSymptoms.getAllSymptomsHistory);
+router.get('/patient/symptomsHistory/:id', patientMoodsAndSymptoms.getSymptomsHistory);
 
 router.get('/patient/verify/:id', patientController.verifyEmail);
 router.get('/patient/activate/:id', patientController.emailActivate);
-router.get('/patient/moodHistory/:id', patientController.getmoodsHistory);
 
 router.post('/createpain', haveController.createPain);
 router.post('/createallergies', haveController.createAllergies);
-router.post('/createinjuries', patientController.createInjuries);
-router.post('createsurgeries', haveController.createSurgeries);
-router.post('createcurrentmedications', haveController.createCurrentMedications);
-router.post('createpastmedications', haveController.createPastMedications);
+router.post('/createinjuries', haveController.createInjuries);
+router.post('/createsurgeries', haveController.createSurgeries);
+router.post('/createcurrentmedications', haveController.createCurrentMedications);
+router.post('/createpastmedications', haveController.createPastMedications);
 router.post('/createchronicdiseases', haveController.createChronicDiseases);
 router.post('/createheridatorydiseases', haveController.createHeridatoryDiseases);
 
-router.post('/createpatientsettings', patientSettings.createPatientSetting);
-router.get('/getpatientsettings', patientSettings.getPatientSetting);
+router
+  .route('/patientsettings')
+  .post(patientSettings.createPatientSetting)
+  .get(patientSettings.getPatientSetting)
+  .patch(patientSettings.updatePatientSettings);
+
+router
+  .route('/patientsettingshistory')
+  .post(patientSettings.createSettingsHistory)
+  .get(patientSettings.getSettingsHistory)
+  .patch(patientSettings.updateSettingsHistory);
+
+router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
+
 
 module.exports = router;
