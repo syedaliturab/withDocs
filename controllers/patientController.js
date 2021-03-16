@@ -7,6 +7,7 @@ const sendEmail = require('./../utils/email');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel.js');
 
+
 //to get Patient
 exports.getAllPatientProfile = catchAsynsc(
     async (req, res, next) => {
@@ -46,6 +47,34 @@ exports.createPatientProfile = catchAsynsc(
         });
     }
 );
+
+// //to create Patient profile
+// exports.createPatientProfile = catchAsynsc(
+//     async (req, res, next) => {
+//         uploadImage( req, res, async ( error ) => {
+//             console.log(req.file)
+//             if( error ){
+//                 console.log( 'errors', error );
+//                 res.json( { error: error } );
+//             } else {
+//                 // If File not found
+//                 if( req.file === undefined ){
+//                 console.log( 'Error: No File Selected!' );
+//                 res.json( 'Error: No File Selected' );
+//             } else {
+//                 req.body.image = req.file.location;
+//                 const newpatient = await patient.create(req.body);
+//                 newpatient.password = undefined;
+//                 newpatient.emailVerificationStatus = false;
+//                 res.status(200).json({
+//                     status: 'success',
+//                     data: newpatient
+//                 });
+//             }
+//             }
+//         });
+//     }
+// );
 
 //to update Patient details
 exports.updatePatientProfile = catchAsynsc(
@@ -175,6 +204,36 @@ exports.createPatientRelativeProfile = catchAsynsc(
         
     }
 );
+
+// exports.createPatientRelativeProfile = catchAsynsc(
+//     async (req, res, next) => {uploadImage( req, res, async ( error ) => {
+//         console.log(req.file)
+//         if( error ){
+//             console.log( 'errors', error );
+//             res.json( { error: error } );
+//         } else {
+//             // If File not found
+//             if( req.file === undefined ){
+//             console.log( 'Error: No File Selected!' );
+//             res.json( 'Error: No File Selected' );
+//         } else {
+//             req.body.image = req.file.location;
+//             const getPatient = await patient.findById(req.params.id);
+//             const createPatientRelative = await patientRelative.create(req.body);
+
+//             await getPatient.relatives.push(createPatientRelative);
+
+//             await getPatient.save();
+//             res.status(200).json({
+//                 status : 'success',
+//                 data : getPatient
+//             })
+//         }
+//     }
+// });
+        
+//     }
+// );
 
 exports.getPatientRelativeProfile = catchAsynsc(
     async(req, res, next) =>{

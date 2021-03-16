@@ -26,249 +26,6 @@ const searchIndex = (date,appointment) => {
     return -1;
 }
 
-
-const addMinutes = (time, minutes) => {
-    var date = new Date(new Date('01/01/2021 ' + time).getTime() + minutes * 60000);
-    var tempTime = ((date.getHours().toString().length == 1) ? '0' + date.getHours() : date.getHours()) + ':' +
-      ((date.getMinutes().toString().length == 1) ? '0' + date.getMinutes() : date.getMinutes());
-    return tempTime;
-}
-
-
-//to get working hours by doctorId
-exports.getWorkingHoursByDoctorId = catchAsynsc(
-    async (req, res, next) => {
-
-        const doctor = await doctors.findById(req.body.id);
-     
-        if(doctor && doctor.workingHours != null){
-            var data = []
-            let working = doctor.workingHours;
-
-            if(working.sunday){
-                morning = working.sunday.morning.slot;
-                evening = working.sunday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ sunday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.sunday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.sunday.evening.clinicName
-                    }
-                }})
-            }
-
-            if(working.monday){
-                morning = working.monday.morning.slot;
-                evening = working.monday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ manday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.monday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.monday.evening.clinicName
-                    }
-                }})
-            }
-
-            if(working.tuesday){
-                morning = working.tuesday.morning.slot;
-                evening = working.tuesday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ tuesday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.tuesday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.tuesday.evening.clinicName
-                    }
-                }})
-            }
-
-            if(working.wednesday){
-                morning = working.wednesday.morning.slot;
-                evening = working.wednesday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ wednesday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.wednesday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.wednesday.evening.clinicName
-                    }
-                }})
-            }
-            if(working.thursday){
-                morning = working.thursday.morning.slot;
-                evening = working.thursday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ thursday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.thursday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.thursday.evening.clinicName
-                    }
-                }})
-            }
-
-            if(working.friday){
-                morning = working.friday.morning.slot;
-                evening = working.friday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ friday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.friday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.friday.evening.clinicName
-                    }
-                }})
-            }
-
-            if(working.saturday){
-                morning = working.saturday.morning.slot;
-                evening = working.saturday.evening.slot;
-                
-                let interval = 30
-                let timeslots = morning.split('-');
-                let morningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    morningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-
-                timeslots = evening.split('-');
-                let eveningSlot = []
-                while (timeslots[0] != timeslots[1]) {
-                    eveningSlot.push(timeslots[0]);
-                    timeslots[0] = addMinutes(timeslots[0], interval);
-                }
-                data.push({ saturday: {
-                    morning: {
-                        slot: morningSlot,
-                        clinicName: working.saturday.morning.clinicName
-                    },
-                    evening: {
-                        slot: eveningSlot,
-                        clinicName: working.saturday.evening.clinicName
-                    }
-                }})
-            }
-
-            res.status(200).json({
-                status: 'success',
-                data: data
-            });
-
-        } else {
-            res.status(400).json({
-                status: 'fail',
-                message: "doctor hasn't set working hours yet."
-            });
-        }
-        
-    }
-);
-
 //to get All appointments by doctorId
 exports.getAppointmentsByDoctorId = catchAsynsc(
     async (req, res, next) => {
@@ -301,36 +58,6 @@ exports.bookAppointment = catchAsynsc(
             data: appointment
         });
     
-    }
-);
-
-//to book appointment into clinic details
-exports.bookAppointment = catchAsynsc(
-    async (req, res, next) => {
-        
-        const appointment = await appointments.create(req.body);
-        res.status(200).json({
-            status: 'success',
-            data: appointment
-        });
-    
-    }
-);
-
-//to cancel appointment into clinic details
-exports.cancelAppointment = catchAsynsc(
-    async (req, res, next) => {
-        
-        const updateClinic = await appointments.findByIdAndUpdate(
-            req.body.id, req.body,{
-                new: true,
-                runValidators: true
-            }
-        );
-        res.status(200).json({
-            status: 'success',
-            data: updateClinic
-        });
     }
 );
 
@@ -576,6 +303,24 @@ exports.completeClinicTwoAppointment = catchAsynsc(
         res.status(200).json({
             status: 'success',
             data: appointment
+        });
+    }
+);
+
+//to cancel appointment into clinic details
+exports.cancelAppointment = catchAsynsc(
+    async (req, res, next) => {
+        
+        const updateClinic = await appointments.updateOne(
+            {id:req.params.id},
+            req.body,{
+                new: true,
+                runValidators: true
+            }
+        );
+        res.status(200).json({
+            status: 'success',
+            data: updateClinic
         });
     }
 );
