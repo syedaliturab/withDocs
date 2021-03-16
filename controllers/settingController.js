@@ -1,5 +1,5 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const patientSetting = require('../models/patientSettingModel');
+const {patientSetting, patientSettingHistory} = require('../models/patientSettingModel');
 const patient  = require('../models/patientModel');
 
 exports.createPatientSetting = catchAsynsc(
@@ -32,3 +32,81 @@ exports.getPatientSetting = catchAsynsc(
         });
     }
 );
+
+exports.updatePatientSettings = catchAsynsc(
+    async(req, res, next) => {
+        const updateData = await patientSetting.findByIdAndUpdate(
+            req.body.id,req.body,{
+                new: true,
+                runValidators: true
+            }
+        );
+
+        res.status(200).json({
+            status : 'success',
+            data : updateData
+        })
+    }
+)
+
+exports.createSettingsHistory= catchAsynsc(
+    async(req, res, next) => {
+        const getData = await patientSetting.findById(req.params.id);
+        const createHistory = await patientSettingHistory.create(getData);
+        getData.history.push(createHistory);
+        getData.save();
+        const updateData = await patientSetting.findByIdAndUpdate(
+            req.params.id, req.data, {
+                new : true,
+                runValidators : true
+            }
+        )
+        res.status(200).json({
+            status : 'success',
+            data : updateData
+        })
+    }
+);
+
+exports.getSettingsHistory = catchAsynsc(
+    async(req, res, next) => {
+        const getData = await patientSettingHistory.findById(req.params.id);
+        res.status(200).json({
+            status : 'success',
+            data : getData
+        })
+    }
+);
+
+exports.updateSettingsHistory = catchAsynsc(
+    async(req, res, next) => {
+        const updateData = await patientSettingHistory.findByIdAndUpdate(
+            req.body.id,req.body,{
+                new: true,
+                runValidators: true
+            }
+        );
+
+        res.status(200).json({
+            status : 'success',
+            data : updateData
+        })
+    }
+)
+
+exports.getAllSettingsHistory = catchAsynsc(
+    async(req, res, next) => {
+        const getsettings = await patientSetting.findById(req.params.id);
+
+        var history = [];
+
+        for(var element of getsettings.history){
+            const getHistorySettings = await patientSettingHistory.findById(element.id);
+            history.push(getHistorySettings);
+        }
+        res.status(200).json({
+            status : 'success',
+            data : history
+        });
+    }
+)

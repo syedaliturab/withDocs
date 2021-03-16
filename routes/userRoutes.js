@@ -172,7 +172,7 @@ router.patch('/patient/moods/:id', patientMoodsAndSymptoms.updatemoods);
 router.get('/patient/moodAllHistory/:id', patientMoodsAndSymptoms.getAllMoodHistory);
 router.get('/patient/moodHistory/:id', patientMoodsAndSymptoms.getMoodsHistory);
 
-router.get('/patient/:id/symptoms', patientController.getSymptoms);
+router.get('/patient/:id/symptoms', patientMoodsAndSymptoms.getSymptoms);
 router.post('/patient/symptoms/:id', patientMoodsAndSymptoms.createSymptoms);
 router.patch('/patient/symptoms/:id', patientMoodsAndSymptoms.updateSymptoms);
 router.get('/patient/symptomsAllHistory/:id', patientMoodsAndSymptoms.getAllSymptomsHistory);
@@ -183,14 +183,26 @@ router.get('/patient/activate/:id', patientController.emailActivate);
 
 router.post('/createpain', haveController.createPain);
 router.post('/createallergies', haveController.createAllergies);
-router.post('/createinjuries', patientController.createInjuries);
+router.post('/createinjuries', haveController.createInjuries);
 router.post('/createsurgeries', haveController.createSurgeries);
 router.post('/createcurrentmedications', haveController.createCurrentMedications);
 router.post('/createpastmedications', haveController.createPastMedications);
 router.post('/createchronicdiseases', haveController.createChronicDiseases);
 router.post('/createheridatorydiseases', haveController.createHeridatoryDiseases);
 
-router.post('/createpatientsettings', patientSettings.createPatientSetting);
-router.get('/getpatientsettings', patientSettings.getPatientSetting);
+router
+  .route('/patientsettings')
+  .post(patientSettings.createPatientSetting)
+  .get(patientSettings.getPatientSetting)
+  .patch(patientSettings.updatePatientSettings);
+
+router
+  .route('/patientsettingshistory')
+  .post(patientSettings.createSettingsHistory)
+  .get(patientSettings.getSettingsHistory)
+  .patch(patientSettings.updateSettingsHistory);
+
+router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
+
 
 module.exports = router;

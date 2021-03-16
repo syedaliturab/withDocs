@@ -141,7 +141,7 @@ exports.getAllSymptomsHistory = catchAsynsc(
         var history = [];
 
         for(var element of getSymptoms.history){
-            const getHistorySymptoms = await symptomsHistory.findById(history.id);
+            const getHistorySymptoms = await symptomsHistory.findById(element.id);
             history.push(getHistorySymptoms);
         }
         res.status(200).json({
