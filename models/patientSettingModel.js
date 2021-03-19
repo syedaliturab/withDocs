@@ -101,9 +101,12 @@ const patientSettingHistorySchema = new mongoose.Schema({
                 periodEnd : Boolean,
                 reminderMessage : String
             },
-            // ovulation : {
-
-            // }
+            ovulation : {
+                periodAlert : Boolean,
+                remindMeAt : Date,
+                remindMeBefore : Number,
+                reminderMessage : String
+            }
         },
         pills : {
             // contraception : {

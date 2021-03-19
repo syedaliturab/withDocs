@@ -6,6 +6,17 @@ exports.createPatientSetting = catchAsynsc(
     async (req, res, next) => {
 
         const patientSettingInfo = await patientSetting.create(req.body);
+        var sanitaryPad = patientSettingInfo.reminder.before.sanitaryPads;
+        var periodalert = patientSettingInfo.reminder.before.periodAlert;
+        if(sanitaryPad.pads == true || sanitaryPad.tampons == true || sanitaryPad.cloths == true)
+        {
+            sanitaryPad.sanitaryPads = true
+        }
+        // if(periodalert.remindMeAt == true || periodalert.tampons == true || periodalert.cloths == true)
+        // {
+        //     periodalert.sanitaryPads = true
+        // }
+
         res.status(200).json({
             status: 'success',
             data: patientSettingInfo
@@ -35,6 +46,12 @@ exports.getPatientSetting = catchAsynsc(
 
 exports.updatePatientSettings = catchAsynsc(
     async(req, res, next) => {
+        var sanitaryPad = req.body.reminder.before.sanitaryPads;
+        var periodalert = req.body.reminder.before.periodAlert;
+        if(sanitaryPad.pads == true || sanitaryPad.tampons == true || sanitaryPad.cloths == true)
+        {
+            sanitaryPad.sanitaryPads = true
+        }
         const updateData = await patientSetting.findByIdAndUpdate(
             req.body.id,req.body,{
                 new: true,
