@@ -191,15 +191,15 @@ exports.emailActivate = catchAsynsc(
 
 exports.createPatientRelativeProfile = catchAsynsc(
     async (req, res, next) => {
-        const getPatient = await patient.findById(req.params.id);
+        // const getPatient = await patient.findById(req.params.id);
         const createPatientRelative = await patientRelative.create(req.body);
 
-        await getPatient.relatives.push(createPatientRelative);
+        // await getPatient.relatives.push(createPatientRelative);
 
-        await getPatient.save();
+        // await getPatient.save();
         res.status(200).json({
             status : 'success',
-            data : getPatient
+            data : createPatientRelative
         })
         
     }
