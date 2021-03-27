@@ -48,6 +48,10 @@ router
   .route('/workinghours/')
   .get(clinicController.checkClinic);
   
+
+router.get('/notification/',notificationController.getAppointments);
+
+  
 router
   .route('/patient')
   .get(patientController.getAllPatientProfile)
