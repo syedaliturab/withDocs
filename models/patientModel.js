@@ -138,24 +138,10 @@ const patientRelativeSchema = new mongoose.Schema({
     relationship : {
         type : String
     },
-    name : {
-        type : String
-    },
-    dateOfBirth : {
-        type : String
-    },
-    age: {
-        type : Number
-    },
-    image : String,
-    contactNo : {
-        type :Number
-    },
+    
     status : {
         type : String
     },
-    latitude : Number,
-    longitude : Number,
     occupation : {
         type : String
     }
