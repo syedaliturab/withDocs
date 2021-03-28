@@ -3,8 +3,9 @@ const morgan = require('morgan');
 const userRoute = require('./routes/userRoutes')
 const errorController = require('./controllers/errorController')
 const ErrorUtil = require('./utils/ErrorUtil')
-
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 //middleware
 

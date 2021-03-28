@@ -63,7 +63,7 @@ router
   .patch(patientController.updatePatientProfile);
 
 router
-  .route('/patient/:id/relative')
+  .route('/patient/relative')
   .post(patientController.createPatientRelativeProfile )
 
 router

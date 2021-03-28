@@ -130,7 +130,12 @@ const patientSchema = mongoose.Schema({
 });
 
 const patientRelativeSchema = new mongoose.Schema({
-    relativeId : {
+    relativeId: {
+        type: String,
+	    unique: true,
+        requried: [true, 'Please provide valid id']
+    },
+    patientId : {
         type: String,
 	    unique: true,
         requried: [true, 'Please provide valid id']
@@ -146,6 +151,36 @@ const patientRelativeSchema = new mongoose.Schema({
         type : String
     }
 });
+
+// const patientRelativeSchema = new mongoose.Schema({
+//     relativeId : {
+//         type: String,
+// 	    unique: true,
+//         requried: [true, 'Please provide valid id']
+//     },
+//     relationship : {
+//         type : String
+//     },
+//     name : {
+//         type : String
+//     },
+//     dateOfBirth : {
+//         type : String
+//     },
+//     age: {
+//         type : Number
+//     },
+//     image : String,
+//     contactNo : {
+//         type :Number
+//     },
+//     status : {
+//         type : String
+//     },
+//     occupation : {
+//         type : String
+//     }
+// });
 
 const patientRelative = mongoose.model('patientRelative', patientRelativeSchema);
 const patient = mongoose.model('Patient',patientSchema);
