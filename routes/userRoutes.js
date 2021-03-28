@@ -15,6 +15,7 @@ const searchController = require('./../controllers/searchController');
 const haveController = require('../controllers/patientHaveController');
 const patientSettings = require('../controllers/settingController');
 const patientMoodsAndSymptoms = require('../controllers/moodsAndSymptomsController');
+const notificationController = require('../controllers/notificationController');
 
 const router = express.Router();
 
@@ -46,6 +47,10 @@ router
 router
   .route('/workinghours/')
   .get(clinicController.checkClinic);
+  
+
+router.get('/notification/',notificationController.getAppointments);
+
   
 router
   .route('/patient')
