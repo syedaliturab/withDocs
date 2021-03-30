@@ -1,4 +1,5 @@
 mongoose = require('mongoose');
+const { mongo } = require('mongoose');
 const validator = require('validator');
 const {moods, symptoms} = require('../models/moodsAndSymptomsModel');
 const patientSetting = require('../models/patientSettingModel');
@@ -125,6 +126,10 @@ const patientSchema = mongoose.Schema({
     settings : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'patientSetting'
+    },
+    report : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'patientReport'
     }
     
 });
