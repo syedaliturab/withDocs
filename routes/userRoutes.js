@@ -16,6 +16,8 @@ const haveController = require('../controllers/patientHaveController');
 const patientSettings = require('../controllers/settingController');
 const patientMoodsAndSymptoms = require('../controllers/moodsAndSymptomsController');
 const notificationController = require('../controllers/notificationController');
+const qrController = require('../controllers/qrController');
+
 
 const router = express.Router();
 
@@ -211,5 +213,10 @@ router
 router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
 
 router.get('/notification/',notificationController.getAppointments, notificationController.getFeedback);
+
+router.post('/qrPatientProfile/',qrController.createPatientProfile);
+router.post('/qrPatientRelativeProfile/',qrController.createPatientRelativeProfile);
+
+
 
 module.exports = router;
