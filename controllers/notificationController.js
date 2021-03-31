@@ -7,7 +7,6 @@ const  {patient, patientRelative} = require('./../models/patientModel.js');
 // for patient relative, put the relative's ID as the patientID 
 exports.getAppointments = catchAsynsc(
     async (req, res, next) => {
-        console.log(req.query)
         const patientAppointments = await appointment.find({patientId: req.query.id});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
@@ -25,7 +24,6 @@ exports.getAppointments = catchAsynsc(
 
 exports.getConfirmedAppointments = catchAsynsc(
     async (req, res, next) => {
-        console.log(req.query)
         const patientAppointments = await appointment.find({patientId: req.query.id, status: confirmed});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
@@ -43,7 +41,6 @@ exports.getConfirmedAppointments = catchAsynsc(
 
 exports.getPushedAppointments = catchAsynsc(
     async (req, res, next) => {
-        console.log(req.query)
         const patientAppointments = await appointment.find({patientId: req.query.id, status: pushed});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
@@ -61,7 +58,6 @@ exports.getPushedAppointments = catchAsynsc(
 
 exports.getActiveAppointments = catchAsynsc(
     async (req, res, next) => {
-        console.log(req.query)
         const patientAppointments = await appointment.find({patientId: req.query.id, status: active});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
@@ -79,7 +75,6 @@ exports.getActiveAppointments = catchAsynsc(
 
 exports.getCancelledAppointments = catchAsynsc(
     async (req, res, next) => {
-        console.log(req.query)
         const patientAppointments = await appointment.find({patientId: req.query.id, status: cancelled});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
@@ -100,9 +95,16 @@ exports.getFeedback = catchAsynsc(
     async (req, res, next) => {
       
         const Feedbacks = await Feedback.find({patientId: req.query.id});
+        const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
+        var allFeedbacks=[];
+        allFeedbacks.push(Feedbacks)
+        for(var element of getPatientRelatives){
+            var patientRelativeFeedbacks = await appointment.find({patientId: element.relativeId});
+            allFeedbacks.push(patientRelativeFeedbacks);
+        }
         res.status(200).json({
             status: 'success',
-            data: Feedbacks
+            data: allFeedbacks
             
         })
     }
