@@ -212,7 +212,15 @@ router
 
 router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
 
-router.get('/notification/',notificationController.getAppointments, notificationController.getFeedback, notificationController.getConfirmedAppointments,notificationController.getCancelledAppointments,notificationController.getPushedAppointments,notificationController.getActiveAppointments);
+// Notification Routes
+router.get('/appointmentNotifications/',notificationController.getAppointments);
+router.get('/feedbackNotifications/',notificationController.getFeedback);
+router.get('/confirmedAppointmentNotifications/',notificationController.getConfirmedAppointments);
+router.get('/cancelledAppointmentNotifications/',notificationController.getCancelledAppointments);
+router.get('/pushedAppointmentNotifications/',notificationController.getPushedAppointments);
+router.get('/upcomingAppointmentNotifications/',notificationController.getActiveAppointments);
+
+
 
 router.post('/qrPatientProfile/',qrController.createPatientProfile);
 router.post('/qrPatientRelativeProfile/',qrController.createPatientRelativeProfile);
