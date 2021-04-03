@@ -24,7 +24,7 @@ exports.getAppointments = catchAsynsc(
 
 exports.getConfirmedAppointments = catchAsynsc(
     async (req, res, next) => {
-        const patientAppointments = await appointment.find({patientId: req.query.id, status: confirmed});
+        const patientAppointments = await appointment.find({patientId: req.query.id, status: "confirmed"});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
         totalAppointments.push(patientAppointments)
@@ -41,7 +41,7 @@ exports.getConfirmedAppointments = catchAsynsc(
 
 exports.getPushedAppointments = catchAsynsc(
     async (req, res, next) => {
-        const patientAppointments = await appointment.find({patientId: req.query.id, status: pushed});
+        const patientAppointments = await appointment.find({patientId: req.query.id, status: "pushed"});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
         totalAppointments.push(patientAppointments)
@@ -58,7 +58,7 @@ exports.getPushedAppointments = catchAsynsc(
 
 exports.getActiveAppointments = catchAsynsc(
     async (req, res, next) => {
-        const patientAppointments = await appointment.find({patientId: req.query.id, status: active});
+        const patientAppointments = await appointment.find({patientId: req.query.id, status: "active"});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
         totalAppointments.push(patientAppointments)
@@ -75,7 +75,7 @@ exports.getActiveAppointments = catchAsynsc(
 
 exports.getCancelledAppointments = catchAsynsc(
     async (req, res, next) => {
-        const patientAppointments = await appointment.find({patientId: req.query.id, status: cancelled});
+        const patientAppointments = await appointment.find({patientId: req.query.id, status: "cancelled"});
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         var totalAppointments=[];
         totalAppointments.push(patientAppointments)

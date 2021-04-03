@@ -51,7 +51,15 @@ router
   .get(clinicController.checkClinic);
   
 
-router.get('/notification/',notificationController.getAppointments);
+// router.get('/notification/',notificationController.getAppointments);
+// Notification Routes
+router.get('/appointmentNotifications/',notificationController.getAppointments);
+router.get('/feedbackNotifications/',notificationController.getFeedback);
+router.get('/confirmedAppointmentNotifications/',notificationController.getConfirmedAppointments);
+router.get('/cancelledAppointmentNotifications/',notificationController.getCancelledAppointments);
+router.get('/pushedAppointmentNotifications/',notificationController.getPushedAppointments);
+router.get('/upcomingAppointmentNotifications/',notificationController.getActiveAppointments);
+
 
   
 router
@@ -212,13 +220,6 @@ router
 
 router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
 
-// Notification Routes
-router.get('/appointmentNotifications/',notificationController.getAppointments);
-router.get('/feedbackNotifications/',notificationController.getFeedback);
-router.get('/confirmedAppointmentNotifications/',notificationController.getConfirmedAppointments);
-router.get('/cancelledAppointmentNotifications/',notificationController.getCancelledAppointments);
-router.get('/pushedAppointmentNotifications/',notificationController.getPushedAppointments);
-router.get('/upcomingAppointmentNotifications/',notificationController.getActiveAppointments);
 
 
 
