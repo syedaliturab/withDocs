@@ -30,3 +30,25 @@ exports.createPatientRelativeProfile = catchAsynsc(
         
     }
 );
+
+exports.updatePatientProfile = catchAsynsc(
+    async (req, res, next) => {
+
+        // if (req.body.password || req.body.confirmPassword) {
+        //     return res.json({
+        //         status: 'fail'
+        //     })
+        // }
+        const updatedpatient = await patient.findByIdAndUpdate(
+            req.params.id, req.body, {
+                new: true,
+                runValidators: true
+            }
+        );
+        res.status(200).json({
+            status: 'success',
+            data: updatedpatient
+            
+        })
+    }
+);
