@@ -42,7 +42,11 @@ const appointmentSchema = mongoose.Schema({
         enum: ['active', 'confirmed', 'cancelled','pushed'],
         default: 'active'
     },
-    
+    type: {
+        type: String,
+        enum: ['video', 'audio', 'clinic'],
+        default: 'clinic'
+    }
 });
 
 const appointments = mongoose.model('Appointments',appointmentSchema);

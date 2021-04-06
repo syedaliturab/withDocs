@@ -51,7 +51,6 @@ router
   .get(clinicController.checkClinic);
   
 
-// router.get('/notification/',notificationController.getAppointments);
 // Notification Routes
 router.get('/appointmentNotifications/',notificationController.getAppointments);
 router.get('/feedbackNotifications/',notificationController.getFeedback);
@@ -220,11 +219,10 @@ router
 
 router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
 
+router.post('/qrCreatePatientProfile/',qrController.createPatientProfile);
+router.post('/qrCreatePatientRelativeProfile/',qrController.createPatientRelativeProfile);
+router.patch('/qrVerifiedPhoneNumber/',qrController.updatePatientProfile);
 
-
-
-router.post('/qrPatientProfile/',qrController.createPatientProfile);
-router.post('/qrPatientRelativeProfile/',qrController.createPatientRelativeProfile);
 
 
 
