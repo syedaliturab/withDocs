@@ -23,12 +23,12 @@ const patientSchema = mongoose.Schema({
     }],
     email: {
         type: String,
-        unique: true,
+        // unique: true,
         validate: [validator.isEmail, 'Please provide valid email']
     },
     emailVerificationStatus : {
         type : Boolean,
-        defualt : false
+        default : false
     },
     status : {
         type : String
@@ -110,7 +110,7 @@ const patientSchema = mongoose.Schema({
     hairType : String,
     drinking : String,
     smoking : String,
-    chewingTobako : String,
+    chewingTobacco : String,
     lifestyle : String,
     foodPreference : String,
     moods : {
