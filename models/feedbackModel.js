@@ -32,7 +32,7 @@ const feedbackSchema = new mongoose.Schema({
       type : String,
       required: true
     },
-    date: {
+    feedbackDate: {
       type: Date,
       default: Date.now
     },

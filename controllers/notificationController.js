@@ -277,8 +277,8 @@ exports.getFeedback = catchAsynsc(
         const patientAppointments = await appointment.find({_id: Feedbacks.appointmentId, status: "confirmed"});
         allFeedbacks.push(patientAppointments)
         // For Clinic Details
-        for (const foundInfo of patientAppointments){
-        const clinicInfo = await clinic.findById({_id : foundInfo.clinicId})
+        for (const foundInfo of Feedbacks){
+        const clinicInfo = await clinic.findById({_id : foundInfo.doctorId})
             if(clinicInfo == null)
             {
                 var obj = {}
@@ -300,7 +300,7 @@ exports.getFeedback = catchAsynsc(
             allFeedbacks.push(obj)
         }
             // For Doctor Details
-            for (const foundInfo of patientAppointments){
+            for (const foundInfo of Feedbacks){
             const doctorInfo = await doctors.findById({_id : foundInfo.doctorId})
             if(doctorInfo == null)
             {
@@ -318,7 +318,6 @@ exports.getFeedback = catchAsynsc(
             allFeedbacks.push(obj1)
 
         }
-        allFeedbacks.push(Feedbacks)
         const getPatientRelatives = await patientRelative.find({patientId: req.query.id}) 
         for(var element of getPatientRelatives){
             var patientRelativeFeedbacks = await appointment.find({patientId: element.relativeId});
