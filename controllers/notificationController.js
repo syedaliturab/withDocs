@@ -288,12 +288,12 @@ exports.getFeedback = catchAsynsc(
                     clinicOneName : clinicInfo.clinicOne.clinicName,
                     clinicOneFees : clinicInfo.clinicOne.consultationFees,
                     clinicOneAddress : clinicInfo.clinicOne.address,
-                    clinicOneDescription : clinicInfo.clinicOne.description,
+                    // clinicOneDescription : clinicInfo.clinicOne.description,
 
                     clinicTwoName : clinicInfo.clinicTwo.clinicName,
                     clinicTwoAddress : clinicInfo.clinicTwo.address,
                     clinicTwoFees : clinicInfo.clinicTwo.consultationFees,
-                    clinicTwoDescription : clinicInfo.clinicTwo.description
+                    // clinicTwoDescription : clinicInfo.clinicTwo.description
 
                 }
             }
