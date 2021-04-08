@@ -29,14 +29,19 @@ const appointmentSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    date: {
-        type: String,
+    appointmentDate: {
+        type: Date,
+        requried: true,
+    },
+    bookingDate: {
+        type: Date,
         requried: true,
     },
     slot: {
         type: String,
         requried: true,
     },
+    
     status: {
         type: String,
         enum: ['active', 'confirmed', 'cancelled','pushed'],
@@ -44,8 +49,8 @@ const appointmentSchema = mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['video', 'audio', 'clinic'],
-        default: 'clinic'
+        enum: ['video', 'audio', 'in clinic'],
+        default: 'in clinic'
     }
 });
 

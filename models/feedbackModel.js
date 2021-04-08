@@ -11,6 +11,10 @@ const feedbackSchema = new mongoose.Schema({
       type: String,
       requried: true
     },
+    appointmentId:{
+      type: String,
+      requried: true
+    },
     patientName : {
       type : String,
       required : true
