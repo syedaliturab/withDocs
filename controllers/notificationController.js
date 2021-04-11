@@ -274,8 +274,11 @@ exports.getFeedback = catchAsynsc(
         const Feedbacks = await Feedback.find({patientId: req.query.id});
         allFeedbacks.push(Feedbacks)
         // For Appointment Details
-        const patientAppointments = await appointment.find({_id: Feedbacks.appointmentId, status: "confirmed"});
+        for (const foundInfo of Feedbacks){
+        const patientAppointments = await appointment.find({_id: foundInfo.appointmentId, status: "confirmed"});
         allFeedbacks.push(patientAppointments)
+        }
+        
         // For Clinic Details
         for (const foundInfo of Feedbacks){
         const clinicInfo = await clinic.findById({_id : foundInfo.doctorId})
