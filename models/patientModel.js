@@ -79,6 +79,9 @@ const patientSchema = mongoose.Schema({
     weight : String,
     height : String,
     bmi : String,
+    occupation : {
+        type : String
+    },
     pain: {
         type : String
     },
@@ -105,7 +108,7 @@ const patientSchema = mongoose.Schema({
     heridatoryDiseases : [{
         type : String
     }],
-    brush : String,
+    brushing : String,
     skinType : String,
     hairType : String,
     drinking : String,
