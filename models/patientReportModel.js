@@ -40,7 +40,7 @@ const patientReportModel = new mongoose.Schema({
             default : 0
         }
     },
-    averages : {
+    averages : { //** 
         cycle: {
             type : Number,
             default : 0

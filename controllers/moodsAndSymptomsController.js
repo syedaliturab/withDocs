@@ -11,7 +11,7 @@ exports.createmoods = catchAsynsc(
             const createInfo = await moods.create(req.body);
             getPatient.moods = createInfo;
         }
-        getPatient.save();
+        await getPatient.save();
         res.status(200).json({
             status : 'success',
             data : getPatient
@@ -22,7 +22,7 @@ exports.createmoods = catchAsynsc(
 exports.getmoods = catchAsynsc(
     async(req, res, next) => {
         const getData = await moods.findById(req.params.id);
-        getData.history = [];
+        // getData.history = [];
         res.status(200).json({
             status : 'success',
             data : getData
