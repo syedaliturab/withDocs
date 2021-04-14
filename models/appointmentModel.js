@@ -41,7 +41,10 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         requried: true,
     },
-    
+    clinicAddress: {
+        type: String,
+        requried: true,
+    },
     status: {
         type: String,
         enum: ['active', 'confirmed', 'cancelled','pushed'],
