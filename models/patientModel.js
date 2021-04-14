@@ -116,12 +116,12 @@ const patientSchema = mongoose.Schema({
     chewingTobacco : String,
     lifestyle : String,
     foodPreference : String,
+    latitude : Number,
+    longitude : Number,
     moods : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'moods'
     },
-    latitude : Number,
-    longitude : Number,
     symptoms : {
         type : mongoose.Schema.Types.ObjectId,
         ref: 'symptoms'
@@ -130,47 +130,42 @@ const patientSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'patientSetting'
     },
-    report : {
+    regularAndIrregular : {
         type : mongoose.Schema.Types.ObjectId,
-        ref: 'patientReport'
+        ref : 'regularAndIrregular'
+    },
+    flow : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'flow'
+    },
+    discharge : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'discharge'
+    },
+    intimacyAndPhases : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'intimacyAndPhases'
+    },
+    pregnancyTest : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'pregnancyTest'
+    },
+    ovulationTest : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'ovulationTest'
+    },
+    notes : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'notes'
     }
-    
 });
 
-// const patientRelativeSchema = new mongoose.Schema({
-//     relativeId: {
-//         type: String,
-// 	    unique: true,
-//         requried: [true, 'Please provide valid id']
-//     },
-//     patientId : {
-//         type: String,
-// 	    unique: true,
-//         requried: [true, 'Please provide valid id']
-//     },
-//     relationship : {
-//         type : String
-//     },
-    
-//     status : {
-//         type : String
-//     },
-//     occupation : {
-//         type : String
-//     }
-// });
-
 const patientRelativeSchema = new mongoose.Schema({
-    relativeId : {
+    patientId : {
         type: String,
-	    unique: true,
+        unique: true,
         requried: [true, 'Please provide valid id']
     },
-    patientId : {
-                type: String,
-        	    unique: true,
-                requried: [true, 'Please provide valid id']
-            },
     relationship : {
         type : String
     },

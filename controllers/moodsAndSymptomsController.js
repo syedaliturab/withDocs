@@ -32,16 +32,19 @@ exports.getmoods = catchAsynsc(
 
 exports.updatemoods= catchAsynsc(
     async(req, res, next) => {
-        const getData = await moods.findById(req.params.id);
-        const createHistory = await moodsHistory.create(getData);
-        getData.history.push(createHistory);
-        getData.save();
+        
         const updateData = await moods.findByIdAndUpdate(
-            req.params.id, req.data, {
+            req.body.id, req.body, {
                 new : true,
                 runValidators : true
             }
-        )
+        );
+        
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.moods = updateData;
+        await getPatientInfo.save();
+        
         res.status(200).json({
             status : 'success',
             data : updateData
@@ -49,32 +52,29 @@ exports.updatemoods= catchAsynsc(
     }
 );
 
-exports.getMoodsHistory = catchAsynsc(
+exports.deleteMoods = catchAsynsc(
     async(req, res, next) => {
-        const getData = await moodsHistory.findById(req.params.id);
+        const deleteInfo = await moods.findByIdAndRemove(req.body.id);
+        
         res.status(200).json({
             status : 'success',
-            data : getData
+            data: deleteInfo
         })
     }
 );
 
-exports.getAllMoodHistory = catchAsynsc(
+exports.getAllMoods = catchAsynsc(
     async(req, res, next) => {
-        const getmoods = await moods.findById(req.params.id);
-
-        var history = [];
-
-        for(var element of getmoods.history){
-            const getHistoryMood = await moodsHistory.findById(history.id);
-            history.push(getHistoryMood);
-        }
+        const getInfo = await moods.find({patientId: req.params.id});
+        
         res.status(200).json({
             status : 'success',
-            data : history
-        });
+            data: getInfo
+        })
     }
-)
+);
+
+// --------------------------- Symptoms --------------------------------
 
 exports.createSymptoms = catchAsynsc(
     async(req, res, next) =>{
@@ -84,7 +84,7 @@ exports.createSymptoms = catchAsynsc(
             const createInfo = await symptoms.create(req.body);
             getPatient.symptoms = createInfo;
         }
-        getPatient.save();
+        await getPatient.save();
         res.status(200).json({
             status : 'success',
             data : getPatient
@@ -106,17 +106,17 @@ exports.getSymptoms = catchAsynsc(
 
 exports.updateSymptoms= catchAsynsc(
     async(req, res, next) => {
-        const getData = await symptoms.findById(req.params.id);
-        const createHistory = await symptomsHistory.create(getData);
-        getData.history.push(createHistory);
-        getData.save();
         const updateData = await symptoms.findByIdAndUpdate(
-            req.params.id, req.data, {
+            req.body.id, req.body, {
                 new : true,
                 runValidators : true
             }
-        )
-        console.log(getData);
+        );
+        
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.symptoms = updateData;
+        await getPatientInfo.save();
         res.status(200).json({
             status : 'success',
             data : updateData
@@ -124,29 +124,24 @@ exports.updateSymptoms= catchAsynsc(
     }
 );
 
-exports.getSymptomsHistory = catchAsynsc(
+exports.deleteSymptoms = catchAsynsc(
     async(req, res, next) => {
-        const getData = await symptomsHistory.findById(req.params.id);
+        const deleteInfo = await symptoms.findByIdAndRemove(req.body.id);
+        
         res.status(200).json({
             status : 'success',
-            data : getData
+            data: deleteInfo
         })
     }
 );
 
-exports.getAllSymptomsHistory = catchAsynsc(
+exports.getAllSymptoms = catchAsynsc(
     async(req, res, next) => {
-        const getSymptoms = await symptoms.findById(req.params.id);
-
-        var history = [];
-
-        for(var element of getSymptoms.history){
-            const getHistorySymptoms = await symptomsHistory.findById(element.id);
-            history.push(getHistorySymptoms);
-        }
+        const getInfo = await symptoms.find({patientId: req.params.id});
+        
         res.status(200).json({
             status : 'success',
-            data : history
-        });
+            data: getInfo
+        })
     }
-)
+);

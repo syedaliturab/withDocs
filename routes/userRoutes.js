@@ -17,6 +17,7 @@ const patientSettings = require('../controllers/settingController');
 const patientMoodsAndSymptoms = require('../controllers/moodsAndSymptomsController');
 const notificationController = require('../controllers/notificationController');
 const qrController = require('../controllers/qrController');
+const patientReportController = require('../controllers/patientReportController');
 
 
 const router = express.Router();
@@ -181,18 +182,6 @@ router
 
 router.post('/newpassword', authController.emailToUser);
 
-router.get('/patient/:id/moods/', patientMoodsAndSymptoms.getmoods);
-router.post('/patient/moods/:id', patientMoodsAndSymptoms.createmoods);
-router.patch('/patient/moods/:id', patientMoodsAndSymptoms.updatemoods);
-router.get('/patient/moodAllHistory/:id', patientMoodsAndSymptoms.getAllMoodHistory);
-router.get('/patient/moodHistory/:id', patientMoodsAndSymptoms.getMoodsHistory);
-
-router.get('/patient/:id/symptoms', patientMoodsAndSymptoms.getSymptoms);
-router.post('/patient/symptoms/:id', patientMoodsAndSymptoms.createSymptoms);
-router.patch('/patient/symptoms/:id', patientMoodsAndSymptoms.updateSymptoms);
-router.get('/patient/symptomsAllHistory/:id', patientMoodsAndSymptoms.getAllSymptomsHistory);
-router.get('/patient/symptomsHistory/:id', patientMoodsAndSymptoms.getSymptomsHistory);
-
 router.get('/patient/verify/:id', patientController.verifyEmail);
 router.get('/patient/activate/:id', patientController.emailActivate);
 
@@ -206,24 +195,57 @@ router.post('/createchronicdiseases', haveController.createChronicDiseases);
 router.post('/createheridatorydiseases', haveController.createHeridatoryDiseases);
 
 router
-  .route('/patientsettings')
+  .route('/patient/settings')
   .post(patientSettings.createPatientSetting)
   .get(patientSettings.getPatientSetting)
   .patch(patientSettings.updatePatientSettings);
 
 router
-  .route('/patientsettingshistory')
+  .route('/patient/settingshistory')
   .post(patientSettings.createSettingsHistory)
   .get(patientSettings.getSettingsHistory)
   .patch(patientSettings.updateSettingsHistory);
 
-router.get('/patientallsettingshistory', patientSettings.getAllSettingsHistory);
+router.get('/patient/allsettingshistory', patientSettings.getAllSettingsHistory);
 
 router.post('/qrCreatePatientProfile/',qrController.createPatientProfile);
 router.post('/qrCreatePatientRelativeProfile/',qrController.createPatientRelativeProfile);
 router.patch('/qrVerifiedPhoneNumber/',qrController.updatePatientProfile);
 
+router.post('/patient/regAndIrreg', patientReportController.createRegularAndIrregular);
+router.get('/patient/regAndIrreg/:id', patientReportController.getRegularAndIrregular);
+router.get('/patient/allRegAndIrreg/:id', patientReportController.getAllRegularAndIrregular);
 
+router.post('/patient/flow', patientReportController.createFlow);
+router.get('/patient/flow/:id', patientReportController.getFlow);
+router.get('/patient/flows/:id', patientReportController.getAllFlow);
 
+router.post('/patient/discharge', patientReportController.createDischarge);
+router.get('/patient/discharge/:id', patientReportController.getDischarge);
+router.get('/patient/allDischarge/:id', patientReportController.getAllDischarge);
+
+router.post('/patient/intimacy', patientReportController.createIntimacyAndPhases);
+router.get('/patient/intimacy/:id', patientReportController.getIntimacyAndPhases);
+router.get('/patient/allIntimacy/:id', patientReportController.getAllIntimacyAndPhases);
+
+router.post('/patient/pregnancy', patientReportController.createPregnancyTest);
+router.get('/patient/pregnancy/:id', patientReportController.getPregnancyTest);
+router.get('/patient/allpregnancy/:id', patientReportController.getAllPregnancyTest);
+
+router.post('/patient/ovulation', patientReportController.createOvulationTest);
+router.get('/patient/ovulation/:id', patientReportController.getOvulationTest);
+router.get('/patient/allOvulation/:id', patientReportController.getAllOvulationTest);
+
+router.post('/patient/note', patientReportController.createNotes);
+router.get('/patient/note/:id', patientReportController.getNotes);
+router.get('/patient/notes/:id', patientReportController.getAllNotes);
+
+router.post('/patient/mood/', patientMoodsAndSymptoms.createmoods);
+router.get('/patient/mood/:id', patientMoodsAndSymptoms.getmoods);
+router.get('/patient/moods/:id', patientMoodsAndSymptoms.getAllMoods);
+
+router.post('/patient/symptom/', patientMoodsAndSymptoms.createSymptoms);
+router.get('/patient/symptom/:id', patientMoodsAndSymptoms.getSymptoms);
+router.patch('/patient/symptoms/:id', patientMoodsAndSymptoms.getAllSymptoms);
 
 module.exports = router;
