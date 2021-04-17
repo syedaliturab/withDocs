@@ -234,7 +234,29 @@ exports.createDischarge = catchAsynsc(
         const createInfo = await discharge.create(req.body);
         const getPatientInfo = await patient.findById(req.body.patientId);
         const fetchExistingInfo = await discharge.findById(getPatientInfo.discharge);
-        
+        if(fetchExistingInfo == null)
+        {
+            if(createInfo.sticky == true)
+            {
+                createInfo.stickyCount = 1;
+            }
+            if(createInfo.creamy == true)
+            {
+                createInfo.creamyCount = 1;
+            }
+            if(createInfo.watery == true)
+            {
+                createInfo.wateryCount = 1;
+            } 
+            if(createInfo.eggWhite == true)
+            {
+                createInfo.eggWhiteCount = 1;
+            }
+            if(createInfo.dry == true)
+            {
+                createInfo.dryCount = 1;
+            }
+        }else{
         if(createInfo.dry == true)
         {
             createInfo.dryCount = fetchExistingInfo.dryCount + 1;
@@ -255,7 +277,7 @@ exports.createDischarge = catchAsynsc(
         {
             createInfo.eggWhiteCount = fetchExistingInfo.eggWhiteCount + 1;
         } else createInfo.eggWhiteCount = fetchExistingInfo.eggWhiteCount;
-
+    }
         await createInfo.save();
         getPatientInfo.discharge = createInfo;
         await getPatientInfo.save();
@@ -269,7 +291,7 @@ exports.createDischarge = catchAsynsc(
 
 exports.getDischarge = catchAsynsc(
     async(req, res, next) => {
-        const getInfo = await flow.findById(req.params.id);
+        const getInfo = await discharge.findById(req.params.id);
         
         res.status(200).json({
             status : 'success',
