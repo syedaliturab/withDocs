@@ -291,7 +291,7 @@ exports.createDischarge = catchAsynsc(
 
 exports.getDischarge = catchAsynsc(
     async(req, res, next) => {
-        const getInfo = await flow.findById(req.params.id);
+        const getInfo = await discharge.findById(req.params.id);
         
         res.status(200).json({
             status : 'success',
