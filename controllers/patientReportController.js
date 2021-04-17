@@ -100,29 +100,44 @@ exports.createFlow = catchAsynsc(
     async(req, res, next) => {
         const createInfo = await flow.create(req.body);
         const getPatientInfo = await patient.findById(req.body.patientId);
-        console.log(getPatientInfo);
-        const fetchExistingInfo = await flow.find({patientId: getPatientInfo._id});
-        console.log(fetchExistingInfo);
-        if(createInfo.light == true)
+        const fetchExistingInfo = await flow.findById(getPatientInfo.flow);
+
+        if(fetchExistingInfo == null)
         {
-            createInfo.lightCount = fetchExistingInfo.lightCount + 1;
-        } 
-        else  createInfo.lightCount = fetchExistingInfo.lightCount;
-        if(createInfo.medium == true)
-        {
-            createInfo.mediumCount = fetchExistingInfo.mediumCount + 1;
-        } 
-        else createInfo.mediumCount = fetchExistingInfo.mediumCount;
-        if(createInfo.heavy == true)
-        {
-            createInfo.heavyCount = fetchExistingInfo.heavyCount + 1;
+            if(createInfo.light == true)
+            {
+                createInfo.lightCount = 1;
+            }
+            if(createInfo.medium == true)
+            {
+                createInfo.mediumCount = 1;
+            }
+            if(createInfo.heavy == true)
+            {
+                createInfo.heavyCount = 1;
+            } 
+            if(createInfo.spotting == true)
+            {
+                createInfo.spottingCount = 1;
+            }
+        }else{
+            if(createInfo.light == true)
+            {
+                createInfo.lightCount = fetchExistingInfo.lightCount + 1;
+            } else  createInfo.lightCount = fetchExistingInfo.lightCount;
+            if(createInfo.medium == true)
+            {
+                createInfo.mediumCount = fetchExistingInfo.mediumCount + 1;
+            } else createInfo.mediumCount = fetchExistingInfo.mediumCount;
+            if(createInfo.heavy == true)
+            {
+                createInfo.heavyCount = fetchExistingInfo.heavyCount + 1;
+            } else createInfo.heavyCount = fetchExistingInfo.heavyCount;
+            if(createInfo.spotting == true)
+            {
+                createInfo.spottingCount = fetchExistingInfo.spottingCount + 1;
+            } else createInfo.spottingCount = fetchExistingInfo.spottingCount;
         }
-        else createInfo.heavyCount = fetchExistingInfo.heavyCount;
-        if(createInfo.spotting == true)
-        {
-            createInfo.spottingCount = fetchExistingInfo.spottingCount + 1;
-        } 
-        else createInfo.spottingCount = fetchExistingInfo.spottingCount;
 
         await createInfo.save();
         getPatientInfo.flow = createInfo;
@@ -133,6 +148,8 @@ exports.createFlow = catchAsynsc(
         });
     }
 );
+
+
 
 exports.getFlow = catchAsynsc(
     async(req, res, next) => {
