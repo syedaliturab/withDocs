@@ -17,7 +17,7 @@ const regularAndIrregularModel = new mongoose.Schema({
     predictatedEndDate : Date,
     actualStartDate : Date,
     actualEndDate : Date,
-    diffInDate : Date,
+    diffInDate : Number,
     currentDate : {
         type : Date,
         default : Date.now
