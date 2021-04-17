@@ -281,27 +281,30 @@ exports.getFeedback = catchAsynsc(
         
         // For Clinic Details
         for (const foundInfo of Feedbacks){
-        const clinicInfo = await clinic.findById({_id : foundInfo.doctorId})
-            if(clinicInfo == null)
-            {
-                var obj = {}
-            }
-            else{
-                var obj = {
-                    clinicOneName : clinicInfo.clinicOne.clinicName,
-                    clinicOneFees : clinicInfo.clinicOne.consultationFees,
-                    clinicOneAddress : clinicInfo.clinicOne.address,
-                    // clinicOneDescription : clinicInfo.clinicOne.description,
-
-                    clinicTwoName : clinicInfo.clinicTwo.clinicName,
-                    clinicTwoAddress : clinicInfo.clinicTwo.address,
-                    clinicTwoFees : clinicInfo.clinicTwo.consultationFees,
-                    // clinicTwoDescription : clinicInfo.clinicTwo.description
-
+            const clinicInfo = await clinic.findById({_id : foundInfo.doctorId})
+            const patientAppointments = await appointment.find({_id: foundInfo.appointmentId, status: "confirmed"});
+                if(clinicInfo.clinicOne.address == patientAppointments.clinicAddress)
+                {
+                    var obj1 = {
+                        clinicOneName : clinicInfo.clinicOne.clinicName,
+                        clinicOneFees : clinicInfo.clinicOne.consultationFees,
+                        clinicOneAddress : clinicInfo.clinicOne.address,
+                        // clinicOneDescription : clinicInfo.clinicOne.description,
+                    }
+                    allFeedbacks.push(obj1)
                 }
+                else if(clinicInfo.clinicTwo.address == patientAppointments.clinicAddress){
+                    
+                    var obj2 = {
+                        clinicTwoName : clinicInfo.clinicTwo.clinicName,
+                        clinicTwoAddress : clinicInfo.clinicTwo.address,
+                        clinicTwoFees : clinicInfo.clinicTwo.consultationFees,
+                        // clinicTwoDescription : clinicInfo.clinicTwo.description
+                    }
+                    allFeedbacks.push(obj2)
+                }
+                
             }
-            allFeedbacks.push(obj)
-        }
             // For Doctor Details
             for (const foundInfo of Feedbacks){
             const doctorInfo = await doctors.findById({_id : foundInfo.doctorId})
