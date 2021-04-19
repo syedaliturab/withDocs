@@ -180,8 +180,8 @@ const pregnancyTestModel = new mongoose.Schema({
         type: String,
         requried: [true, 'Please provide valid id']
     },
-    positive : Boolean,
-    negative : Boolean,
+    positive : {type: Boolean, default: false},
+    negative : {type: Boolean, default: false},
     Date : {
         type : Date,
         default : Date.now
@@ -193,8 +193,8 @@ const ovulationTestModel = new mongoose.Schema({
         type: String,
         requried: [true, 'Please provide valid id']
     },
-    positive : Boolean,
-    negative : Boolean,
+    positive : {type: Boolean, default: false},
+    negative : {type: Boolean, default: false},
     Date : {
         type : Date,
         default : Date.now
@@ -206,11 +206,11 @@ const notesModel = new mongoose.Schema({
         type: String,
         requried: [true, 'Please provide valid id']
     },
-    fertile : Boolean,
-    ovulation : Boolean,
-    leutal : Boolean,
-    period : Boolean,
-    pms : Boolean,
+    fertile : {type: Boolean, default: false},
+    ovulation : {type: Boolean, default: false},
+    leutal : {type: Boolean, default: false},
+    period : {type: Boolean, default: false},
+    pms : {type: Boolean, default: false},
     note : String,
     Date : {
         type : Date,

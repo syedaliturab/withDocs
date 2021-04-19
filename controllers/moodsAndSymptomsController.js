@@ -4,14 +4,14 @@ const catchAsynsc = require('./../utils/catchAsync');
 
 exports.createmoods = catchAsynsc(
     async(req, res, next) =>{
-        const getPatient = await patient.findById(req.params.id);
-        console.log(getPatient.gender)
+        const getPatient = await patient.findById(req.body.patientId);
         if(getPatient.gender === 'female')
         {
             const createInfo = await moods.create(req.body);
             getPatient.moods = createInfo;
+            await getPatient.save();
         }
-        await getPatient.save();
+        
         res.status(200).json({
             status : 'success',
             data : getPatient
@@ -78,13 +78,13 @@ exports.getAllMoods = catchAsynsc(
 
 exports.createSymptoms = catchAsynsc(
     async(req, res, next) =>{
-        const getPatient = await patient.findById(req.params.id);
+        const getPatient = await patient.findById(req.body.patientId);
         if(getPatient.gender === 'female')
         {
             const createInfo = await symptoms.create(req.body);
             getPatient.symptoms = createInfo;
+            await getPatient.save();
         }
-        await getPatient.save();
         res.status(200).json({
             status : 'success',
             data : getPatient
