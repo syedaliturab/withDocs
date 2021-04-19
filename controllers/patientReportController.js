@@ -11,7 +11,7 @@ exports.createRegularAndIrregular = catchAsynsc(
 
         const createInfo = await regularAndIrregular.create(req.body);
         const getPatientInfo = await patient.findById(req.body.patientId);
-        const fetchExistingInfo = await flow.findById(getPatientInfo.flow);
+        const fetchExistingInfo = await regularAndIrregular.findById(getPatientInfo.regularAndIrregular);
 
         if(abs(createInfo.diffInDate) > 4){
             createInfo.irregularCount = fetchExistingInfo.irregularCount + 1;
@@ -52,7 +52,7 @@ exports.updateRegularAndIrregular = catchAsynsc(
             }
         );
         const getPatientInfo = await patient.findById(req.body.patientId);
-        const fetchExistingInfo = await regularAndIrregular.findById(getPatientInfo.flow);
+        const fetchExistingInfo = await regularAndIrregular.findById(getPatientInfo.regularAndIrregular);
 
 
         if(abs(updateData.diffInDate) > 4){

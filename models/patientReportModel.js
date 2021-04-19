@@ -13,7 +13,7 @@ const regularAndIrregularModel = new mongoose.Schema({
         type : Number,
         default : 0
     },
-    predictatedStartDate : Date,
+    predictatedStartDate : Date, //two variations
     predictatedEndDate : Date,
     actualStartDate : Date,
     actualEndDate : Date,
@@ -212,6 +212,10 @@ const notesModel = new mongoose.Schema({
     period : {type: Boolean, default: false},
     pms : {type: Boolean, default: false},
     note : String,
+    noteCount : {
+        type : Boolean,
+        default : 0
+    },
     Date : {
         type : Date,
         default : Date.now
