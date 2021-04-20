@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const patientSettingSchema = mongoose.Schema({
-    _id:{
+    patientId:{
         type: String,
 	    unique: true,
         requried: [true, 'Please provide valid id']
@@ -11,7 +11,7 @@ const patientSettingSchema = mongoose.Schema({
         cycleLength : String,
         periodLength : String,
         ovaluationLength : String,
-        pmsLenght : String,
+        pmsLength : String,
         sanitaryUsed : String
     },
     reminder : {
@@ -58,8 +58,8 @@ const patientSettingSchema = mongoose.Schema({
             text : String
         },
         pregnancyMode : {
-            notPregnant : String,
-            noLongerPregnant : String,
+            notPregnant : Boolean,
+            noLongerPregnant : Boolean,
             babyBorn : Boolean
         }
     },
@@ -78,7 +78,7 @@ const patientSettingHistorySchema = new mongoose.Schema({
         cycleLength : String,
         periodLength : String,
         ovaluationLength : String,
-        pmsLenght : String,
+        pmsLength : String,
         sanitaryUsed : String
     },
     reminder : {
@@ -92,7 +92,7 @@ const patientSettingHistorySchema = new mongoose.Schema({
             periodAlert : {
                 periodAlert : Boolean,
                 remindMeAt : Date,
-                remindMeBefore : Number,
+                remindMeBefore : Number, 
                 reminderMessage : String
             }
         },

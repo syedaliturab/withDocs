@@ -13,8 +13,8 @@ const regularAndIrregularModel = new mongoose.Schema({
         type : Number,
         default : 0
     },
-    predictatedStartDate : Date, //two variations
-    predictatedEndDate : Date,
+    predictedStartDate : Date, //two variations
+    predictedEndDate : Date,
     actualStartDate : Date,
     actualEndDate : Date,
     diffInDate : Number,
@@ -171,9 +171,30 @@ const intimacyAndPhasesModel = new mongoose.Schema({
     }
 });
 
-// const pillsModel = new mongoose.Schema({  
-
-// });
+const pillsModel = new mongoose.Schema({  
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
+    reminderStartDate: {
+        type: Date,
+        requried: [true, 'Enter a start Date.']
+    },
+    reminderEndDate: {
+        type: Date
+    },
+    pillName: {
+        type: String,
+        requried: [true, 'Enter the name of the pill.']
+    },
+    taken : Boolean,
+    missed : Boolean,
+    late : Boolean,
+    double : Boolean,
+    pillDate: {
+        type: Date
+    }
+});
 
 const pregnancyTestModel = new mongoose.Schema({
     patientId: {
@@ -229,4 +250,5 @@ const intimacyAndPhases = mongoose.model('intimacyAndPhases', intimacyAndPhasesM
 const pregnancyTest = mongoose.model('pregnancyTest', pregnancyTestModel);
 const ovulationTest = mongoose.model('ovulationTest', ovulationTestModel);
 const notes = mongoose.model('notes', notesModel);
-module.exports = {regularAndIrregular, flow, discharge, intimacyAndPhases, pregnancyTest, ovulationTest, notes};
+const pills = mongoose.model('pills', pillsModel);
+module.exports = {regularAndIrregular, flow, discharge, intimacyAndPhases, pregnancyTest, ovulationTest, notes, pills};

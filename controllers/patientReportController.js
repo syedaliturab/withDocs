@@ -6,8 +6,13 @@ const { patient } = require('../models/patientModel');
 
 exports.createRegularAndIrregular = catchAsynsc(
     async(req, res, next) => {
-        const diffTime = Math.abs(req.body.predictatedStartDate - req.body.actualStartDate);
-        req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        // console.log(req.body.predictedStartDate)
+        // console.log(req.body.actualStartDate)
+        // const psd=req.body.predictedStartDate.getDate();
+        // console.log(psd)
+        const diffTime = Math.abs( req.body.predictedStartDate.getDate() - req.body.actualStartDate.getDate());
+        // req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        console.log(diffTime)
 
         const createInfo = await regularAndIrregular.create(req.body);
         const getPatientInfo = await patient.findById(req.body.patientId);
@@ -42,7 +47,7 @@ exports.getRegularAndIrregular = catchAsynsc(
 
 exports.updateRegularAndIrregular = catchAsynsc(
     async(req, res, next) => {
-        const diffTime = Math.abs(req.body.predictatedStartDate - req.body.actualStartDate);
+        const diffTime = Math.abs(req.body.predictedStartDate - req.body.actualStartDate);
         req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
         const updateData = await regularAndIrregular.findByIdAndUpdate(
@@ -369,7 +374,7 @@ exports.getAllDischarge = catchAsynsc(
 );
 
 
-// ----------------------------- INTIMACY --------------------------------
+// ----------------------------- INTIMACY AND PHASES --------------------------------
 
 exports.createIntimacyAndPhases = catchAsynsc(
     async(req, res, next) => {
