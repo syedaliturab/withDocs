@@ -246,6 +246,10 @@ router.get('/patient/moods/:id', patientMoodsAndSymptoms.getAllMoods);
 
 router.post('/patient/symptom/', patientMoodsAndSymptoms.createSymptoms);
 router.get('/patient/symptom/:id', patientMoodsAndSymptoms.getSymptoms);
-router.patch('/patient/symptoms/:id', patientMoodsAndSymptoms.getAllSymptoms);
+router.get('/patient/symptoms/:id', patientMoodsAndSymptoms.getAllSymptoms);
+
+router.post('/patient/pill/', patientReportController.createPills);
+router.get('/patient/pill/:id', patientReportController.getPills);
+router.get('/patient/pills/:id', patientReportController.getAllPills);
 
 module.exports = router;
