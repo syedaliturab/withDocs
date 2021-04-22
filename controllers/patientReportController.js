@@ -6,8 +6,13 @@ const { patient } = require('../models/patientModel');
 
 exports.createRegularAndIrregular = catchAsynsc(
     async(req, res, next) => {
-        const diffTime = Math.abs(req.body.predictatedStartDate - req.body.actualStartDate);
-        req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        // console.log(req.body.predictedStartDate)
+        // console.log(req.body.actualStartDate)
+        // const psd=req.body.predictedStartDate.getDate();
+        // console.log(psd)
+        const diffTime = Math.abs( req.body.predictedStartDate.getDate() - req.body.actualStartDate.getDate());
+        // req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        console.log(diffTime)
 
         const createInfo = await regularAndIrregular.create(req.body);
         const getPatientInfo = await patient.findById(req.body.patientId);
@@ -42,7 +47,7 @@ exports.getRegularAndIrregular = catchAsynsc(
 
 exports.updateRegularAndIrregular = catchAsynsc(
     async(req, res, next) => {
-        const diffTime = Math.abs(req.body.predictatedStartDate - req.body.actualStartDate);
+        const diffTime = Math.abs(req.body.predictedStartDate - req.body.actualStartDate);
         req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
         const updateData = await regularAndIrregular.findByIdAndUpdate(
@@ -369,7 +374,7 @@ exports.getAllDischarge = catchAsynsc(
 );
 
 
-// ----------------------------- INTIMACY --------------------------------
+// ----------------------------- INTIMACY AND PHASES --------------------------------
 
 exports.createIntimacyAndPhases = catchAsynsc(
     async(req, res, next) => {
@@ -377,29 +382,38 @@ exports.createIntimacyAndPhases = catchAsynsc(
         const getPatientInfo = await patient.findById(req.body.patientId);
         const fetchExistingInfo = await intimacyAndPhases.findById(getPatientInfo.intimacyAndPhases);
 
-        const date = Date.now;
+        const date = new Date();
         const d = date.getTime();
-
-        if(d <= folicularStartDate.getTime() && d >= folicularEndDate.getTime()){
+        if(d <= createInfo.folicularStartDate.getTime() && d >=createInfo.folicularEndDate.getTime()){
             createInfo.folicularCount = fetchExistingInfo.folicularCount + 1;
-        }else if(d <= ovulationStartDate.getTime() && d >= ovulationEndDate.getTime()){
+        }else if(d <= createInfo.ovulationStartDate.getTime() && d >= createInfo.ovulationEndDate.getTime()){
             createInfo.ovulationCount = fetchExistingInfo.ovulationCount + 1;
-        }else if(d <= leutalStartDate.getTime() && d >= leutalEndDate.getTime()){
+        }else if(d <= createInfo.leutalStartDate.getTime() && d >= createInfo.leutalEndDate.getTime()){
             createInfo.leutalCount = fetchExistingInfo.leutalCount + 1;
-        }else if(d <= fertileStartDate.getTime() && d >= fertileStartDate.getTime()){
+        }else if(d <= createInfo.fertileStartDate.getTime() && d >= createInfo.fertileStartDate.getTime()){
             createInfo.fertileCount = fetchExistingInfo.fertileCount + 1;
-        }else if(d <= periodStartDate.getTime() && d >= periodEndDate.getTime()){
+        }else if(d <= createInfo.periodStartDate.getTime() && d >= createInfo.periodEndDate.getTime()){
             createInfo.periodCount = fetchExistingInfo.periodCount + 1;
         }
-
-        if(createInfo.protected == true)
+        if(fetchExistingInfo == null)
         {
-            createInfo.protectedCount = fetchExistingInfo.protectedCount + 1;
+            if(createInfo.protected == true)
+            {
+                createInfo.protectedCount = 1;
+            }
+            if(createInfo.unProtected == true)
+            {
+                createInfo.unProtectedCount = 1;
+            }
+        } else{
+            if(createInfo.protected == true)
+            {
+                createInfo.protectedCount = fetchExistingInfo.protectedCount + 1;
+            }
+            else if(createInfo.unProtected == true){
+                createInfo.unProtectedCount = fetchExistingInfo.unProtectedCount + 1;
+            }
         }
-        else if(createInfo.unProtected == true){
-            createInfo.unProtectedCount = fetchExistingInfo.unProtectedCount + 1;
-        }
-
         await createInfo.save();
         getPatientInfo.intimacyAndPhases = createInfo;
         await getPatientInfo.save();
@@ -435,7 +449,7 @@ exports.updateIntimacyAndPhases = catchAsynsc(
         const getPatientInfo = await patient.findById(req.body.patientId);
         const fetchExistingInfo = await intimacyAndPhases.findById(getPatientInfo.intimacyAndPhases);
 
-        const date = Date.now;
+        const date = new Date();
         const d = date.getTime();
 
         if(d <= folicularStartDate.getTime() && d >= folicularEndDate.getTime()){
@@ -567,7 +581,7 @@ exports.getAllPregnancyTest = catchAsynsc(
 );
 
 
-// ----------------------- OVULATION ----------------------------
+// ----------------------- OVULATION TEST ----------------------------
 
 
 
