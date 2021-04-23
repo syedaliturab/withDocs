@@ -103,9 +103,6 @@ const patientSettingHistorySchema = new mongoose.Schema({
             }
         },
         pills : {
-            // contraception : {
-
-            // }
             pills : {
             fromTime : Date,
             tillTime : Date,
@@ -147,6 +144,40 @@ const inputSettingSchema = mongoose.Schema({
 
 });
 
+const periodAlertSettingSchema = mongoose.Schema({
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
+    periodAlert : Boolean,
+    remindMeAt : String,
+    fromWhenToStart : Number, 
+    reminderMessage : String
+
+});
+
+const ovulationSettingSchema = mongoose.Schema({
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
+    ovulation : Boolean,
+    remindMeAt : String,
+    fromWhenToStart : Number, 
+    reminderMessage : String
+
+});
+
+const periodEndSettingSchema = mongoose.Schema({
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
+    periodEnd : {type: Boolean, default: false},
+    reminderMessage : String
+});
+
+
 
 const padSettingSchema = mongoose.Schema({
     patientId: {
@@ -154,42 +185,67 @@ const padSettingSchema = mongoose.Schema({
         requried: [true, 'Please provide valid id']
     },
     sanitaryPads : {
-        type: Boolean, 
-        default: false,
+        pads: {type: Boolean, default: false},
         once: {type: Boolean, default: false},
         twice: {type: Boolean, default: false},
         thrice: {type: Boolean, default: false},
         fourTimes: {type: Boolean, default: false},
         fifthHour: {type: Boolean, default: false},
-        twoHour: {type: Boolean, default: false}
+        twoHour: {type: Boolean, default: false},
     },
     tampons : {
-        type: Boolean, 
-        default: false,
+        tampons: {type: Boolean, default: false},
         once: {type: Boolean, default: false},
         twice: {type: Boolean, default: false},
         thrice: {type: Boolean, default: false},
         fourTimes: {type: Boolean, default: false},
         fifthHour: {type: Boolean, default: false},
-        twoHour: {type: Boolean, default: false}
+        twoHour: {type: Boolean, default: false},
     },
     cloth : {
-        type: Boolean, 
-        default: false,
+        cloth: {type: Boolean, default: false},
         once: {type: Boolean, default: false},
         twice: {type: Boolean, default: false},
         thrice: {type: Boolean, default: false},
         fourTimes: {type: Boolean, default: false},
         fifthHour: {type: Boolean, default: false},
-        twoHour: {type: Boolean, default: false}
+        twoHour: {type: Boolean, default: false},
     },
 
 });
+
+const pillsSettingSchema = mongoose.Schema({
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
+    pills : Boolean,
+    from : Date,
+    till : Date,
+    noOfPillsPerDay : Number,
+    stages : String,
+    nameOfPill : String,
+    reminderMessage : String
+
+});
+
+const contraceptionSettingSchema = mongoose.Schema({
+    patientId: {
+        type: String,
+        requried: [true, 'Please provide valid id']
+    },
+    contraception : {type: Boolean, default: false}
+    
+
+});
+
 const inputSetting = mongoose.model('inputSetting', inputSettingSchema);
 const padSetting = mongoose.model('padSetting', padSettingSchema);
-// const discharge = mongoose.model('discharge', dischargeModel);
-// const intimacyAndPhases = mongoose.model('intimacyAndPhases', intimacyAndPhasesModel);
-// const pregnancyTest = mongoose.model('pregnancyTest', pregnancyTestModel);
+const periodAlertSetting = mongoose.model('periodAlertSetting', periodAlertSettingSchema);
+const pillsSetting = mongoose.model('pillsSetting', pillsSettingSchema);
+const contraceptionSetting = mongoose.model('contraceptionSettting', contraceptionSettingSchema);
+const periodEndSetting = mongoose.model('periodEndSetting', periodEndSettingSchema);
+const ovulationSetting = mongoose.model('ovulationSetting', ovulationSettingSchema);
 const patientSetting = mongoose.model('patientSetting', patientSettingSchema);
 const patientSettingHistory = mongoose.model('patientSettingHistory', patientSettingHistorySchema);
-module.exports = {patientSetting, patientSettingHistory, inputSetting, padSetting};
+module.exports = {patientSetting, patientSettingHistory, inputSetting, padSetting, periodAlertSetting, periodEndSetting, ovulationSetting, pillsSetting, contraceptionSetting};
