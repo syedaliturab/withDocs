@@ -17,7 +17,7 @@ exports.createPain = catchAsynsc(
 );
 exports.createAllergies = catchAsynsc(
     async (req, res, next) => {
-        
+        console.log(req.body)
         for(var element of req.body.data){
             const member = await allergies.create(element);
             console.log(member);

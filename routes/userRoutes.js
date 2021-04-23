@@ -18,6 +18,7 @@ const patientMoodsAndSymptoms = require('../controllers/moodsAndSymptomsControll
 const notificationController = require('../controllers/notificationController');
 const qrController = require('../controllers/qrController');
 const patientReportController = require('../controllers/patientReportController');
+// const inputSettings = require('../controllers/inputSettingController');
 
 
 const router = express.Router();
@@ -199,6 +200,10 @@ router
   .post(patientSettings.createPatientSetting)
   .get(patientSettings.getPatientSetting)
   .patch(patientSettings.updatePatientSettings);
+
+router.post('/patient/inputSettings', patientSettings.createinputSetting)
+router.get('/patient/getallInputSettings/:id', patientSettings.getAllInputSetting);
+router.get('/patient/getInputSettings/:id', patientSettings.getInputSetting);
 
 router
   .route('/patient/settingshistory')

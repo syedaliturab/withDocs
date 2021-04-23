@@ -1,6 +1,6 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const {patientSetting, patientSettingHistory} = require('../models/patientSettingModel');
-const patient  = require('../models/patientModel');
+const {patientSetting, patientSettingHistory, inputSetting} = require('../models/patientSettingModel');
+const {patient}  = require('../models/patientModel');
 
 exports.createPatientSetting = catchAsynsc(
     async (req, res, next) => {
@@ -127,3 +127,42 @@ exports.getAllSettingsHistory = catchAsynsc(
         });
     }
 )
+
+// ----------------------------- Input Settings -------------------------------------
+
+exports.createinputSetting = catchAsynsc(
+    async (req, res, next) => {
+
+        const inputSettingInfo = await inputSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.input = inputSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: inputSettingInfo
+        });
+    }
+);
+
+exports.getAllInputSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await inputSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getInputSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await inputSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);

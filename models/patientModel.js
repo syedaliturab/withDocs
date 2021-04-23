@@ -126,6 +126,10 @@ const patientSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref: 'symptoms'
     },
+    input : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'inputSetting'
+    },
     settings : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'patientSetting'
@@ -153,6 +157,10 @@ const patientSchema = mongoose.Schema({
     ovulationTest : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'ovulationTest'
+    },
+    pills : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'pills'
     },
     notes : {
         type : mongoose.Schema.Types.ObjectId,
