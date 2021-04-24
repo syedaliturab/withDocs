@@ -60,6 +60,39 @@ router.get('/cancelledAppointmentNotifications/',notificationController.getCance
 router.get('/pushedAppointmentNotifications/',notificationController.getPushedAppointments);
 router.get('/upcomingAppointmentNotifications/',notificationController.getActiveAppointments);
 
+router
+  .route('/pain')
+  .get(haveController.getAllPain)
+  .post(haveController.createPain);
+router
+  .route('/allergies')
+  .get(haveController.getAllAllergies)
+  .post(haveController.createAllergies);
+router
+  .route('/injuries')
+  .get(haveController.getAllInjuries)
+  .post(haveController.createInjuries);
+router
+  .route('/surgeries')
+  .get(haveController.getAllSurgeries)
+  .post(haveController.createSurgeries);
+router
+  .route('/chronicDiseases')
+  .get(haveController.getAllChronicDiseases)
+  .post(haveController.createChronicDiseases);
+router
+  .route('/heridatoryDiseases')
+  .get(haveController.getAllHeridatoryDiseases)
+  .post(haveController.createHeridatoryDiseases);
+router
+  .route('/currentMedications')
+  .get(haveController.getAllCurrentMedications)
+  .post(haveController.createCurrentMedications);
+router
+  .route('/pastMedications')
+  .get(haveController.getAllPastMedications)
+  .post(haveController.createPastMedications);
+
 
   
 router
@@ -185,14 +218,6 @@ router.post('/newpassword', authController.emailToUser);
 router.get('/patient/verify/:id', patientController.verifyEmail);
 router.get('/patient/activate/:id', patientController.emailActivate);
 
-router.post('/createpain', haveController.createPain);
-router.post('/createallergies', haveController.createAllergies);
-router.post('/createinjuries', haveController.createInjuries);
-router.post('/createsurgeries', haveController.createSurgeries);
-router.post('/createcurrentmedications', haveController.createCurrentMedications);
-router.post('/createpastmedications', haveController.createPastMedications);
-router.post('/createchronicdiseases', haveController.createChronicDiseases);
-router.post('/createheridatorydiseases', haveController.createHeridatoryDiseases);
 
 router
   .route('/patient/settings')
