@@ -187,12 +187,13 @@ const pillsModel = new mongoose.Schema({
         type: String,
         requried: [true, 'Enter the name of the pill.']
     },
-    taken : Boolean,
-    missed : Boolean,
-    late : Boolean,
-    double : Boolean,
+    taken : {type: Boolean, default: false},
+    missed : {type: Boolean, default: false},
+    late : {type: Boolean, default: false},
+    double : {type: Boolean, default: false},
     pillDate: {
-        type: Date
+        type: Date,
+        default : Date.now
     }
 });
 

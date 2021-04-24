@@ -1,5 +1,5 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const {regularAndIrregular, flow, discharge, intimacyAndPhases, pregnancyTest, ovulationTest, notes} = require('../models/patientReportModel');
+const {regularAndIrregular, flow, discharge, intimacyAndPhases, pregnancyTest, ovulationTest, notes, pills} = require('../models/patientReportModel');
 const { patient } = require('../models/patientModel');
 
 // -----------------------------REGULAR AND IRREGULAR -----------------------------------
@@ -724,6 +724,45 @@ exports.deleteNotes = catchAsynsc(
 exports.getAllNotes = catchAsynsc(
     async(req, res, next) => {
         const getInfo = await notes.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Pills -------------------------------------
+
+exports.createPills = catchAsynsc(
+    async(req, res, next) => {
+        const createInfo = await pills.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.pills = createInfo;
+        await getPatientInfo.save();
+
+        res.status(200).json({
+            status : 'success',
+            data : createInfo
+        });
+    }
+);
+
+exports.getAllPills = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await pills.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getPills = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await pills.findById(req.params.id);
         
         res.status(200).json({
             status : 'success',

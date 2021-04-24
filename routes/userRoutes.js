@@ -18,6 +18,7 @@ const patientMoodsAndSymptoms = require('../controllers/moodsAndSymptomsControll
 const notificationController = require('../controllers/notificationController');
 const qrController = require('../controllers/qrController');
 const patientReportController = require('../controllers/patientReportController');
+// const inputSettings = require('../controllers/inputSettingController');
 
 
 const router = express.Router();
@@ -225,6 +226,10 @@ router
   .get(patientSettings.getPatientSetting)
   .patch(patientSettings.updatePatientSettings);
 
+router.post('/patient/inputSettings', patientSettings.createinputSetting)
+router.get('/patient/getallInputSettings/:id', patientSettings.getAllInputSetting);
+router.get('/patient/getInputSettings/:id', patientSettings.getInputSetting);
+
 router
   .route('/patient/settingshistory')
   .post(patientSettings.createSettingsHistory)
@@ -271,6 +276,10 @@ router.get('/patient/moods/:id', patientMoodsAndSymptoms.getAllMoods);
 
 router.post('/patient/symptom/', patientMoodsAndSymptoms.createSymptoms);
 router.get('/patient/symptom/:id', patientMoodsAndSymptoms.getSymptoms);
-router.patch('/patient/symptoms/:id', patientMoodsAndSymptoms.getAllSymptoms);
+router.get('/patient/symptoms/:id', patientMoodsAndSymptoms.getAllSymptoms);
+
+router.post('/patient/pill/', patientReportController.createPills);
+router.get('/patient/pill/:id', patientReportController.getPills);
+router.get('/patient/pills/:id', patientReportController.getAllPills);
 
 module.exports = router;
