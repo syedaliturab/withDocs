@@ -155,6 +155,26 @@ const intimacyAndPhasesModel = new mongoose.Schema({
         type : Number,
         default : 0
     },
+    folicular : {
+        type : Boolean,
+        default : false
+    },
+    ovulation : {
+        type : Boolean,
+        default : false
+    },
+    leutal : {
+        type : Boolean,
+        default : false
+    },
+    fertile :{
+        type : Boolean,
+        default : false
+    },
+    period : {
+        type : Boolean,
+        default : false
+    },
     folicularStartDate : Date,
     folicularEndDate : Date,
     ovulationStartDate : Date,
