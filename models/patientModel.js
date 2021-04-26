@@ -2,7 +2,7 @@ mongoose = require('mongoose');
 const { mongo } = require('mongoose');
 const validator = require('validator');
 const {moods, symptoms} = require('../models/moodsAndSymptomsModel');
-const patientSetting = require('../models/patientSettingModel');
+const {patientSetting, inputSetting, padSetting} = require('../models/patientSettingModel');
 
 const patientSchema = mongoose.Schema({
     _id:{
@@ -129,6 +129,30 @@ const patientSchema = mongoose.Schema({
     input : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'inputSetting'
+    },
+    sanitaryPads : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'padSetting'
+    },
+    periodAlert : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'periodAlertSetting'
+    },
+    pills : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'pillsSetting'
+    },
+    contraception : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'contraceptionSetting'
+    },
+    periodEnd : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'periodEndSetting'
+    },
+    ovulation : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'ovulationSetting'
     },
     settings : {
         type : mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,5 @@
 const catchAsynsc = require('./../utils/catchAsync');
-const {patientSetting, patientSettingHistory, inputSetting} = require('../models/patientSettingModel');
+const {patientSetting, patientSettingHistory, inputSetting, padSetting, periodAlertSetting, periodEndSetting, ovulationSetting, pillsSetting, contraceptionSetting} = require('../models/patientSettingModel');
 const {patient}  = require('../models/patientModel');
 
 exports.createPatientSetting = catchAsynsc(
@@ -159,6 +159,240 @@ exports.getAllInputSetting = catchAsynsc(
 exports.getInputSetting = catchAsynsc(
     async(req, res, next) => {
         const getInfo = await inputSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Sanitary Pad Settings -------------------------------------
+
+exports.createpadSetting = catchAsynsc(
+    async (req, res, next) => {
+        
+        const padSettingInfo = await padSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.sanitaryPads = padSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: padSettingInfo
+        });
+    }
+);
+
+exports.getAllPadSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await padSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getPadSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await padSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Period Alert Settings -------------------------------------
+
+exports.createperiodAlertSetting = catchAsynsc(
+    async (req, res, next) => {
+        
+        const periodAlertSettingInfo = await periodAlertSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.periodAlert =periodAlertSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: periodAlertSettingInfo
+        });
+    }
+);
+
+exports.getAllperiodAlertSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await periodAlertSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getperiodAlertSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await periodAlertSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Period End Settings -------------------------------------
+
+exports.createperiodEndSetting = catchAsynsc(
+    async (req, res, next) => {
+        
+        const periodEndSettingInfo = await periodEndSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.periodEnd =periodEndSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: periodEndSettingInfo
+        });
+    }
+);
+
+exports.getAllperiodEndSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await periodEndSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getperiodEndSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await periodEndSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Ovulation Settings -------------------------------------
+
+exports.createovulationSetting = catchAsynsc(
+    async (req, res, next) => {
+        
+        const ovulationSettingInfo = await ovulationSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.ovulation =ovulationSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: ovulationSettingInfo
+        });
+    }
+);
+
+exports.getAllovulationSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await ovulationSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getovulationSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await ovulationSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Pills Settings -------------------------------------
+
+exports.createpillsSetting = catchAsynsc(
+    async (req, res, next) => {
+        
+        const pillsSettingInfo = await pillsSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.pills =pillsSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: pillsSettingInfo
+        });
+    }
+);
+
+exports.getAllpillsSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await pillsSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getpillsSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await pillsSetting.findById(req.params.id);
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+// ----------------------------- Contraception Settings -------------------------------------
+
+exports.createcontraceptionSetting = catchAsynsc(
+    async (req, res, next) => {
+        
+        const contraceptionSettingInfo = await contraceptionSetting.create(req.body);
+        const getPatientInfo = await patient.findById(req.body.patientId);
+        
+        getPatientInfo.contraception =contraceptionSettingInfo;
+        await getPatientInfo.save();
+        res.status(200).json({
+            status: 'success',
+            data: contraceptionSettingInfo
+        });
+    }
+);
+
+exports.getAllcontraceptionSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await contraceptionSetting.find({patientId: req.params.id});
+        
+        res.status(200).json({
+            status : 'success',
+            data: getInfo
+        })
+    }
+);
+
+exports.getcontraceptionSetting = catchAsynsc(
+    async(req, res, next) => {
+        const getInfo = await contraceptionSetting.findById(req.params.id);
         
         res.status(200).json({
             status : 'success',

@@ -230,6 +230,30 @@ router.post('/patient/inputSettings', patientSettings.createinputSetting)
 router.get('/patient/getallInputSettings/:id', patientSettings.getAllInputSetting);
 router.get('/patient/getInputSettings/:id', patientSettings.getInputSetting);
 
+router.post('/patient/padSettings', patientSettings.createpadSetting);
+router.get('/patient/getallPadSettings/:id', patientSettings.getAllPadSetting);
+router.get('/patient/getPadSettings/:id', patientSettings.getPadSetting);
+
+router.post('/patient/periodAlertSettings', patientSettings.createperiodAlertSetting);
+router.get('/patient/getallPeriodAlertSettings/:id', patientSettings.getAllperiodAlertSetting);
+router.get('/patient/getPeriodAlertSettings/:id', patientSettings.getperiodAlertSetting);
+
+router.post('/patient/periodEndSettings', patientSettings.createperiodEndSetting);
+router.get('/patient/getallPeriodEndSettings/:id', patientSettings.getAllperiodEndSetting);
+router.get('/patient/getPeriodEndSettings/:id', patientSettings.getperiodEndSetting);
+
+router.post('/patient/periodovulationSettings', patientSettings.createovulationSetting);
+router.get('/patient/getallPeriodovulationSettings/:id', patientSettings.getAllovulationSetting);
+router.get('/patient/getPeriodovulationSettings/:id', patientSettings.getovulationSetting);
+
+router.post('/patient/pillsSettings', patientSettings.createpillsSetting);
+router.get('/patient/getallpillsSettings/:id', patientSettings.getAllpillsSetting);
+router.get('/patient/getpillsSettings/:id', patientSettings.getpillsSetting);
+
+router.post('/patient/contraceptionSettings', patientSettings.createcontraceptionSetting);
+router.get('/patient/getallcontraceptionSettings/:id', patientSettings.getAllcontraceptionSetting);
+router.get('/patient/getcontraceptionSettings/:id', patientSettings.getcontraceptionSetting);
+
 router
   .route('/patient/settingshistory')
   .post(patientSettings.createSettingsHistory)
