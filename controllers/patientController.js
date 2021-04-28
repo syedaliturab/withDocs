@@ -245,6 +245,16 @@ exports.getPatientRelativeProfile = catchAsynsc(
     }
 )
 
+exports.getAllPatientRelativeProfile = catchAsynsc(
+    async(req, res, next) =>{
+        const getPatientRelative = await patientRelative.find({patientId : req.params.id});
+        res.status(200).json({
+            status : 'success',
+            data : getPatientRelative
+        })
+    }
+)
+
 exports.updatePatientRelativeProfile = catchAsynsc(
     async (req, res, next) => {
         const updatePatientRelative = await patientRelative.findByIdAndUpdate(

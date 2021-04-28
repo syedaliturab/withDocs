@@ -116,6 +116,8 @@ router
   .patch(patientController.updatePatientRelativeProfile)
   .delete(patientController.deletePatientRelativeProfile)
 
+  router.get('/patient/relatives/:id',patientController.getAllPatientRelativeProfile);
+
 router.get('/clinic',clinicController.getClinic);
 router.post('/clinic',clinicController.createClinicProfile);
 router.patch('/clinic',clinicController.updateClinicProfile);
