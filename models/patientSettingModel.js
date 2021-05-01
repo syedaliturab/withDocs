@@ -71,7 +71,7 @@ const patientSettingHistorySchema = new mongoose.Schema({
     input : {
         cycleLength : String,
         periodLength : String,
-        ovaluationLength : String,
+        ovulationLength : String,
         pmsLength : String,
         sanitaryUsed : String
     },
@@ -136,7 +136,7 @@ const inputSettingSchema = mongoose.Schema({
     },
         cycleLength : Number,
         periodLength : Number,
-        ovaluationLength : Number,
+        ovulationLength : Number,
         pmsLength : Number,
         sanitaryUsed : String,
         height : Number,
