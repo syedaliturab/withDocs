@@ -139,8 +139,8 @@ const inputSettingSchema = mongoose.Schema({
         ovulationLength : Number,
         pmsLength : Number,
         sanitaryUsed : String,
-        height : Number,
-        weight : Number,
+        height : String,
+        weight : String,
 
 });
 
