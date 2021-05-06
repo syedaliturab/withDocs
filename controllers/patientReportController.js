@@ -1,27 +1,45 @@
 const catchAsynsc = require('./../utils/catchAsync');
 const {regularAndIrregular, flow, discharge, intimacyAndPhases, pregnancyTest, ovulationTest, notes, pills} = require('../models/patientReportModel');
 const { patient } = require('../models/patientModel');
+const e = require('express');
 
 // -----------------------------REGULAR AND IRREGULAR -----------------------------------
 
 exports.createRegularAndIrregular = catchAsynsc(
     async(req, res, next) => {
-        // console.log(req.body.predictedStartDate)
-        // console.log(req.body.actualStartDate)
-        // const psd=req.body.predictedStartDate.getDate();
-        // console.log(psd)
-        const diffTime = Math.abs( req.body.predictedStartDate.getDate() - req.body.actualStartDate.getDate());
-        // req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        req.body.predictedStartDate = new Date(req.body.predictedStartDate);
+        req.body.predictedEndDate = new Date(req.body.predictedEndDate);
+        req.body.actualStartDate = new Date(req.body.actualStartDate);
+        req.body.actualEndDate = new Date(req.body.actualEndDate);
+        console.log(req.body.predictedStartDate + " ");
+        console.log(req.body.predictedEndDate + " ");
+        console.log(req.body.actualStartDate + " ");
+        console.log(req.body.actualEndDate + " ");
+        const diffTime = Math.abs(req.body.predictedStartDate.getTime() - req.body.actualStartDate.getTime());
+        req.body.diffInDate = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         console.log(diffTime)
 
         const createInfo = await regularAndIrregular.create(req.body);
         const getPatientInfo = await patient.findById(req.body.patientId);
         const fetchExistingInfo = await regularAndIrregular.findById(getPatientInfo.regularAndIrregular);
 
-        if(abs(createInfo.diffInDate) > 4){
-            createInfo.irregularCount = fetchExistingInfo.irregularCount + 1;
+        if(fetchExistingInfo == null)
+        {
+            if(Math.abs(createInfo.diffInDate) > 4){
+                createInfo.irregularCount = 1;
+                createInfo.regularCount = 0;
+            }else{
+                createInfo.regularCount = 1;
+                createInfo.irregularCount = 0;
+            }
         }else{
-            createInfo.regularCount = fetchExistingInfo.regularCount + 1;
+            if(Math.abs(createInfo.diffInDate) > 4){
+                createInfo.irregularCount = fetchExistingInfo.irregularCount + 1;
+                createInfo.regularCount = fetchExistingInfo.regularCount;
+            }else{
+                createInfo.regularCount = fetchExistingInfo.regularCount + 1;
+                createInfo.irregularCount = fetchExistingInfo.irregularCount;
+            }
         }
 
         await createInfo.save();
@@ -90,7 +108,7 @@ exports.deleteRegularAndIrregular = catchAsynsc(
 
 exports.getAllRegularAndIrregular = catchAsynsc(
     async(req, res, next) => {
-        const getInfo = await regularAndIrregular.findById({patientId: req.params.id});
+        const getInfo = await regularAndIrregular.find({patientId: req.params.id});
         
         res.status(200).json({
             status : 'success',

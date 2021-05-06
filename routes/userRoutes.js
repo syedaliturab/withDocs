@@ -270,7 +270,7 @@ router.patch('/qrVerifiedPhoneNumber/',qrController.updatePatientProfile);
 
 router.post('/patient/regAndIrreg', patientReportController.createRegularAndIrregular);
 router.get('/patient/regAndIrreg/:id', patientReportController.getRegularAndIrregular);
-router.get('/patient/allRegAndIrreg/:id', patientReportController.getAllRegularAndIrregular);
+router.get('/patient/RegAndIrregs/:id', patientReportController.getAllRegularAndIrregular);
 
 router.post('/patient/flow', patientReportController.createFlow);
 router.get('/patient/flow/:id', patientReportController.getFlow);
