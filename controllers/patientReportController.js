@@ -27,17 +27,21 @@ exports.createRegularAndIrregular = catchAsynsc(
         {
             if(Math.abs(createInfo.diffInDate) > 4){
                 createInfo.irregularCount = 1;
+                createInfo.irregular = true;
                 createInfo.regularCount = 0;
             }else{
                 createInfo.regularCount = 1;
+                createInfo.regular = true;
                 createInfo.irregularCount = 0;
             }
         }else{
             if(Math.abs(createInfo.diffInDate) > 4){
                 createInfo.irregularCount = fetchExistingInfo.irregularCount + 1;
+                createInfo.irregular = true;
                 createInfo.regularCount = fetchExistingInfo.regularCount;
             }else{
                 createInfo.regularCount = fetchExistingInfo.regularCount + 1;
+                createInfo.regular = true;
                 createInfo.irregularCount = fetchExistingInfo.irregularCount;
             }
         }

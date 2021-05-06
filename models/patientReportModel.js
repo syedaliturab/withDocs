@@ -5,6 +5,14 @@ const regularAndIrregularModel = new mongoose.Schema({
         type: String,
         requried: [true, 'Please provide valid id']
     },
+    regular : {
+        type : Boolean,
+        default : false
+    },
+    irregular : {
+        type : Boolean,
+        default : false
+    },
     regularCount : {
         type : Number,
         default : 0
