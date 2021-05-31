@@ -30,7 +30,7 @@ const createSendToken = (user, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  
+
   if(!(req.body.email) && !(req.body.contact)){
     res.status(400).json({
       status: 'fail',
@@ -39,7 +39,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   }
 
   const newUser = await User.create(req.body);
-  
+
   // 3) If everything ok, send token to client
   const token = createSendToken(newUser,res);
   // Remove password from output
@@ -53,11 +53,62 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 
+
+// for google
+exports.getprofileGoogle = (req, res) => {
+  const map = {
+    email: req.body.email
+  };
+  User.findOne({email:map.email}, function(err, foundUser) {
+    if(foundUser) {
+      // console.log(foundUser);
+      res.status(200).json({
+        status: 'success',
+        data: foundUser
+      });
+    } else {
+      console.log(err);
+      res.status(400).json({
+        status: 'fail',
+        message: 'Please Register!!',
+        error: err
+      });
+    }
+  });
+}
+
+
+// this one for facebook
+exports.getprofileFacebook = (req, res) => {
+  const mapData = {
+    email: req.body.email
+  };
+  User.findOne({email:mapData.email}, function(err, foundUser) {
+    if(foundUser) {
+      // console.log(foundUser);
+      res.status(200).json({
+        status: 'success',
+        data: foundUser
+      });
+    }
+    else {
+      res.status(400).json({
+        status: 'fail',
+        message: 'Please Register!!',
+        error: err
+      });
+    }
+  });
+}
+
+
+
+
 exports.login = catchAsync(async (req, res, next) => {
 
   var userId;
   var message;
- 
+
   if(req.body.email) {
     userId = {email: req.body.email};
     message = "email";
@@ -188,7 +239,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   )}/api/v11/user/resetPassword/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
-  
+
   try {
     await sendEmail({
       email: user.email,
@@ -278,13 +329,13 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 
 exports.emailToUser = catchAsync(async (req, res, next) => {
-  
+
   const resetURL = `${req.protocol}://${req.get(
     'host'
   )}/resetpassword/`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
-  
+
   try {
     await sendEmail({
       email: req.body.email,

@@ -63,6 +63,10 @@ exports.createUser = (req, res) => {
 exports.getUser = factory.getOne(User);
 exports.getAllUsers = factory.getAll(User);
 
+//google user match
+// exports.googl
+
+
 // Do NOT update passwords with this!
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);

@@ -21,6 +21,8 @@ const patientReportController = require('../controllers/patientReportController'
 // const inputSettings = require('../controllers/inputSettingController');
 
 
+
+
 const router = express.Router();
 
 router.post('/signup', authController.signup);
@@ -35,6 +37,11 @@ router.patch('/updateMyPassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
+
+// get user from google when re log in;
+router.get('/profilegoogle', authController.getprofileGoogle);
+router.get('/profilefb', authController.getprofileFacebook);
+// ends
 
 //router.use(authController.restrictTo('admin'));
 
@@ -51,7 +58,7 @@ router
 router
   .route('/workinghours/')
   .get(clinicController.checkClinic);
-  
+
 
 // Notification Routes
 router.get('/appointmentNotifications/',notificationController.getAppointments);
@@ -95,7 +102,7 @@ router
   .post(haveController.createPastMedications);
 
 
-  
+
 router
   .route('/patient')
   .get(patientController.getAllPatientProfile)
@@ -159,8 +166,8 @@ router.post('/createclinicissues',specialitiesController.createClinicIssues);
 router
   .route('/doctorcardSearch')
   .post(doctorcardsearchController.getdoctorcardSearch)
-  
-router.get('/doctorprofile', doctorcardsearchController.doctorprofile);  
+
+router.get('/doctorprofile', doctorcardsearchController.doctorprofile);
 
 router
   .route('/image')
@@ -183,20 +190,20 @@ router
   .route('/feedback/')
   .get(feedbackController.getFeedback)
   .post(feedbackController.createFeedback)
-  .patch(feedbackController.updateFeedback)  
-  .delete(feedbackController.deleteFeedback)  
+  .patch(feedbackController.updateFeedback)
+  .delete(feedbackController.deleteFeedback)
 
 router
   .route('/feedback/reply/')
   .get(feedbackController.getReply)
   .post(feedbackController.createReply)
-  .patch(feedbackController.updateReply)  
+  .patch(feedbackController.updateReply)
   .delete(feedbackController.deleteReply)
-   
+
 
 router
   .route('/feedback/reaction/')
-  .post(feedbackController.postReaction)  
+  .post(feedbackController.postReaction)
 
 router
   .route('/:id')
@@ -206,15 +213,15 @@ router
 
   router
   .route('/search/autoComplete')
-  .post(searchController.getSearch)  
+  .post(searchController.getSearch)
 
 router
   .route('/search/doctor')
-  .post(searchController.getDoctorSearch)  
+  .post(searchController.getDoctorSearch)
 
 router
   .route('/search/clinics')
-  .post(searchController.getClinicSearch)  
+  .post(searchController.getClinicSearch)
 
 router.post('/newpassword', authController.emailToUser);
 
